@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "779691885114",
+    "project_id": "assignmate-e9c29",
+    "storage_bucket": "assignmate-e9c29.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:779691885114:android:e66852631fb89f48e56b03",
+        "android_client_info": {
+          "package_name": "com.example.assignmate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBe97F7ffbGJv_B3IxgEYrX873aDZ3IXSo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

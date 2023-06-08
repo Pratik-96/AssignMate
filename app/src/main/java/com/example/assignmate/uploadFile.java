@@ -7,26 +7,38 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.assignmate.databinding.ActivityMainBinding;
 import com.example.assignmate.databinding.ActivityUploadFileBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class uploadFile extends AppCompatActivity {
 
-
+ProgressDialog dialog;
  ActivityUploadFileBinding binding;
 FirebaseStorage storage;
 FirebaseDatabase database;
@@ -83,6 +95,9 @@ Uri uri;
                   Toast.makeText(uploadFile.this, "Please Select a File..", Toast.LENGTH_SHORT).show();
               }
           }
+
+          private void upload(Uri uri) {
+          }
       });
 
 
@@ -91,9 +106,79 @@ Uri uri;
 
     }
 
-    private void upload(Uri uri) {
-        StorageReference storageReference = storage.getReference();
+    public String getFileName(Uri uri)
+    {
+        String fileName;
+        if (uri.getScheme().equals("file")) {
+            fileName = uri.getLastPathSegment();
+        } else {
+            Cursor cursor = null;
+            try {
+                cursor = getContentResolver().query(uri, new String[]{
+                        MediaStore.Images.ImageColumns.DISPLAY_NAME
+                }, null, null, null);
+
+                if (cursor != null && cursor.moveToFirst()) {
+                    fileName = cursor.getString(cursor.getColumnIndex(MediaStore.Images.ImageColumns.DISPLAY_NAME)+0);
+                    return fileName;
+                }
+            } finally {
+
+                if (cursor != null) {
+                    cursor.close();
+                }
+            }
+        }
+        return "No file Selected";
     }
+//
+//   private void upload(Uri uri) {          // Uploads the file
+////
+////        dialog = new ProgressDialog(this);
+////        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+////        dialog.setTitle("Uploading File...");
+////        dialog.setProgress(0);
+////        dialog.show();
+//        StorageReference storageReference = storage.getReference();         //Get Reference returns root    path
+//        String selectedSub = binding.spinner.getSelectedItem().toString();
+//        storageReference.child(selectedSub).child(getFileName(uri)).getFile(uri)
+//                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+//
+//                    @Override
+//                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+//
+//
+//
+//                    String link = taskSnapshot.getStorage().getDownloadUrl().toString();
+//                        DatabaseReference reference = database.getReference();      //Return path to root
+//                        reference.child(getFileName(uri)).setValue(link).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<Void> task) {
+//                                if (task.isSuccessful()) {
+//                                    Toast.makeText(uploadFile.this, "Document Uploaded Successfully", Toast.LENGTH_SHORT).show();
+//                                }
+//                                else
+//                                {
+//                                    Toast.makeText(uploadFile.this, "Failed to Upload File!!", Toast.LENGTH_SHORT).show();
+//                                }
+//                            }
+//                        });
+//
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(uploadFile.this, "Failed to Upload File!!", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                }).addOnProgressListener(new OnProgressListener<FileDownloadTask.TaskSnapshot>() {
+//                    @Override
+//                    public void onProgress(@NonNull FileDownloadTask.TaskSnapshot snapshot) {
+//                        int currentProgress = (int) (100*snapshot.getBytesTransferred()/ snapshot.getTotalByteCount());
+//                        dialog.setProgress(currentProgress);
+//                    }
+//                });
+//    }
 
     private void select_pdf() {
         Intent intent= new Intent();
@@ -108,6 +193,8 @@ Uri uri;
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 8 && resultCode == RESULT_OK && data != null) {
             uri=data.getData();     //return data of selected file
+            String fileName = getFileName(uri);
+            binding.selectedFile.setText(fileName);
 
         }
         else

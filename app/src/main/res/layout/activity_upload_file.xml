@@ -93,12 +93,11 @@
 
             <ImageView
                 android:id="@+id/select_file"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_gravity="center"
-                android:elevation="100dp"
-                android:rotation="270"
-                android:src="@drawable/upload" />
+
+                android:src="@drawable/document_icon" />
 
             <TextView
                 android:layout_width="wrap_content"

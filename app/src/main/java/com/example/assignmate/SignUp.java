@@ -75,6 +75,9 @@ public class SignUp extends AppCompatActivity {
         String txt2 = "<b>Already have an account ? <a href=''>Log In</a></b>";
         reg.setText(Html.fromHtml(txt2));
         button=findViewById(R.id.button);
+
+        Pass2.setLongClickable(false);
+
         chkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

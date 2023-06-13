@@ -63,11 +63,12 @@ Uri uri;
         setContentView(binding.getRoot());
         storage = FirebaseStorage.getInstance();    // Returns an object of Firebase storage
         database=FirebaseDatabase.getInstance();
-        String[] subjects ={"Subject 1","Subject 2","Subject 3","Subject 4"};
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(),R.array.subjects, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         binding.spinner.setAdapter(adapter);
-
+        ArrayAdapter<CharSequence> docTypeAd = ArrayAdapter.createFromResource(this,R.array.documentType, android.R.layout.simple_spinner_item);
+        docTypeAd.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        binding.doctype.setAdapter(docTypeAd);
       binding.selectFile.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
@@ -132,53 +133,17 @@ Uri uri;
         return "No file Selected";
     }
 //
-//   private void upload(Uri uri) {          // Uploads the file
-////
-////        dialog = new ProgressDialog(this);
-////        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-////        dialog.setTitle("Uploading File...");
-////        dialog.setProgress(0);
-////        dialog.show();
-//        StorageReference storageReference = storage.getReference();         //Get Reference returns root    path
-//        String selectedSub = binding.spinner.getSelectedItem().toString();
-//        storageReference.child(selectedSub).child(getFileName(uri)).getFile(uri)
-//                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-//
-//                    @Override
-//                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-//
-//
-//
-//                    String link = taskSnapshot.getStorage().getDownloadUrl().toString();
-//                        DatabaseReference reference = database.getReference();      //Return path to root
-//                        reference.child(getFileName(uri)).setValue(link).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<Void> task) {
-//                                if (task.isSuccessful()) {
-//                                    Toast.makeText(uploadFile.this, "Document Uploaded Successfully", Toast.LENGTH_SHORT).show();
-//                                }
-//                                else
-//                                {
-//                                    Toast.makeText(uploadFile.this, "Failed to Upload File!!", Toast.LENGTH_SHORT).show();
-//                                }
-//                            }
-//                        });
-//
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Toast.makeText(uploadFile.this, "Failed to Upload File!!", Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                }).addOnProgressListener(new OnProgressListener<FileDownloadTask.TaskSnapshot>() {
-//                    @Override
-//                    public void onProgress(@NonNull FileDownloadTask.TaskSnapshot snapshot) {
-//                        int currentProgress = (int) (100*snapshot.getBytesTransferred()/ snapshot.getTotalByteCount());
-//                        dialog.setProgress(currentProgress);
-//                    }
-//                });
-//    }
+   private void upload(Uri uri) {          // Uploads the file
+
+        dialog = new ProgressDialog(this);
+        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        dialog.setTitle("Uploading File...");
+        dialog.setProgress(0);
+        dialog.show();
+        StorageReference storageReference = storage.getReference();         //Get Reference returns root    path
+        String selectedSub = binding.spinner.getSelectedItem().toString();
+        storageReference.child(selectedSub).child(getFileName(uri)).getFile(uri); //Add on success Listener
+    }
 
     private void select_pdf() {
         Intent intent= new Intent();

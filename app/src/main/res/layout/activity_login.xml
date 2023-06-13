@@ -66,29 +66,27 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:id="@+id/emailLayout"
-                android:layout_height="57dp"
+                android:layout_height="67dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
+
                 android:layout_marginStart="20dp"
-                android:background="@drawable/input"
                 android:elevation="10dp"
                 android:hint="Email"
+                app:boxBackgroundMode="outline"
                 app:boxStrokeColor="@color/primary"
                 android:layout_marginEnd="20dp"
                 android:textColorHint="@color/primary"
-                app:boxCornerRadiusBottomEnd="40dp"
-                app:boxCornerRadiusBottomStart="40dp"
-                app:boxCornerRadiusTopEnd="40dp"
-                app:boxCornerRadiusTopStart="40dp"
-
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
                 app:counterEnabled="false"
                 app:counterMaxLength="16"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/primary"
                 app:errorEnabled="true"
                 app:hintTextColor="@color/primary"
-
-
                 app:startIconDrawable="@drawable/email"
                 app:startIconTint="@color/primary">
                 >
@@ -98,30 +96,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/email"
+                    android:paddingBottom="20dp"
+                    android:backgroundTint="@color/white"
                     android:paddingEnd="50dp"
-                    android:background="@drawable/input"
                     android:textColorHint="@color/primary"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="57dp"
+                android:layout_height="67dp"
                 android:layout_gravity="center"
                 android:id="@+id/passwordlayout"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
-                android:background="@drawable/input"
                 android:clipToPadding="false"
                 android:elevation="10dp"
                 android:hint="Password"
                 android:layout_marginEnd="20dp"
                 android:textColorHint="@color/primary"
-                app:boxCornerRadiusBottomEnd="40dp"
-                app:boxCornerRadiusBottomStart="40dp"
-                app:boxCornerRadiusTopEnd="40dp"
-                app:boxCornerRadiusTopStart="40dp"
-
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxBackgroundMode="outline"
                 app:counterEnabled="false"
                 app:counterMaxLength="16"
                 app:endIconMode="password_toggle"
@@ -138,8 +136,10 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/password"
                     android:inputType="textPassword"
-                    android:background="@drawable/input"
                     android:paddingEnd="50dp"
+                    android:paddingBottom="20dp"
+
+                    android:backgroundTint="@color/white"
                     android:textColorHint="@color/primary" />
             </com.google.android.material.textfield.TextInputLayout>
 

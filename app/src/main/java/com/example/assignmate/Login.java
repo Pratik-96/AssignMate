@@ -195,6 +195,7 @@ public class Login extends AppCompatActivity {
         else
         {
             Toast.makeText(this, "Please Enter all Fields..", Toast.LENGTH_SHORT).show();
+            inProgress(false);
         }
 
 

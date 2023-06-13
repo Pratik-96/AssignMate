@@ -54,65 +54,62 @@
                 android:layout_marginEnd="20dp"
                 android:fontFamily="serif"
                 android:text="@string/signdetails"
-
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameLayout"
-                android:layout_width="match_parent"
-                android:layout_height="57dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/input"
-                android:elevation="10dp"
-                android:hint="Name"
 
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Name"
+                app:boxStrokeColor="@color/black"
                 android:textColorHint="@color/primary"
-                app:boxCornerRadiusBottomEnd="40dp"
-                app:boxCornerRadiusBottomStart="40dp"
-                app:boxCornerRadiusTopEnd="40dp"
-                app:boxCornerRadiusTopStart="40dp"
-                app:boxStrokeColor="@color/primary"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/primary"
-                app:hintAnimationEnabled="false"
-                app:hintEnabled="true"
                 app:errorEnabled="true"
-                android:layout_gravity="center"
+                android:backgroundTint="@color/white"
+                app:hintEnabled="true"
                 app:hintTextColor="@color/primary"
                 app:startIconDrawable="@drawable/custom_person"
-                app:startIconTint="@color/primary"
-                tools:layout_editor_absoluteY="135dp">
+                app:startIconTint="@color/primary">
 
                 <EditText
-                    android:layout_width="match_parent"
                     android:id="@+id/name"
-                    android:inputType="textPersonName"
-                    android:background="@drawable/input"
+                    android:layout_width="match_parent"
+                    android:paddingBottom="20dp"
                     android:layout_height="wrap_content"
-                    />
+                    android:backgroundTint="@color/white"
+                    android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:id="@+id/emailLayout"
-                android:layout_height="57dp"
+                android:layout_height="67dp"
+
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxBackgroundMode="outline"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
-                android:background="@drawable/input"
                 android:clipToPadding="false"
                 android:elevation="10dp"
                 android:hint="Email"
                 android:layout_marginEnd="20dp"
                 android:textColorHint="@color/primary"
-                app:boxCornerRadiusBottomEnd="40dp"
-                app:boxCornerRadiusBottomStart="40dp"
-                app:boxCornerRadiusTopEnd="40dp"
-                app:boxCornerRadiusTopStart="40dp"
                 app:boxStrokeColor="@color/primary"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/primary"
@@ -128,8 +125,10 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/email"
                     android:inputType="textEmailAddress"
+                    android:paddingBottom="20dp"
+
                     android:paddingEnd="50dp"
-                    android:background="@drawable/input"
+                    android:backgroundTint="@color/white"
                     android:textColorHint="@color/primary"
 
                     />
@@ -137,21 +136,22 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="67dp"
                 android:layout_gravity="center"
+                app:boxBackgroundMode="outline"
                 android:id="@+id/pasLayout"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
-                android:background="@drawable/input"
                 android:clipToPadding="false"
                 android:elevation="10dp"
                 android:hint="Password"
+
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
                 android:layout_marginEnd="20dp"
                 android:textColorHint="@color/primary"
-                app:boxCornerRadiusBottomEnd="40dp"
-                app:boxCornerRadiusBottomStart="40dp"
-                app:boxCornerRadiusTopEnd="40dp"
-                app:boxCornerRadiusTopStart="40dp"
                 app:boxStrokeColor="@color/primary"
                 app:counterEnabled="false"
                 app:counterMaxLength="16"
@@ -169,28 +169,28 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/password"
                     android:paddingEnd="50dp"
+                    android:backgroundTint="@color/white"
+                    android:paddingBottom="20dp"
+
                     android:inputType="textPassword"
-                    android:background="@drawable/input"
                     android:textColorHint="@color/primary" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="57dp"
+                android:layout_height="67dp"
                 android:id="@+id/cnfpassLayout"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
                 android:layout_marginStart="20dp"
-                android:background="@drawable/input"
-                android:clipToPadding="false"
                 android:elevation="10dp"
                 android:hint="Confirm Password"
                 android:layout_marginEnd="20dp"
                 android:textColorHint="@color/primary"
-                app:boxCornerRadiusBottomEnd="40dp"
-                app:boxCornerRadiusBottomStart="40dp"
-                app:boxCornerRadiusTopEnd="40dp"
-                app:boxCornerRadiusTopStart="40dp"
                 app:boxStrokeColor="@color/primary"
                 app:counterEnabled="true"
                 app:counterMaxLength="16"
@@ -199,7 +199,7 @@
                 app:errorEnabled="true"
                 app:hintTextColor="@color/primary"
 
-
+                app:boxBackgroundMode="outline"
                 app:startIconDrawable="@drawable/lock"
                 app:startIconTint="@color/primary">
 
@@ -207,9 +207,10 @@
                     android:layout_width="match_parent"
                     android:id="@+id/cnfpass"
                     android:inputType="textPassword"
-                    android:background="@drawable/input"
                     android:paddingEnd="50dp"
+                    android:paddingBottom="20dp"
 
+                    android:backgroundTint="@color/white"
                     android:layout_height="wrap_content"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -218,8 +219,7 @@
                 android:id="@+id/checkBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="20dp"
+                android:layout_margin="20dp"
                 android:backgroundTint="@color/black"
                 android:fontFamily="serif"
                 android:text=""

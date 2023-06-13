@@ -11,4 +11,8 @@
         <item>Subject 4</item>
 
     </string-array>
+    <string-array name="documentType">
+        <item>Assignments</item>
+        <item>Question Papers</item>
+    </string-array>
 </resources>

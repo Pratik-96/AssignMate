@@ -36,6 +36,8 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+
 public class uploadFile extends AppCompatActivity {
 
 ProgressDialog dialog;
@@ -71,7 +73,7 @@ Uri uri;
         binding.doctype.setAdapter(docTypeAd);
       binding.selectFile.setOnClickListener(new View.OnClickListener() {
           @Override
-          public void onClick(View view) {
+           public void onClick(View view) {
               if (ContextCompat.checkSelfPermission(uploadFile.this,Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED)
               {
                   select_pdf();
@@ -97,8 +99,7 @@ Uri uri;
               }
           }
 
-          private void upload(Uri uri) {
-          }
+
       });
 
 
@@ -135,15 +136,65 @@ Uri uri;
 //
    private void upload(Uri uri) {          // Uploads the file
 
-        dialog = new ProgressDialog(this);
-        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        dialog.setTitle("Uploading File...");
-        dialog.setProgress(0);
-        dialog.show();
-        StorageReference storageReference = storage.getReference();         //Get Reference returns root    path
-        String selectedSub = binding.spinner.getSelectedItem().toString();
-        storageReference.child(selectedSub).child(getFileName(uri)).getFile(uri); //Add on success Listener
-    }
+       dialog = new ProgressDialog(this);
+       dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+       dialog.setTitle("Uploading File...");
+       dialog.setProgress(0);
+       dialog.show();
+
+       StorageReference storageReference = storage.getReference();         //Get Reference returns root    path
+
+       ByteArrayOutputStream baos = new ByteArrayOutputStream();
+       byte[] data = baos.toByteArray();
+       UploadTask uploadTask =storageReference.putBytes(data);
+       String selectedSub = binding.spinner.getSelectedItem().toString();
+       String selectedType = binding.doctype.getSelectedItem().toString();
+       storageReference.child(selectedSub).child(selectedType).child(getFileName(uri)).putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+           @Override
+           public void onSuccess(UploadTask.TaskSnapshot snapshot) {
+
+               String url = snapshot.getStorage().getDownloadUrl().toString();
+               DatabaseReference reference = database.getReference();
+               String str = getFileName(uri);
+               String path = str.replaceAll("\\.", "").replaceAll("\\(","").replaceAll("\\)","").replaceAll("\\[","").replaceAll("]","").replaceAll("#","").replaceAll("\\$","");
+               reference.getRoot().child(path).setValue(url).addOnCompleteListener(new OnCompleteListener<Void>() {
+                   @Override
+                   public void onComplete(@NonNull Task<Void> task) {
+                       if (task.isSuccessful()) {
+                           Toast.makeText(uploadFile.this, "File Uploaded Sucessfully!!", Toast.LENGTH_SHORT).show();
+                           dialog.setTitle("File Uploaded Sucessfully!!");
+                           dialog.dismiss();
+                       }
+                       else
+                       {
+                           Toast.makeText(uploadFile.this, "Upload Failed!!", Toast.LENGTH_SHORT).show();
+                           dialog.dismiss();
+                       }
+                   }
+               }).addOnFailureListener(new OnFailureListener() {
+                   @Override
+                   public void onFailure(@NonNull Exception e) {
+                       Toast.makeText(uploadFile.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                   }
+               });
+           }
+       }).addOnFailureListener(new OnFailureListener() {
+           @Override
+           public void onFailure(@NonNull Exception e) {
+               Toast.makeText(uploadFile.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+               dialog.dismiss();
+           }
+       }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+           @Override
+           public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+
+               int currentProgress = (int) (100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
+               dialog.setProgress(currentProgress);
+           }
+       });
+
+
+   }
 
     private void select_pdf() {
         Intent intent= new Intent();

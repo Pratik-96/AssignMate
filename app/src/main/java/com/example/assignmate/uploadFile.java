@@ -28,6 +28,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FileDownloadTask;
@@ -142,47 +143,47 @@ Uri uri;
        dialog.setProgress(0);
        dialog.show();
 
-       StorageReference storageReference = storage.getReference();         //Get Reference returns root    path
 
-       ByteArrayOutputStream baos = new ByteArrayOutputStream();
-       byte[] data = baos.toByteArray();
-       UploadTask uploadTask =storageReference.putBytes(data);
+       String str = getFileName(uri);
+       String path = str.replaceAll("\\.", "").replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("\\[", "").replaceAll("]", "").replaceAll("#", "").replaceAll("\\$", "");
+
+       StorageReference storageReference = storage.getReference();         //Get Reference returns root    path
        String selectedSub = binding.spinner.getSelectedItem().toString();
        String selectedType = binding.doctype.getSelectedItem().toString();
        storageReference.child(selectedSub).child(selectedType).child(getFileName(uri)).putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
            @Override
            public void onSuccess(UploadTask.TaskSnapshot snapshot) {
+               Task<Uri> result = snapshot.getStorage().getDownloadUrl();   //gets a task uri
 
-               String url = snapshot.getStorage().getDownloadUrl().toString();
-               DatabaseReference reference = database.getReference();
-               String str = getFileName(uri);
-               String path = str.replaceAll("\\.", "").replaceAll("\\(","").replaceAll("\\)","").replaceAll("\\[","").replaceAll("]","").replaceAll("#","").replaceAll("\\$","");
-               reference.getRoot().child(path).setValue(url).addOnCompleteListener(new OnCompleteListener<Void>() {
+               result.addOnSuccessListener(new OnSuccessListener<Uri>() {
                    @Override
-                   public void onComplete(@NonNull Task<Void> task) {
-                       if (task.isSuccessful()) {
-                           Toast.makeText(uploadFile.this, "File Uploaded Sucessfully!!", Toast.LENGTH_SHORT).show();
-                           dialog.setTitle("File Uploaded Sucessfully!!");
-                           dialog.dismiss();
-                       }
-                       else
-                       {
-                           Toast.makeText(uploadFile.this, "Upload Failed!!", Toast.LENGTH_SHORT).show();
-                           dialog.dismiss();
-                       }
+                   public void onSuccess(Uri uri) {
+                       String url = uri.toString();     // Extracting url from result uri
+                       DatabaseReference reference = database.getReference();
+                       reference.child(path).setValue(url).addOnCompleteListener(new OnCompleteListener<Void>() {
+                           @Override
+                           public void onComplete(@NonNull Task<Void> task) {
+                               if (task.isSuccessful()) {
+                                   Toast.makeText(uploadFile.this, "File Uploaded Sucessfully!!", Toast.LENGTH_SHORT).show();
+                                   dialog.setTitle("File Uploaded Sucessfully!!");
+                                   dialog.dismiss();
+                               } else {
+                                   Toast.makeText(uploadFile.this, "Upload Failed!!", Toast.LENGTH_SHORT).show();
+                                   dialog.dismiss();
+                               }
+                           }
+                       });
                    }
+
+
                }).addOnFailureListener(new OnFailureListener() {
                    @Override
                    public void onFailure(@NonNull Exception e) {
                        Toast.makeText(uploadFile.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                       dialog.dismiss();
                    }
+
                });
-           }
-       }).addOnFailureListener(new OnFailureListener() {
-           @Override
-           public void onFailure(@NonNull Exception e) {
-               Toast.makeText(uploadFile.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-               dialog.dismiss();
            }
        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
            @Override
@@ -192,7 +193,6 @@ Uri uri;
                dialog.setProgress(currentProgress);
            }
        });
-
 
    }
 

@@ -5,14 +5,17 @@
     <string name="log_message">We are Glad to have you back..!!</string>
     <string name="Welcome2">Welcome Back..!!</string>
     <string-array name="subjects">
-        <item>Subject 1</item>
-        <item>Subject 2</item>
-        <item>Subject 3</item>
-        <item>Subject 4</item>
+        <item>Programming in Java</item>
+        <item>Data Mining &amp; Data Science</item>
+        <item>Principles of Operating Systems</item>
+        <item>Artificial Intelligence</item>
+        <item>Cloud Computing</item>
 
     </string-array>
     <string-array name="documentType">
         <item>Assignments</item>
+        <item>Practicals</item>
         <item>Question Papers</item>
     </string-array>
+
 </resources>

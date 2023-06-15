@@ -22,7 +22,7 @@
             android:id="@+id/homepageTitle"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="104dp"
-            android:fontFamily="@font/dancing_script_font"
+            android:fontFamily="@font/script"
             android:text="@string/app_name"
             android:textColor="@color/white"
             android:textSize="30sp"
@@ -72,15 +72,148 @@
         android:textSize="20sp"
         android:id="@+id/greet"/>
     </RelativeLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:layout_below="@id/greetLayout"
-        />
+        android:layout_marginTop="10dp"
+        android:scrollbars="none"
+
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/javaCard"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:onClick="selectCategory"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/round_note">
 
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="30dp"
+
+            android:text="Programming in Java"
+            android:textColor="#7f00ff"
+            android:textSize="25sp"
+            android:fontFamily="serif"
+            android:textStyle="bold" />
+        </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/dsCard"
+        android:onClick="selectCategory"
+        android:layout_below="@+id/javaCard"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/round_note">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:fontFamily="serif"
+        android:padding="30dp"
+        android:text="Data Mining &amp; Data Science"
+        android:textColor="#7f00ff"
+        android:textStyle="bold" />
+    </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/osCard"
+            android:layout_below="@+id/dsCard"
+            android:onClick="selectCategory"
+
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/round_note">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:fontFamily="serif"
+
+                android:padding="30dp"
+                android:text="Principles of Operating Systems"
+                android:textColor="#7f00ff"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/aiCard"
+            android:layout_below="@+id/osCard"
+            android:onClick="selectCategory"
+
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/round_note">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:fontFamily="serif"
+                android:padding="30dp"
+                android:text="Artificial Intelligence"
+                android:textColor="#7f00ff"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/cloudCard"
+            android:layout_below="@+id/aiCard"
+            android:onClick="selectCategory"
+
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/round_note">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:fontFamily="serif"
+                android:padding="30dp"
+                android:text="Cloud Computing"
+                android:textColor="#7f00ff"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+    </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
@@ -91,8 +224,8 @@
         android:layout_marginEnd="20dp"
         android:clickable="true"
         android:layout_marginBottom="40dp"
-        android:backgroundTint="@color/white"
-        app:tint="@color/black"
+        app:tint="@color/white"
+        android:backgroundTint="#1C20FA"
         app:shapeAppearance="@drawable/roundbtn"
         android:src="@drawable/baseline_add_24"
 

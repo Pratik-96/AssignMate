@@ -1,26 +1,37 @@
 {
   "project_info": {
-    "project_number": "779691885114",
-    "project_id": "assignmate-e9c29",
-    "storage_bucket": "assignmate-e9c29.appspot.com"
+    "project_number": "660056468922",
+    "firebase_url": "https://assignmate-df72e-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "assignmate-df72e",
+    "storage_bucket": "assignmate-df72e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:779691885114:android:e66852631fb89f48e56b03",
+        "mobilesdk_app_id": "1:660056468922:android:74bcbff34294f7cbb54183",
         "android_client_info": {
           "package_name": "com.example.assignmate"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "660056468922-ignu42jlr1moks6fef43krtvnpcgt4qq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyBe97F7ffbGJv_B3IxgEYrX873aDZ3IXSo"
+          "current_key": "AIzaSyAc5CRX-VUXYkws5BqmHNLBRBg7yEBj4eg"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "660056468922-ignu42jlr1moks6fef43krtvnpcgt4qq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

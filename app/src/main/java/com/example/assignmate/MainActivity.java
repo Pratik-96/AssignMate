@@ -56,5 +56,9 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(new Intent(getApplicationContext(), uploadFile.class));
 
     }
+    public void selectCategory(View view)
+    {
+        startActivity(new Intent(getApplicationContext(), documentType.class));
+    }
 
 }

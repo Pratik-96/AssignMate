@@ -66,12 +66,17 @@ Uri uri;
         setContentView(binding.getRoot());
         storage = FirebaseStorage.getInstance();    // Returns an object of Firebase storage
         database=FirebaseDatabase.getInstance();
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(),R.array.subjects, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         binding.spinner.setAdapter(adapter);
-        ArrayAdapter<CharSequence> docTypeAd = ArrayAdapter.createFromResource(this,R.array.documentType, android.R.layout.simple_spinner_item);
+
+
+        ArrayAdapter<CharSequence> docTypeAd = ArrayAdapter.createFromResource(getApplicationContext(),R.array.documentType, android.R.layout.simple_spinner_item);
         docTypeAd.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         binding.doctype.setAdapter(docTypeAd);
+
+
       binding.selectFile.setOnClickListener(new View.OnClickListener() {
           @Override
            public void onClick(View view) {

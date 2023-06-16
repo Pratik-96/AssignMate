@@ -11,7 +11,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
+        android:text=""
+        android:layout_margin="10dp"
+        android:id="@+id/appname"
         android:layout_gravity="center"
         android:textSize="40sp"
         android:fontFamily="@font/script"
@@ -25,6 +27,16 @@
         android:fontFamily="@font/script"
         android:textColor="@color/black"
         android:textSize="15sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/moto"
+        android:fontFamily="@font/script"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        />
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

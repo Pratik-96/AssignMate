@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/moonlit_asteroid_gradient"
     tools:context=".Login">
     <ScrollView
         android:id="@+id/scrollView2"
@@ -45,7 +46,7 @@
                 android:layout_marginEnd="20dp"
                 android:text="Login"
                 android:elevation="10dp"
-                android:textColor="@color/black"
+                android:textColor="@color/primary"
                 android:textSize="40sp"
                 android:textStyle="bold"  />
 
@@ -59,7 +60,7 @@
                 android:fontFamily="serif"
                 android:text="@string/Logdetails"
 
-                android:textColor="@color/black"
+                android:textColor="@color/primary"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -97,6 +98,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/email"
                     android:paddingBottom="20dp"
+                    android:textColor="@color/primary"
+
                     android:backgroundTint="@color/white"
                     android:paddingEnd="50dp"
                     android:textColorHint="@color/primary"
@@ -138,6 +141,7 @@
                     android:inputType="textPassword"
                     android:paddingEnd="50dp"
                     android:paddingBottom="20dp"
+                    android:textColor="@color/primary"
 
                     android:backgroundTint="@color/white"
                     android:textColorHint="@color/primary" />
@@ -153,22 +157,20 @@
                 android:layout_marginLeft="32dp"
                 android:textColorLink="@color/primary" />
 
-            <CheckBox
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/checkBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="20dp"
-                android:backgroundTint="@color/black"
                 android:fontFamily="serif"
                 android:text=""
-                android:textColorLink="@color/primary"
-                app:buttonIconTint="@color/black"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold" />
 
+                android:textColor="@color/primary"
+                android:textColorHint="@color/white"
+                android:textColorLink="@color/primary"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
@@ -178,14 +180,14 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/roundbtn"
                 android:text="Login "
-                android:backgroundTint="@color/black"
+                android:backgroundTint="@color/primary"
                 android:elevation="10dp"
                 android:onClick="login"
                 android:textAlignment="center"
                 android:fontFamily="serif"
                 android:textStyle="bold"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="15sp">
 
             </androidx.appcompat.widget.AppCompatButton>
@@ -206,7 +208,7 @@
                 android:layout_marginBottom="20dp"
                 android:textAlignment="center"
                 android:layout_marginTop="20dp"
-                android:textColor="@color/black"
+                android:textColor="@color/primary"
                 android:textStyle="bold"
                 android:fontFamily="serif"
                 android:textColorLink="@color/primary"
@@ -217,5 +219,4 @@
 
         </LinearLayout>
     </ScrollView>
-
-</LinearLayout>
+    </LinearLayout>

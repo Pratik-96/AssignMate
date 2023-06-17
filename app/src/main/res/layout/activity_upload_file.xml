@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".uploadFile"
-    android:background="@drawable/background_2"
+    android:background="@drawable/moonlit_asteroid_gradient"
     android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
     >
 
@@ -50,7 +50,7 @@
 
             android:text="No file selected.."
             android:textAlignment="center"
-            android:textColor="@color/primary" />
+            android:textColor="#2C5364" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
             android:fontFamily="serif"
             android:textStyle="bold"
             android:text="Select type of Document *"
-            android:textColor="@color/black" />
+            android:textColor="#2C5364" />
 
         <Spinner
             android:id="@+id/doctype"
@@ -84,7 +84,7 @@
             android:elevation="10dp"
             android:fontFamily="serif"
             android:text="Select Subject *"
-            android:textColor="@color/black" />
+            android:textColor="#2C5364" />
 
         <Spinner
             android:id="@+id/spinner"
@@ -104,9 +104,9 @@
             android:elevation="10dp"
             android:hint="Description *"
             app:boxBackgroundMode="outline"
-            app:boxStrokeColor="@color/black"
+            app:boxStrokeColor="#2C5364"
             android:layout_marginEnd="20dp"
-            android:textColorHint="@color/primary"
+            android:textColorHint="#2C5364"
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
@@ -114,11 +114,11 @@
             app:counterEnabled="false"
             app:counterMaxLength="16"
             app:endIconMode="clear_text"
-            app:endIconTint="@color/primary"
+            app:endIconTint="#2C5364"
             app:errorEnabled="true"
-            app:hintTextColor="@color/primary"
+            app:hintTextColor="#2C5364"
             app:startIconDrawable="@drawable/baseline_description_24"
-            app:startIconTint="@color/primary">
+            app:startIconTint="#2C5364">
             >
 
             <EditText
@@ -126,6 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/email"
+                android:fontFamily="serif"
                 android:paddingBottom="20dp"
                 android:backgroundTint="@color/white"
                 android:paddingEnd="50dp"
@@ -155,8 +156,9 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:textAlignment="center"
+                android:fontFamily="serif"
                 android:text="Browse an Image or Pdf to Upload."
-                android:textColor="@color/black"
+                android:textColor="#2C5364"
                 android:textSize="15sp" />
         </LinearLayout>
 

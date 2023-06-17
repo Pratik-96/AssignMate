@@ -253,7 +253,7 @@ public class SignUp extends AppCompatActivity {
             Toast.makeText(SignUp.this, "Please Accept our Terms And Conditions.", Toast.LENGTH_SHORT).show();
 //                    Log.e("error", "onClick: Button is not working properly.." );
 
-            inProgress(true);
+            inProgress(false);
 
 
 

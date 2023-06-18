@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:padding="30dp"
             android:text="Assignments"
-            android:textColor="#2C5364"
+            android:textColor="@color/secondary"
             android:textSize="25sp"
             android:fontFamily="serif"
             android:textStyle="bold" />
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:padding="30dp"
             android:text="Practicals"
-            android:textColor="#2C5364"
+            android:textColor="@color/secondary"
             android:textSize="25sp"
             android:fontFamily="serif"
             android:textStyle="bold" />
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:padding="30dp"
             android:text="Question Papers"
-            android:textColor="#2C5364"
+            android:textColor="@color/secondary"
             android:textSize="25sp"
             android:fontFamily="serif"
             android:textStyle="bold" />

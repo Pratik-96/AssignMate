@@ -5,7 +5,7 @@
         <!-- Disable force dark mode -->
         <item name="android:forceDarkAllowed">false</item>
 
-        <item name="android:statusBarColor" type="style">@color/black</item>
+        <item name="android:statusBarColor" type="style">@color/secondary</item>
 
         <!-- Add any custom style attributes here -->
     </style>

@@ -104,7 +104,7 @@
             android:padding="30dp"
 
             android:text="Programming in Java"
-            android:textColor="#2C5364"
+            android:textColor="@color/secondary"
             android:textSize="25sp"
             android:fontFamily="serif"
             android:textStyle="bold" />
@@ -133,7 +133,7 @@
         android:fontFamily="serif"
         android:padding="30dp"
         android:text="Data Mining &amp; Data Science"
-        android:textColor="#2C5364"
+        android:textColor="@color/secondary"
         android:textStyle="bold" />
     </LinearLayout>
 
@@ -161,7 +161,7 @@
 
                 android:padding="30dp"
                 android:text="Principles of Operating Systems"
-                android:textColor="#2C5364"
+                android:textColor="@color/secondary"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -188,7 +188,7 @@
                 android:fontFamily="serif"
                 android:padding="30dp"
                 android:text="Artificial Intelligence"
-                android:textColor="#2C5364"
+                android:textColor="@color/secondary"
                 android:textStyle="bold" />
         </LinearLayout>
         <LinearLayout
@@ -213,7 +213,7 @@
                 android:fontFamily="serif"
                 android:padding="30dp"
                 android:text="Cloud Computing"
-                android:textColor="#2C5364"
+                android:textColor="@color/secondary"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -231,7 +231,7 @@
         android:clickable="true"
         android:layout_marginBottom="40dp"
         app:tint="@color/white"
-        android:backgroundTint="#2C5364"
+        android:backgroundTint="@color/secondary"
         app:shapeAppearance="@drawable/roundbtn"
         android:src="@drawable/baseline_add_24"
 

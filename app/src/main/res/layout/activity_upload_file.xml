@@ -125,7 +125,7 @@
                 android:inputType="textMultiLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/email"
+                android:id="@+id/description"
                 android:fontFamily="serif"
                 android:paddingBottom="20dp"
                 android:backgroundTint="@color/white"

@@ -165,7 +165,11 @@ Uri uri;
                    public void onSuccess(Uri uri) {
                        String url = uri.toString();     // Extracting url from result uri
                        DatabaseReference reference = database.getReference();
-                       reference.child(selectedSub).child(selectedType).child(path).setValue(url).addOnCompleteListener(new OnCompleteListener<Void>() {
+                       String description = binding.description.getText().toString();
+                       reference.child(selectedSub).child(selectedType).child(path).push();
+                       reference.child(selectedSub).child(selectedType).child(path).setValue(url);
+                       reference.child(selectedSub).child(selectedType).child("Description").setValue(description)
+                                       .addOnCompleteListener(new OnCompleteListener<Void>() {
                            @Override
                            public void onComplete(@NonNull Task<Void> task) {
                                if (task.isSuccessful()) {

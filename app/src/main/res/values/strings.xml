@@ -5,6 +5,7 @@
     <string name="log_message">We are Glad to have you back..!!</string>
     <string name="Welcome2">Welcome Back..!!</string>
     <string-array name="subjects">
+        <item>None</item>
         <item>Programming in Java</item>
         <item>Data Mining &amp; Data Science</item>
         <item>Principles of Operating Systems</item>
@@ -13,6 +14,7 @@
 
     </string-array>
     <string-array name="documentType">
+        <item>None</item>
         <item>Assignments</item>
         <item>Practicals</item>
         <item>Question Papers</item>

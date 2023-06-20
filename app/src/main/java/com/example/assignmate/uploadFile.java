@@ -74,14 +74,15 @@ Uri uri;
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         binding.spinner.setAdapter(adapter);
 
+
         binding.description.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                binding.descriptionLy.setError("");
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                binding.descriptionLy.setError("");
 
             }
 
@@ -114,24 +115,36 @@ Uri uri;
       binding.upload.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
+              String sub = binding.spinner.getSelectedItem().toString();
+              String type = binding.doctype.getSelectedItem().toString();
 
               if (uri!=null)
               {
-                  if (!binding.description.getText().toString().isEmpty())
+                  if (binding.description.getText().toString().isEmpty())
+                  {
+                      binding.descriptionLy.setError("Description Cannot be Empty");
+
+
+                  }
+                  else if (sub.equals("None"))
+                  {
+                      Toast.makeText(uploadFile.this, "Please select a subject..", Toast.LENGTH_SHORT).show();
+                  }
+                  else if (type.equals("None"))
+                  {
+                      Toast.makeText(uploadFile.this, "Please select document type..", Toast.LENGTH_SHORT).show();
+                  }
+                  else if (!binding.description.getText().toString().isEmpty() && !sub.equals("None") && !type.equals("None"))
                   {
                       upload(uri);
 
                   }
-                  else
-                  {
-                      binding.descriptionLy.setError("Description Cannot be Empty");
 
-                  }
 
               }
               else
               {
-                  Toast.makeText(uploadFile.this, "Please Select a File..", Toast.LENGTH_SHORT).show();
+                  Toast.makeText(uploadFile.this, "Please select a file to upload..", Toast.LENGTH_SHORT).show();
               }
           }
 

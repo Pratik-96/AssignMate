@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
     FirebaseAuth mAuth;
+    public static final String SUBJECT_NAME ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,25 +41,68 @@ public class MainActivity extends AppCompatActivity {
 
         if (hrs>=1 && hrs<=12)
         {
-            binding.greet.setText("Good Morning!!");
-        } else if (hrs>12 && hrs<=16) {
-            binding.greet.setText("Good Afternoon!!");
+            binding.greet.setText("Good morning");
+        } else if (hrs>12 && hrs<=18) {
+            binding.greet.setText("Good afternoon");
         }
         else
         {
-            binding.greet.setText("Good Evening!!");
+            binding.greet.setText("Good evening");
         }
 
         binding.floatingActionButton.setOnClickListener(view -> uploadFile());
+
+        binding.javaCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), documentType.class);
+                intent.putExtra(SUBJECT_NAME,"Programming in Java");
+                startActivity(intent);
+                }
+        });
+
+        binding.dsCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), documentType.class);
+                intent.putExtra(SUBJECT_NAME,"Data Mining & Data Science");
+                startActivity(intent);
+            }
+        });
+
+        binding.osCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), documentType.class);
+                intent.putExtra(SUBJECT_NAME,"Principles of Operating Systems");
+                startActivity(intent);
+            }
+        });
+
+        binding.aiCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), documentType.class);
+                intent.putExtra(SUBJECT_NAME,"Artificial Intelligence");
+                startActivity(intent);
+            }
+        });
+
+        binding.cloudCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), documentType.class);
+                intent.putExtra(SUBJECT_NAME,"Cloud Computing");
+                startActivity(intent);
+            }
+        });
+
     }
     public void uploadFile()
     {
         this.startActivity(new Intent(getApplicationContext(), uploadFile.class));
 
     }
-    public void selectCategory(View view)
-    {
-        startActivity(new Intent(getApplicationContext(), documentType.class));
-    }
+
 
 }

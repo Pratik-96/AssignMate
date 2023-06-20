@@ -17,6 +17,7 @@
     android:text="Select Category"
     android:textColor="@color/white"
     android:textSize="30sp"
+    android:id="@+id/text"
     android:fontFamily="@font/dancing_script_font"
     android:textStyle="bold"/>
     </LinearLayout>
@@ -39,7 +40,7 @@
             android:text="Assignments"
             android:textColor="@color/secondary"
             android:textSize="25sp"
-            android:fontFamily="serif"
+            android:fontFamily="@font/sarabun"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -61,7 +62,7 @@
             android:text="Practicals"
             android:textColor="@color/secondary"
             android:textSize="25sp"
-            android:fontFamily="serif"
+            android:fontFamily="@font/sarabun"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -83,7 +84,7 @@
             android:text="Question Papers"
             android:textColor="@color/secondary"
             android:textSize="25sp"
-            android:fontFamily="serif"
+            android:fontFamily="@font/sarabun"
             android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>

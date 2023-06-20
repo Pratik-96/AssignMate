@@ -16,7 +16,7 @@
         android:text="Upload Your File"
         android:textColor="@color/white"
         android:textSize="30sp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/dancing_script_font"
         android:textStyle="bold"
         android:layout_gravity="center"/>
@@ -25,7 +25,10 @@
         android:layout_height="match_parent"
         android:background="@drawable/round_note"
         android:elevation="100dp"
-        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+
         android:orientation="vertical">
         <ScrollView
             android:layout_width="match_parent"
@@ -44,10 +47,10 @@
             android:layout_marginTop="20dp"
             android:drawableStart="@drawable/baseline_attach_file_24"
             android:drawablePadding="10dp"
-            android:fontFamily="serif"
+            android:fontFamily="@font/sarabun"
             android:paddingTop="6dp"
             android:textStyle="bold"
-
+            android:textSize="15sp"
             android:text="No file selected.."
             android:textAlignment="center"
             android:textColor="@color/secondary" />
@@ -59,8 +62,10 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:elevation="20dp"
-            android:fontFamily="serif"
+            android:fontFamily="@font/sarabun"
             android:textStyle="bold"
+            android:textSize="15sp"
+
             android:text="Select type of Document *"
             android:textColor="@color/secondary" />
 
@@ -80,9 +85,10 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:textStyle="bold"
+            android:textSize="15sp"
 
             android:elevation="10dp"
-            android:fontFamily="serif"
+            android:fontFamily="@font/sarabun"
             android:text="Select Subject *"
             android:textColor="@color/secondary" />
 
@@ -126,8 +132,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/description"
-                android:fontFamily="serif"
+                android:fontFamily="@font/sarabun"
                 android:paddingBottom="20dp"
+                android:textColor="@color/secondary"
                 android:backgroundTint="@color/white"
                 android:paddingEnd="50dp"
                 />
@@ -156,7 +163,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:textAlignment="center"
-                android:fontFamily="serif"
+                android:fontFamily="@font/sarabun"
+
                 android:textStyle="bold"
                 android:text="Browse an Image or Pdf to Upload."
                 android:textColor="@color/secondary"
@@ -175,6 +183,8 @@
             android:layout_gravity="center"
             android:padding="10dp"
             android:text="UPLOAD"
+            android:fontFamily="@font/sarabun"
+
             android:textColor="@color/white" />
     </LinearLayout>
         </ScrollView>

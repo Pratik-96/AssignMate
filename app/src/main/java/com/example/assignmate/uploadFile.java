@@ -164,11 +164,14 @@ Uri uri;
                    @Override
                    public void onSuccess(Uri uri) {
                        String url = uri.toString();     // Extracting url from result uri
-                       DatabaseReference reference = database.getReference();
+                       DatabaseReference reference = database.getReference().child(selectedSub).child(selectedType).push();
                        String description = binding.description.getText().toString();
-                       reference.child(selectedSub).child(selectedType).child(path).push();
-                       reference.child(selectedSub).child(selectedType).child(path).setValue(url);
-                       reference.child(selectedSub).child(selectedType).child("Description").setValue(description)
+                       file_model model = new file_model(str,description,url);
+                       reference.setValue(model)
+
+//                       reference.child(selectedSub).child(selectedType).child("Url").setValue(url);
+//                       reference.child(selectedSub).child(selectedType).child("Description").setValue(description);
+//                       reference.child(selectedSub).child(selectedType).child("File Name:").setValue(str)
                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
                            @Override
                            public void onComplete(@NonNull Task<Void> task) {

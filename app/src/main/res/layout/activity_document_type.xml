@@ -18,7 +18,7 @@
     android:textColor="@color/white"
     android:textSize="30sp"
     android:id="@+id/text"
-    android:fontFamily="@font/dancing_script_font"
+    android:fontFamily="@font/sarabun"
     android:textStyle="bold"/>
     </LinearLayout>
     <LinearLayout

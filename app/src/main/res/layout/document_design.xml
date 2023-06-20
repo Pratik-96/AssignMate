@@ -1,46 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+  >
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/round_note"
-        android:backgroundTint="@color/white"
         android:elevation="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/java"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:src="@drawable/icons8_google_docs__1_"
             />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_gravity="center"
-            android:id="@+id/put_filename"
-            android:text="File Name"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="description:"
-            android:id="@+id/put_description"
-            android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="File Name"
+                android:textSize="15sp"
+                android:textColor="@color/secondary"
+                android:fontFamily="@font/sarabun"
+                android:id="@+id/put_filename"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:id="@+id/put_description"
+                android:textSize="15sp"
+                android:textColor="@color/secondary"
+                android:fontFamily="@font/sarabun"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"/>
         </LinearLayout>
 
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

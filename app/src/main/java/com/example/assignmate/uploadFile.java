@@ -17,6 +17,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -28,6 +30,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -71,6 +74,22 @@ Uri uri;
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         binding.spinner.setAdapter(adapter);
 
+        binding.description.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                binding.descriptionLy.setError("");
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         ArrayAdapter<CharSequence> docTypeAd = ArrayAdapter.createFromResource(getApplicationContext(),R.array.documentType, android.R.layout.simple_spinner_item);
         docTypeAd.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
@@ -95,9 +114,20 @@ Uri uri;
       binding.upload.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
+
               if (uri!=null)
               {
-                  upload(uri);
+                  if (!binding.description.getText().toString().isEmpty())
+                  {
+                      upload(uri);
+
+                  }
+                  else
+                  {
+                      binding.descriptionLy.setError("Description Cannot be Empty");
+
+                  }
+
               }
               else
               {
@@ -168,10 +198,6 @@ Uri uri;
                        String description = binding.description.getText().toString();
                        file_model model = new file_model(str,description,url);
                        reference.setValue(model)
-
-//                       reference.child(selectedSub).child(selectedType).child("Url").setValue(url);
-//                       reference.child(selectedSub).child(selectedType).child("Description").setValue(description);
-//                       reference.child(selectedSub).child(selectedType).child("File Name:").setValue(str)
                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
                            @Override
                            public void onComplete(@NonNull Task<Void> task) {

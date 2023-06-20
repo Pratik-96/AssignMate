@@ -105,18 +105,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
-            android:elevation="10dp"
-            android:hint="Description *"
-            app:boxBackgroundMode="outline"
-            app:boxStrokeColor="@color/secondary"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
+            android:elevation="10dp"
+            android:id="@+id/description_ly"
+            android:hint="Description *"
             android:textColorHint="@color/secondary"
-            app:boxCornerRadiusTopEnd="10dp"
+            app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="10dp"
-            app:boxCornerRadiusTopStart="10dp"
             app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/secondary"
             app:counterEnabled="false"
             app:counterMaxLength="16"
             app:endIconMode="clear_text"
@@ -128,16 +129,16 @@
             >
 
             <EditText
-                android:inputType="textMultiLine"
+                android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/description"
-                android:fontFamily="@font/sarabun"
-                android:paddingBottom="20dp"
-                android:textColor="@color/secondary"
                 android:backgroundTint="@color/white"
+                android:fontFamily="@font/sarabun"
+                android:inputType="textMultiLine"
+                android:maxLines="2"
                 android:paddingEnd="50dp"
-                />
+                android:paddingBottom="20dp"
+                android:textColor="@color/secondary" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout

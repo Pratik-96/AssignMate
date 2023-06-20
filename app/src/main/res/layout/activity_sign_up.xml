@@ -10,6 +10,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="none"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/sarabun"
                 android:layout_marginEnd="20dp"
                 android:text="Sign Up"
@@ -63,7 +64,7 @@
                 android:id="@+id/nameLayout"
 
                 android:layout_width="match_parent"
-                android:layout_height="67dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
@@ -99,15 +100,14 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:id="@+id/emailLayout"
-                android:layout_height="67dp"
-
+                android:layout_height="wrap_content"
                 app:boxCornerRadiusTopEnd="10dp"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusTopStart="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxBackgroundMode="outline"
+                android:layout_marginTop="5dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
                 android:clipToPadding="false"
                 android:elevation="10dp"
@@ -142,11 +142,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="67dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 app:boxBackgroundMode="outline"
                 android:id="@+id/pasLayout"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
+
                 android:layout_marginStart="20dp"
                 android:clipToPadding="false"
                 android:elevation="10dp"
@@ -186,10 +187,11 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="67dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+
                 android:id="@+id/cnfpassLayout"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
                 app:boxCornerRadiusTopEnd="10dp"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusTopStart="10dp"

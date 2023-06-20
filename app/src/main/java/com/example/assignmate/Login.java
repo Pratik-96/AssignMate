@@ -18,8 +18,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.assignmate.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,10 +30,13 @@ public class Login extends AppCompatActivity {
 
     EditText email,Pass;
 
+    TextInputLayout emaily,passly;
+
     Button login;
 
     ProgressBar progressBar;
 
+    ActivityLoginBinding binding;
     FirebaseAuth mAuth;
 
     TextView signup;
@@ -54,7 +59,8 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        binding=ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         TextView forgotpass = findViewById(R.id.forgotpass);
         TextView txt2 =findViewById(R.id.signup);
@@ -62,6 +68,10 @@ public class Login extends AppCompatActivity {
         Pass=findViewById(R.id.password);
         mAuth=FirebaseAuth.getInstance();
         login=findViewById(R.id.button);
+
+
+
+
         progressBar=findViewById(R.id.progressBar);
         CheckBox chkbx = findViewById(R.id.checkBox);
         String url = " <a href=''>Forgot Password ?</a>";
@@ -94,12 +104,12 @@ public class Login extends AppCompatActivity {
                 if(pass.length()>=8)
                 {
 
-                    Pass.setError(null);
+                    binding.passwordlayout.setError("");
 
                 }
                 else
                 {
-                    Pass.setError("Password Length Must be atleast 8 Characters long");
+                    binding.passwordlayout.setError("Password Length Must be atleast 8 Characters long");
                 }
             }
 
@@ -118,9 +128,8 @@ public class Login extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String mail = charSequence.toString();
                 if (!mail.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
-                    email.setError(null);
-                } else {
-                    email.setError("Invalid Email!!"); }
+                    binding.emailLayout.setError("");
+                }
             }
 
             @Override
@@ -153,15 +162,30 @@ public class Login extends AppCompatActivity {
 
         inProgress(true);
         String mail = email.getText().toString();
+        if(key.length()>=8)
+        {
+
+            binding.passwordlayout.setError("");
+            flag=true;
+
+        }
+        else
+        {
+            binding.passwordlayout.setError("Password Length Must be atleast 8 Characters long");
+            flag=false;
+        }
+
         // Email Validation
 
         boolean mailchk = false;
 
         if (!mail.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
             mailchk = true;
+
         } else {
             mailchk = false;
 //            progressBar.setVisibility(View.GONE);
+            binding.emailLayout.setError("Invalid Email!!");
         }
 
 
@@ -194,7 +218,7 @@ public class Login extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this, "Please Enter all Fields..", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter all fields..", Toast.LENGTH_SHORT).show();
             inProgress(false);
         }
 

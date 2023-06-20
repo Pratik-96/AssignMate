@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.assignmate.databinding.ActivitySignUpBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -35,6 +36,8 @@ public class SignUp extends AppCompatActivity {
     CheckBox chkbox;
 
     ProgressBar progressBar;
+
+    ActivitySignUpBinding binding;
 
     Button button;
     FirebaseAuth mAuth;
@@ -57,7 +60,8 @@ public class SignUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        binding=ActivitySignUpBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         mAuth=FirebaseAuth.getInstance();
         name = (EditText) findViewById(R.id.name);
@@ -77,6 +81,26 @@ public class SignUp extends AppCompatActivity {
         button=findViewById(R.id.button);
 
         Pass2.setLongClickable(false);
+
+        binding.name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    if (!binding.name.getText().toString().isEmpty())
+                    {
+                        binding.nameLayout.setError("");
+                    }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         chkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -106,16 +130,16 @@ public class SignUp extends AppCompatActivity {
                     boolean iscontainspc=matcher.find();
                     if (iscontainspc)
                     {
-                        Pass1.setError(null);
+                        binding.pasLayout.setError(null);
 
                     }
                     else {
-                        Pass1.setError("Weak Password!!");
+                        binding.pasLayout.setError("Weak Password!!");
                     }
                 }
                 else
                 {
-                    Pass1.setError("Password Length Must be atleast 8 Characters long");
+                    binding.pasLayout.setError("Password Length Must be atleast 8 Characters long");
                 }
             }
 
@@ -135,9 +159,9 @@ public class SignUp extends AppCompatActivity {
                 String key = Pass1.getText().toString();
                 String key2 = Pass2.getText().toString();
                 if (!key.equals(key2)) {         // Password checking
-                    Pass2.setError("Passwords are not matching!!");
+                    binding.cnfpassLayout.setError("Passwords are not matching");
                 } else {
-                    Pass2.setError(null);
+                    binding.cnfpassLayout.setError(null);
                 }
             }
 
@@ -156,9 +180,11 @@ public class SignUp extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String mail = charSequence.toString();
                 if (!mail.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
-                    email.setError(null);
+//                    email.setError("");
+                    binding.emailLayout.setError("");
                 } else {
-                    email.setError("Invalid Email!!"); }
+//                    email.setError("Invalid Email!!");
+                }
             }
 
             @Override
@@ -181,6 +207,8 @@ public class SignUp extends AppCompatActivity {
         inProgress(true);
         if (!key.equals(key2)) {         // Password checking
             flag = false;
+            binding.cnfpassLayout.setError("Passwords are not matching!!");
+
 //            progressBar.setVisibility(View.GONE);
         } else {
             flag = true;
@@ -192,11 +220,26 @@ public class SignUp extends AppCompatActivity {
 
         if (!mail.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
             mailchk = true;
+
         } else {
             mailchk = false;
+            binding.emailLayout.setError("Invalid Email!!");
 //            progressBar.setVisibility(View.GONE);
         }
         String str = name.getText().toString();
+        if (str.isEmpty())
+        {
+            binding.nameLayout.setError("Name cannot be empty!!");
+        }
+        if (binding.password.getText().toString().isEmpty())
+        {
+            binding.pasLayout.setError("Password cannot be empty!!");
+        }
+        if (binding.cnfpass.getText().toString().isEmpty())
+        {
+            binding.cnfpassLayout.setError("Field cannot be empty!!");
+        }
+
 //
 
 
@@ -262,7 +305,7 @@ public class SignUp extends AppCompatActivity {
             button.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);
-            Toast.makeText(this, "Please Enter all the fields Correctly!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter all the fields correctly!!", Toast.LENGTH_SHORT).show();
             button.setVisibility(View.VISIBLE);
         }
     }

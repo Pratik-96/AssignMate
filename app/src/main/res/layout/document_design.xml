@@ -12,8 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_margin="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+
         android:background="@drawable/round_note"
         android:elevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,20 +37,22 @@
                 android:layout_height="wrap_content"
                 android:text="File Name"
                 android:textSize="15sp"
+                android:layout_marginStart="5dp"
                 android:textColor="@color/secondary"
                 android:fontFamily="@font/sarabun"
                 android:id="@+id/put_filename"
                 android:layout_marginTop="10dp"
-                android:layout_gravity="center"/>
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Description"
                 android:id="@+id/put_description"
                 android:textSize="15sp"
+                android:layout_marginStart="5dp"
+
                 android:textColor="@color/secondary"
                 android:fontFamily="@font/sarabun"
-                android:layout_gravity="center"
                 android:layout_marginTop="10dp"/>
         </LinearLayout>
 

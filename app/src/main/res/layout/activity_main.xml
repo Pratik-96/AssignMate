@@ -31,14 +31,14 @@
         <ImageView
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:id="@+id/logout"
+            android:id="@+id/menu"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="104dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             app:tint="@color/white"
-            android:src="@drawable/menu_24" />
+            android:src="@drawable/menu" />
 
 
 

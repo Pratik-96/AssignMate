@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupMenu;
 
 import com.example.assignmate.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,13 +28,38 @@ public class MainActivity extends AppCompatActivity {
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         mAuth=FirebaseAuth.getInstance();
-        binding.logout.setOnClickListener(new View.OnClickListener() {
+        binding.menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               mAuth.signOut();
-                Intent intent = new Intent(getApplicationContext(), Login.class);
-                startActivity(intent);
-                finish();
+
+                PopupMenu menu = new PopupMenu(getApplicationContext(),binding.menu);
+                menu.getMenu().add("About AssignMate");
+                menu.getMenu().add("Logout");
+                menu.show();
+                menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        if (menuItem.getTitle()=="Logout")
+                        {
+                            mAuth.signOut();
+                            Intent intent = new Intent(getApplicationContext(), Login.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        if (menuItem.getTitle()=="About AssignMate")
+                        {
+                            startActivity(new Intent(getApplicationContext(), aboutAssignMate.class));
+                        }
+
+
+                        return false;
+                    }
+                });
+
+
+
+
+
 
             }
         });

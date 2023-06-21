@@ -5,6 +5,15 @@
     <string name="signdetails">Please fill the details below to Create your Account</string>
     <string name="log_message">We are Glad to have you back..!!</string>
     <string name="backtolog"> &lt; Back to Login</string>
+    <string name="about_assignmate">About AssignMate:\n\n
+        Designed &amp; developed by :\nPratik Nandvikar.\n\n AssignMate is an android Application which lets students share their notes and Assignments with their friends/classmates.!!
+    \n\nBenefits of using AssignMate:\n\n
+    1.Once a study material is uploaded on AssignMate it will be accessible to everyone who is using AssignMate.\n\n
+    2.AssignMate allows us to organize Assignments,Practical and Question Papers of particular subjects by uploading them in their categories.\n\n
+    3.Once the document is uploaded it will never get lost and will always accessible.\n\n
+    4.One can always access the document by navigating through the subjects and their categories.\n\n
+        With the help of AssignMate we altogether can collaborate and share our knowledge and provide assistance to others in their Classwork.
+    </string>
     <string name="Welcome2">Welcome Back..!!</string>
     <string-array name="subjects">
         <item>None</item>

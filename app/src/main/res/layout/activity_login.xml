@@ -159,7 +159,7 @@
                 android:fontFamily="@font/sarabun"
 
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="32dp"
+                android:layout_marginStart="32dp"
                 android:textColorLink="@color/primary" />
 
             <com.google.android.material.checkbox.MaterialCheckBox

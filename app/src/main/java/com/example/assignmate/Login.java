@@ -71,6 +71,13 @@ public class Login extends AppCompatActivity {
 
 
 
+        binding.forgotpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), ForgetPass.class));
+            }
+        });
+
 
         progressBar=findViewById(R.id.progressBar);
         CheckBox chkbx = findViewById(R.id.checkBox);

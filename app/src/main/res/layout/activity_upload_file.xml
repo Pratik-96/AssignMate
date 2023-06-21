@@ -17,7 +17,7 @@
         android:textColor="@color/white"
         android:textSize="30sp"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/dancing_script_font"
+        android:fontFamily="@font/sarabun"
         android:textStyle="bold"
         android:layout_gravity="center"/>
     <LinearLayout

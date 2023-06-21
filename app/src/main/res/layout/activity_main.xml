@@ -38,7 +38,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             app:tint="@color/white"
-            android:src="@drawable/baseline_logout_24" />
+            android:src="@drawable/menu_24" />
 
 
 

@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -14,8 +15,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
+import java.util.IdentityHashMap;
 
 public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHolder> {
     RecyclerView recyclerView;
@@ -24,6 +29,9 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
     ProgressBar progressBar;
     Context context;
 
+    ImageView image;
+
+    TextView empty;
     ArrayList<String> urls = new ArrayList<>();
 
     /**
@@ -60,6 +68,8 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
         holder.name.setText("File Name:- "+model.getFile_Name());
         holder.descrption.setText("Description:- "+model.getDescription());
         urls.add(model.getUrl());
+
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +86,7 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
                     context.startActivity(intent);
                 }
             }
+
         });
 
     }
@@ -92,9 +103,22 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
             descrption=itemView.findViewById(R.id.put_description);
             RecyclerView recyclerView=itemView.findViewById(R.id.recyclerView);
 
+            empty = itemView.findViewById(R.id.empty);
+
+
         }
 
     }
 
 
+
+    @Override
+    public void onDataChanged() {
+        super.onDataChanged();
+        if (progressBar!=null)
+        {
+            progressBar.setVisibility(View.GONE);
+
+        }
+    }
 }

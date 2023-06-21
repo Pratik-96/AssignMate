@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -45,15 +46,43 @@ public class fetch_files extends AppCompatActivity {
            String subject = bundle.getString("name");
            String type = bundle.getString("docType");
         binding.selectedCategory.setText(type);
+        binding.selectedCategory2.setText(type);
 
 
+        binding.progressBarID.setVisibility(View.VISIBLE);
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child(subject).child(type);
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                binding.progressBarID.setVisibility(View.GONE);
+                if (snapshot.getChildrenCount()==0)
+                {
+                    binding.recyclerView.setVisibility(View.VISIBLE);
+                    binding.nodata.setVisibility(View.VISIBLE);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                binding.progressBarID.setVisibility(View.GONE);
+                binding.recyclerView.setVisibility(View.GONE);
+                binding.nodata.setVisibility(View.VISIBLE);
+
+            }
+        });
 //
+
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(databaseReference, file_model.class).build();
-         ad = new adapter(options,fetch_files.this);
+
+
+
+        ad = new adapter(options,fetch_files.this);
         binding.recyclerView.setAdapter(ad);
+        binding.recyclerView.setVisibility(View.VISIBLE);
     }
 
     @Override

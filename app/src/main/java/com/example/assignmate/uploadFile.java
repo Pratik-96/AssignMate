@@ -4,9 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 
@@ -15,6 +20,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -34,6 +40,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -44,12 +52,14 @@ import java.io.ByteArrayOutputStream;
 
 public class uploadFile extends AppCompatActivity {
 
-ProgressDialog dialog;
- ActivityUploadFileBinding binding;
-FirebaseStorage storage;
-FirebaseDatabase database;
+    ProgressDialog dialog;
+    ActivityUploadFileBinding binding;
+    FirebaseStorage storage;
+    FirebaseDatabase database;
 
-Uri uri;
+    Uri uri;
+
+    String str, sub, type;
 
 
     @Override
@@ -57,20 +67,23 @@ Uri uri;
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 9 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             select_pdf();
+        } else if (requestCode == 99 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//            notification();
         } else {
             Toast.makeText(this, "Please Grant Permissions to use the App..", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivityUploadFileBinding.inflate(getLayoutInflater());
+        binding = ActivityUploadFileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         storage = FirebaseStorage.getInstance();    // Returns an object of Firebase storage
-        database=FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance();
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(),R.array.subjects, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.subjects, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         binding.spinner.setAdapter(adapter);
 
@@ -92,73 +105,56 @@ Uri uri;
             }
         });
 
-        ArrayAdapter<CharSequence> docTypeAd = ArrayAdapter.createFromResource(getApplicationContext(),R.array.documentType, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> docTypeAd = ArrayAdapter.createFromResource(getApplicationContext(), R.array.documentType, android.R.layout.simple_spinner_item);
         docTypeAd.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         binding.doctype.setAdapter(docTypeAd);
 
 
-      binding.selectFile.setOnClickListener(new View.OnClickListener() {
-          @Override
-           public void onClick(View view) {
-              if (ContextCompat.checkSelfPermission(uploadFile.this,Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED)
-              {
-                  select_pdf();
-              }
-              else
-              {
-                  ActivityCompat.requestPermissions(uploadFile.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},9);
-              }
-          }
-      });
+        binding.selectFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ContextCompat.checkSelfPermission(uploadFile.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    select_pdf();
+                } else {
+                    ActivityCompat.requestPermissions(uploadFile.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 9);
+                }
+            }
+        });
 
 
-      binding.upload.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              String sub = binding.spinner.getSelectedItem().toString();
-              String type = binding.doctype.getSelectedItem().toString();
+        binding.upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sub = binding.spinner.getSelectedItem().toString();
+                type = binding.doctype.getSelectedItem().toString();
 
-              if (uri!=null)
-              {
-                  if (binding.description.getText().toString().isEmpty())
-                  {
-                      binding.descriptionLy.setError("Description Cannot be Empty");
+                if (uri != null) {
+                    if (binding.description.getText().toString().isEmpty()) {
+                        binding.descriptionLy.setError("Description Cannot be Empty");
 
 
-                  }
-                  else if (sub.equals("None"))
-                  {
-                      Toast.makeText(uploadFile.this, "Please select a subject..", Toast.LENGTH_SHORT).show();
-                  }
-                  else if (type.equals("None"))
-                  {
-                      Toast.makeText(uploadFile.this, "Please select document type..", Toast.LENGTH_SHORT).show();
-                  }
-                  else if (!binding.description.getText().toString().isEmpty() && !sub.equals("None") && !type.equals("None"))
-                  {
-                      upload(uri);
+                    } else if (sub.equals("None")) {
+                        Toast.makeText(uploadFile.this, "Please select a subject..", Toast.LENGTH_SHORT).show();
+                    } else if (type.equals("None")) {
+                        Toast.makeText(uploadFile.this, "Please select document type..", Toast.LENGTH_SHORT).show();
+                    } else if (!binding.description.getText().toString().isEmpty() && !sub.equals("None") && !type.equals("None")) {
+                        upload(uri);
 
-                  }
+                    }
 
 
-              }
-              else
-              {
-                  Toast.makeText(uploadFile.this, "Please select a file to upload..", Toast.LENGTH_SHORT).show();
-              }
-          }
+                } else {
+                    Toast.makeText(uploadFile.this, "Please select a file to upload..", Toast.LENGTH_SHORT).show();
+                }
+            }
 
 
-      });
-
-
-
+        });
 
 
     }
 
-    public String getFileName(Uri uri)
-    {
+    public String getFileName(Uri uri) {
         String fileName;
         if (uri.getScheme().equals("file")) {
             fileName = uri.getLastPathSegment();
@@ -170,7 +166,7 @@ Uri uri;
                 }, null, null, null);
 
                 if (cursor != null && cursor.moveToFirst()) {
-                    fileName = cursor.getString(cursor.getColumnIndex(MediaStore.Images.ImageColumns.DISPLAY_NAME)+0);
+                    fileName = cursor.getString(cursor.getColumnIndex(MediaStore.Images.ImageColumns.DISPLAY_NAME) + 0);
                     return fileName;
                 }
             } finally {
@@ -182,91 +178,123 @@ Uri uri;
         }
         return "No file Selected";
     }
-//
-   private void upload(Uri uri) {          // Uploads the file
 
-       dialog = new ProgressDialog(this);
-       dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-       dialog.setTitle("Uploading File...");
-       dialog.setProgress(0);
-       dialog.show();
+    //
+    private void upload(Uri uri) {          // Uploads the file
 
-
-       String str = getFileName(uri);
-       String path = str.replaceAll("\\.", "").replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("\\[", "").replaceAll("]", "").replaceAll("#", "").replaceAll("\\$", "");
-
-       StorageReference storageReference = storage.getReference();         //Get Reference returns root    path
-       String selectedSub = binding.spinner.getSelectedItem().toString();
-       String selectedType = binding.doctype.getSelectedItem().toString();
-       storageReference.child(selectedSub).child(selectedType).child(getFileName(uri)).putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-           @Override
-           public void onSuccess(UploadTask.TaskSnapshot snapshot) {
-               Task<Uri> result = snapshot.getStorage().getDownloadUrl();   //gets a task uri
-
-               result.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                   @Override
-                   public void onSuccess(Uri uri) {
-                       String url = uri.toString();     // Extracting url from result uri
-                       DatabaseReference reference = database.getReference().child(selectedSub).child(selectedType).push();
-                       String description = binding.description.getText().toString();
-                       file_model model = new file_model(str,description,url);
-                       reference.setValue(model)
-                                       .addOnCompleteListener(new OnCompleteListener<Void>() {
-                           @Override
-                           public void onComplete(@NonNull Task<Void> task) {
-                               if (task.isSuccessful()) {
-                                   Toast.makeText(uploadFile.this, "File Uploaded Sucessfully!!", Toast.LENGTH_SHORT).show();
-                                   dialog.setTitle("File Uploaded Sucessfully!!");
-                                   dialog.dismiss();
-                               } else {
-                                   Toast.makeText(uploadFile.this, "Upload Failed!!", Toast.LENGTH_SHORT).show();
-                                   dialog.dismiss();
-                               }
-                           }
-                       });
-                   }
+        dialog = new ProgressDialog(this);
+        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        dialog.setTitle("Uploading File...");
+        dialog.setProgress(0);
+        dialog.show();
 
 
-               }).addOnFailureListener(new OnFailureListener() {
-                   @Override
-                   public void onFailure(@NonNull Exception e) {
-                       Toast.makeText(uploadFile.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                       dialog.dismiss();
-                   }
+        str = getFileName(uri);
+        String path = str.replaceAll("\\.", "").replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("\\[", "").replaceAll("]", "").replaceAll("#", "").replaceAll("\\$", "");
 
-               });
-           }
-       }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-           @Override
-           public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+        StorageReference storageReference = storage.getReference();         //Get Reference returns root    path
+        String selectedSub = binding.spinner.getSelectedItem().toString();
+        String selectedType = binding.doctype.getSelectedItem().toString();
+        storageReference.child(selectedSub).child(selectedType).child(getFileName(uri)).putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot snapshot) {
+                Task<Uri> result = snapshot.getStorage().getDownloadUrl();   //gets a task uri
 
-               int currentProgress = (int) (100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
-               dialog.setProgress(currentProgress);
-           }
-       });
+                result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        String url = uri.toString();     // Extracting url from result uri
+                        DatabaseReference reference = database.getReference().child(selectedSub).child(selectedType).push();
+                        String description = binding.description.getText().toString();
+                        file_model model = new file_model(str, description, url);
+                        reference.setValue(model)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(uploadFile.this, "File Uploaded Sucessfully!!", Toast.LENGTH_SHORT).show();
+                                            dialog.setTitle("File Uploaded Sucessfully!!");
+//                                            notification();
+                                            dialog.dismiss();
+                                        } else {
+                                            Toast.makeText(uploadFile.this, "Upload Failed!!", Toast.LENGTH_SHORT).show();
+                                            dialog.dismiss();
+                                        }
+                                    }
+                                });
+                    }
 
-   }
+
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(uploadFile.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+
+                });
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+
+                int currentProgress = (int) (100 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                dialog.setProgress(currentProgress);
+            }
+        });
+
+    }
 
     private void select_pdf() {
-        Intent intent= new Intent();
+        Intent intent = new Intent();
         intent.setType("*/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent,8);
-                
+        startActivityForResult(intent, 8);
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 8 && resultCode == RESULT_OK && data != null) {
-            uri=data.getData();     //return data of selected file
+            uri = data.getData();     //return data of selected file
             String fileName = getFileName(uri);
             binding.selectedFile.setText(fileName);
 
-        }
-        else
-        {
+        } else {
             Toast.makeText(this, "Please select a file to upload", Toast.LENGTH_SHORT).show();
         }
+
+
     }
-}
+
+//    public void notification() {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            NotificationChannel channel = new NotificationChannel("data_uploaded", "notification", NotificationManager.IMPORTANCE_DEFAULT);
+//            NotificationManager manager = getSystemService(NotificationManager.class);
+//            manager.createNotificationChannel(channel);
+//        }
+//        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "data_uploaded")
+//                .setContentText("Code Sphere")
+//                .setSmallIcon(R.drawable.logo)
+//                .setAutoCancel(true)
+//                .setContentText("New document " + str + " is added in " + sub + "/" + type);
+//        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getApplicationContext());
+//
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(uploadFile.this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 99);
+//
+//            return;
+//        }
+//        managerCompat.notify(999, builder.build());
+//
+//
+//
+//
+//    }
+
+    }
+
+
+
+

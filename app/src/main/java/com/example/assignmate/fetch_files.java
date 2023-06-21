@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.assignmate.databinding.ActivityFetchFilesBinding;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -30,6 +32,7 @@ public class fetch_files extends AppCompatActivity {
     ArrayList<file_model> file;
 
     adapter ad;
+    ProgressBar progressBar;
 
 
     @Override
@@ -42,6 +45,7 @@ public class fetch_files extends AppCompatActivity {
            String subject = bundle.getString("name");
            String type = bundle.getString("docType");
         binding.selectedCategory.setText(type);
+
 
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child(subject).child(type);
 //
@@ -60,6 +64,8 @@ public class fetch_files extends AppCompatActivity {
         ad.notifyDataSetChanged();
 
     }
+
+
 
     @Override
     protected void onStop() {

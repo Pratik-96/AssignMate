@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
     RecyclerView recyclerView;
 
 
+    ProgressBar progressBar;
     Context context;
 
     ArrayList<String> urls = new ArrayList<>();
@@ -85,10 +87,14 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
         TextView descrption,name;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            progressBar=itemView.findViewById(R.id.progressBarID);
             name=itemView.findViewById(R.id.put_filename);
             descrption=itemView.findViewById(R.id.put_description);
             RecyclerView recyclerView=itemView.findViewById(R.id.recyclerView);
 
         }
+
     }
+
+
 }

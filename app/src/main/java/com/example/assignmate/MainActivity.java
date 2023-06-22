@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +28,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        if (Objects.equals(FirebaseAuth.getInstance().getUid(), "Atda2EZUKxXMNlaTQ4IyUHMVyJ02"))
+        {
+            binding.floatingActionButton.setVisibility(View.VISIBLE);
+        }
+        else {
+            binding.floatingActionButton.setVisibility(View.GONE);
+        }
         mAuth=FirebaseAuth.getInstance();
         binding.menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
                         return false;
                     }
                 });
+
+
 
 
 

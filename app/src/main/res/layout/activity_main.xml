@@ -257,6 +257,7 @@
         android:clickable="true"
         android:layout_marginBottom="40dp"
         app:tint="@color/white"
+
         android:backgroundTint="@color/secondary"
         app:shapeAppearance="@drawable/roundbtn"
         android:src="@drawable/baseline_add_24"

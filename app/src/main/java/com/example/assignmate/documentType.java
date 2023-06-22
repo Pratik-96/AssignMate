@@ -55,5 +55,17 @@ public class documentType extends AppCompatActivity {
                         startActivity(intent);               }
                 });
 
+        binding.noteCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), fetch_files.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("docType","Notes");
+                bundle.putString("name",selectedsub);
+                intent.putExtras(bundle);
+                startActivity(intent);               }
+        });
+
+
     }
 }

@@ -7,20 +7,90 @@
     android:background="@drawable/moonlit_asteroid_gradient"
     android:layout_height="match_parent"
     tools:context=".aboutAssignMate">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="30sp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/script"
+        android:textColor="@color/white"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
         android:layout_margin="20dp"
         >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/about_assignmate"
+        android:text="@string/app_description_1"
         android:textColor="@color/white"
 
         android:fontFamily="@font/sarabun"
         android:textSize="20sp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_description_2"
+            android:textColor="@color/white"
+
+            android:fontFamily="@font/sarabun"
+            android:textSize="20sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_description_3"
+                android:textColor="@color/white"
+
+                android:fontFamily="@font/sarabun"
+                android:textSize="20sp"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_description_4"
+                android:textColor="@color/white"
+
+                android:fontFamily="@font/sarabun"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_description_5"
+                android:textColor="@color/white"
+
+                android:fontFamily="@font/sarabun"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_description_6"
+                android:textColor="@color/white"
+
+                android:fontFamily="@font/sarabun"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_description_7"
+                android:textColor="@color/white"
+
+                android:fontFamily="@font/sarabun"
+                android:textSize="20sp"/>
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>

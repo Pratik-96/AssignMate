@@ -5,15 +5,21 @@
     <string name="signdetails">Please fill the details below to Create your Account</string>
     <string name="log_message">We are Glad to have you back..!!</string>
     <string name="backtolog"> &lt; Back to Login</string>
-    <string name="about_assignmate">About AssignMate:\n\n
-        Designed &amp; developed by :\nPratik Nandvikar.\n\n AssignMate is an android Application which lets students share their notes and Assignments with their friends/classmates.!!
-    \n\nBenefits of using AssignMate:\n\n
-    1.Once a study material is uploaded on AssignMate it will be accessible to everyone who is using AssignMate.\n\n
-    2.AssignMate allows us to organize Assignments,Practical and Question Papers of particular subjects by uploading them in their categories.\n\n
-    3.Once the document is uploaded it will never get lost and will always accessible.\n\n
-    4.One can always access the document by navigating through the subjects and their categories.\n\n
-        With the help of AssignMate we altogether can collaborate and share our knowledge and provide assistance to others in their Classwork.
-    </string>
+
+    <string name="app_description_1">Designed and developed by:\n Pratik Nandvikar \n\nIntroducing AssignMate, your ultimate companion for academic success!  AssignMate is an innovative Android application that revolutionizes the way students handle their assignments and study materials.</string>
+
+    <string name="app_description_2">With AssignMate, students can bid farewell to the stress of tackling complex assignments. Our app offers comprehensive solutions to a wide range of assignments across various subjects, ensuring that students never get stuck or feel overwhelmed.</string>
+
+    <string name="app_description_3">AssignMate goes beyond assignments by providing students with a one-stop platform for all their study needs. You can access a vast repository of well-organized notes, assignments, practicals, and question papers, all in one convenient location.</string>
+
+    <string name="app_description_4">No more rummaging through stacks of papers or endlessly scrolling through disorganized files. With AssignMate, everything is neatly categorized and easily accessible.</string>
+
+    <string name="app_description_5">Our commitment to user experience is evident in every aspect of AssignMate\'s design. We have crafted an intuitive and user-friendly interface that ensures seamless navigation and effortless usage.</string>
+
+    <string name="app_description_6">Whether you\'re a tech-savvy student or just getting started with technology, AssignMate welcomes you with open arms. So, why struggle with assignments and study materials when you can have AssignMate by your side?</string>
+
+    <string name="app_description_7"> AssignMate is here to unleash your academic potential and pave the way for success.</string>
+
     <string name="Welcome2">Welcome Back..!!</string>
     <string-array name="subjects">
         <item>None</item>
@@ -27,8 +33,9 @@
     <string-array name="documentType">
         <item>None</item>
         <item>Assignments</item>
+        <item>Notes</item>
         <item>Practicals</item>
-        <item>Question Papers</item>
+        <item>Question Banks</item>
     </string-array>
 
 </resources>

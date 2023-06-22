@@ -19,20 +19,17 @@
         android:fontFamily="@font/script"
         android:textColor="@color/black"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text=""
-        android:fontFamily="@font/script"
-        android:textColor="@color/black"
-        android:textSize="15sp"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
         android:id="@+id/moto"
+
         android:fontFamily="@font/script"
+        android:layout_margin="15dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/black"

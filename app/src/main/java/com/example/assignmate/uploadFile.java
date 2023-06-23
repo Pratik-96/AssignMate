@@ -268,31 +268,7 @@ public class uploadFile extends AppCompatActivity {
 
     }
 
-//    public void notification() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            NotificationChannel channel = new NotificationChannel("data_uploaded", "notification", NotificationManager.IMPORTANCE_DEFAULT);
-//            NotificationManager manager = getSystemService(NotificationManager.class);
-//            manager.createNotificationChannel(channel);
-//        }
-//        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "data_uploaded")
-//                .setContentText("Code Sphere")
-//                .setSmallIcon(R.drawable.logo)
-//                .setAutoCancel(true)
-//                .setContentText("New document " + str + " is added in " + sub + "/" + type);
-//        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getApplicationContext());
 //
-//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(uploadFile.this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 99);
-//
-//            return;
-//        }
-//        managerCompat.notify(999, builder.build());
-//
-//
-//
-//
-//    }
-
     }
 
 

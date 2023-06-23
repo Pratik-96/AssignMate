@@ -2,8 +2,15 @@ package com.example.assignmate;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
@@ -40,6 +47,8 @@ public class SignUp extends AppCompatActivity {
     ActivitySignUpBinding binding;
 
     Button button;
+
+    String User_Name;
     FirebaseAuth mAuth;
 
     TextInputLayout passly,mailly,cnfpassly;
@@ -79,6 +88,8 @@ public class SignUp extends AppCompatActivity {
         String txt2 = "<b>Already have an account ? <a href=''>Log In</a></b>";
         reg.setText(Html.fromHtml(txt2));
         button=findViewById(R.id.button);
+
+
 
         Pass2.setLongClickable(false);
 
@@ -245,7 +256,7 @@ public class SignUp extends AppCompatActivity {
 
         if (checked[0] == 1 && flag && mailchk && !str.isEmpty()) {
 
-            String User_Name = name.getText().toString();
+             User_Name = name.getText().toString();
             String User_Email = email.getText().toString();
             String User_Pass = Pass2.getText().toString();
 
@@ -262,6 +273,7 @@ public class SignUp extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Toast.makeText(SignUp.this, "Signing Up..", Toast.LENGTH_SHORT).show();
                                 Intent home = new Intent(getApplicationContext(), Login.class);
+                                notification();
                                 startActivity(home);
                                 finish();
                                 inProgress(false);
@@ -322,5 +334,40 @@ public class SignUp extends AppCompatActivity {
             button.setVisibility(View.VISIBLE);
         }
     }
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+      if (requestCode == 99 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//            notification();
+        } else {
+            Toast.makeText(this, "Please Grant Permissions to use the App..", Toast.LENGTH_SHORT).show();
+        }
 
-}
+    }
+
+    public void notification() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("data_uploaded", "notification", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "data_uploaded")
+                .setContentText("")
+                .setSmallIcon(R.drawable.google_play_books)
+                .setAutoCancel(true)
+                .setContentText("Welcome "+User_Name+" to AssignMate!!");
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getApplicationContext());
+
+        if (ActivityCompat.checkSelfPermission(SignUp.this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(SignUp.this, new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 99);
+
+            return;
+        }
+        managerCompat.notify(999, builder.build());
+
+
+
+
+    }
+
+
+    }

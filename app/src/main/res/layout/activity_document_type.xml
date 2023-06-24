@@ -44,6 +44,8 @@
             android:layout_height="wrap_content"
             android:padding="30dp"
             android:text="Assignments"
+            android:layout_gravity="center"
+
             android:textColor="@color/secondary"
             android:textSize="25sp"
             android:fontFamily="@font/sarabun"
@@ -73,6 +75,8 @@
             android:text="Notes"
             android:textColor="@color/secondary"
             android:textSize="25sp"
+            android:layout_gravity="center"
+
             android:fontFamily="@font/sarabun"
             android:textStyle="bold" />
     </LinearLayout>
@@ -97,6 +101,8 @@
             android:layout_height="wrap_content"
             android:padding="30dp"
             android:text="Practicals"
+            android:layout_gravity="center"
+
             android:textColor="@color/secondary"
             android:textSize="25sp"
             android:fontFamily="@font/sarabun"
@@ -122,9 +128,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="30dp"
+            android:layout_gravity="center"
+
             android:text="Question Banks"
             android:textColor="@color/secondary"
             android:textSize="25sp"
+
             android:fontFamily="@font/sarabun"
             android:textStyle="bold" />
     </LinearLayout>

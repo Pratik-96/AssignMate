@@ -143,7 +143,7 @@ public class splash extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                binding.moto.setText("Assignment Solutions at Your Fingertips!!");
+                binding.moto.setText("Assignment Solutions at\n Your Fingertips!!");
             }
         },1300);
     }

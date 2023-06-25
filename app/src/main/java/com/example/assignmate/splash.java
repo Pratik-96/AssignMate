@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 
 
 import com.example.assignmate.databinding.ActivitySplashBinding;
@@ -33,7 +34,7 @@ public class splash extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-
+        binding.moto.setVisibility(View.GONE);
         new Handler().postDelayed((Runnable) new Runnable() {
             @Override
             public void run() {
@@ -143,6 +144,7 @@ public class splash extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 binding.moto.setText("Assignment Solutions at\n Your Fingertips!!");
             }
         },1300);

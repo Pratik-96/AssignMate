@@ -21,6 +21,7 @@
     <string name="app_description_7"> AssignMate is here to unleash your academic potential and pave the way for success.</string>
 
     <string name="Welcome2">Welcome Back..!!</string>
+    <string name="msg_token_fmt" > </string>
     <string-array name="subjects">
         <item>None</item>
         <item>Programming in Java</item>

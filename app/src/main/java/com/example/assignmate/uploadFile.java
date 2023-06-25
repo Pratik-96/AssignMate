@@ -217,6 +217,9 @@ public class uploadFile extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             Toast.makeText(uploadFile.this, "File Uploaded Sucessfully!!", Toast.LENGTH_SHORT).show();
                                             dialog.setTitle("File Uploaded Sucessfully!!");
+                                            FirebaseMessaging.getInstance().subscribeToTopic("all");
+                                            notificationsSender notificationsSender = new notificationsSender("/topics/all","New Document.",str+" has been added to "+selectedSub+"/"+selectedType,getApplicationContext(),uploadFile.this);
+                                            notificationsSender.sendNotification();
 //                                            notification();
                                             dialog.dismiss();
                                         } else {

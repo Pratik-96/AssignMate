@@ -52,7 +52,6 @@
             android:textStyle="bold"
             android:textSize="15sp"
             android:text="No file selected.."
-            android:textAlignment="center"
             android:textColor="@color/secondary" />
 
         <TextView

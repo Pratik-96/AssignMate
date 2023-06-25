@@ -73,10 +73,12 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setType(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(model.getUrl()));
-                intent.setPackage("com.android.chrome");
+                Uri url = Uri.parse(model.getUrl());
+                Intent intent = new Intent(Intent.ACTION_VIEW,url);
+
+//                intent.setType(Intent.ACTION_VIEW);
+//                intent.setData(Uri.parse(model.getUrl()));
+//                intent.setPackage("com.android.chrome");
                 context.startActivity(intent);// This will launch a browser
                 try {
                     context.startActivity(intent);

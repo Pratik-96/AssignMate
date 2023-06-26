@@ -221,7 +221,7 @@ public class uploadFile extends AppCompatActivity {
                                             dialog.setTitle("File Uploaded Sucessfully!!");
 
 
-                                            FirebaseMessaging.getInstance().subscribeToTopic("all");
+
 
                                             notificationsSender notificationsSender = new notificationsSender("/topics/all","New Document.",str+" has been added to "+selectedSub+"/"+selectedType,getApplicationContext(),uploadFile.this);
                                             notificationsSender.sendNotification();

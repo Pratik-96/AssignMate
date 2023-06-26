@@ -44,6 +44,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         builder.setStyle(new NotificationCompat.BigTextStyle().bigText(remoteMessage.getNotification().getBody()));
         builder.setAutoCancel(true);
         builder.setPriority(Notification.PRIORITY_MAX);
+        builder.setContentIntent(pendingIntent);
 
        NotificationManager notificationManager = (NotificationManager)getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
@@ -53,6 +54,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             notificationManager.createNotificationChannel(channel);
             builder.setChannelId(channelId);
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (!notificationManager.isNotificationPolicyAccessGranted()) {
+                Intent intent2 = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+                startActivity(intent2);
+            }
+        }
+
 
         notificationManager.notify(100,builder.build());
 

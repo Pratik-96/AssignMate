@@ -2,10 +2,16 @@ package com.example.assignmate;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,10 +36,42 @@ public class MainActivity extends AppCompatActivity {
     public static final String SUBJECT_NAME ="";
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 99 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        }
+        else
+        {
+            Toast.makeText(this, "permission", Toast.LENGTH_SHORT).show();
+            // Open app settings to allow the user to manually grant notification permission
+            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            Uri uri = Uri.fromParts("package", getPackageName(), null);
+            intent.setData(uri);
+            startActivity(intent);
+        }
+
+    }
+
+    private void checkNotificationPermission() {
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
+        boolean isNotificationEnabled = notificationManager.areNotificationsEnabled();
+
+        if (!isNotificationEnabled) {
+            Toast.makeText(getApplicationContext(), "Please allow notification permission", Toast.LENGTH_LONG).show();
+
+            // Open app settings to allow the user to manually grant notification permission
+            Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+            intent.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
+            startActivity(intent);
+        }
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        checkNotificationPermission();
 
 
 

@@ -24,6 +24,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -72,11 +73,11 @@ public class uploadFile extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 9 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             select_pdf();
-        } else if (requestCode == 99 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//            notification();
-        } else {
+        }
+        else {
             Toast.makeText(this, "Please Grant Permissions to use the App..", Toast.LENGTH_SHORT).show();
         }
+
 
     }
 
@@ -121,6 +122,7 @@ public class uploadFile extends AppCompatActivity {
                 } else {
                     ActivityCompat.requestPermissions(uploadFile.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 9);
                 }
+
             }
         });
 
@@ -217,7 +219,10 @@ public class uploadFile extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             Toast.makeText(uploadFile.this, "File Uploaded Sucessfully!!", Toast.LENGTH_SHORT).show();
                                             dialog.setTitle("File Uploaded Sucessfully!!");
+
+
                                             FirebaseMessaging.getInstance().subscribeToTopic("all");
+
                                             notificationsSender notificationsSender = new notificationsSender("/topics/all","New Document.",str+" has been added to "+selectedSub+"/"+selectedType,getApplicationContext(),uploadFile.this);
                                             notificationsSender.sendNotification();
 //                                            notification();
@@ -259,6 +264,8 @@ public class uploadFile extends AppCompatActivity {
 
     }
 
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -272,7 +279,9 @@ public class uploadFile extends AppCompatActivity {
         }
 
 
+
     }
+
 }
 
 

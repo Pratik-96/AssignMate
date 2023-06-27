@@ -67,6 +67,7 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull file_model model) {
         holder.name.setText("File Name:- "+model.getFile_Name());
         holder.descrption.setText("Description:- "+model.getDescription());
+        holder.timestamp.setText(model.getTimeStamp());
         urls.add(model.getUrl());
 
 
@@ -97,13 +98,13 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView descrption,name;
+        TextView descrption,name,timestamp;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             progressBar=itemView.findViewById(R.id.progressBarID);
             name=itemView.findViewById(R.id.put_filename);
             descrption=itemView.findViewById(R.id.put_description);
-            RecyclerView recyclerView=itemView.findViewById(R.id.recyclerView);
+            timestamp = itemView.findViewById(R.id.timestamp);
 
             empty = itemView.findViewById(R.id.empty);
 

@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -52,6 +53,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -211,7 +214,10 @@ public class uploadFile extends AppCompatActivity {
                         String url = uri.toString();     // Extracting url from result uri
                         DatabaseReference reference = database.getReference().child(selectedSub).child(selectedType).push();
                         String description = binding.description.getText().toString();
-                        file_model model = new file_model(str, description, url);
+                        SimpleDateFormat ts = new SimpleDateFormat("dd/MM/yyyy");
+                        Date date = new Date();
+                        String timestamp = ts.format(date);
+                        file_model model = new file_model(str, description, url,timestamp);
                         reference.setValue(model)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override

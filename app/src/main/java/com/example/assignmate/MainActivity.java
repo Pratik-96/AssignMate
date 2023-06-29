@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.PaintKt;
 
 import android.Manifest;
 import android.app.Activity;
@@ -42,16 +44,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 99 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-        }
-        else
-        {
-            Toast.makeText(this, "permission", Toast.LENGTH_SHORT).show();
+        if (requestCode == 99 && !(grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+            Toast.makeText(this, "Please grant notification permission to AssignMate!!", Toast.LENGTH_SHORT).show();
             // Open app settings to allow the user to manually grant notification permission
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
             Uri uri = Uri.fromParts("package", getPackageName(), null);
             intent.setData(uri);
             startActivity(intent);
+        }
+
+        if (requestCode==100 && !(grantResults[0] == PackageManager.PERMISSION_GRANTED))
+        {
+            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},100);
+
+            Toast.makeText(getApplicationContext(), "Please grant the permission to use AssignMate!!", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -80,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
 
         checkNotificationPermission();
 
+        if (!(ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED))
+        {
+            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},100);
+        }
 
 
         FirebaseMessaging.getInstance().getToken()

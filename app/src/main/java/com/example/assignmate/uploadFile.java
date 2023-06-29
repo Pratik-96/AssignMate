@@ -78,7 +78,7 @@ public class uploadFile extends AppCompatActivity {
             select_pdf();
         }
         else {
-            Toast.makeText(this, "Please Grant Permissions to use the App..", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please Grant Permissions to use the AssignMate!!", Toast.LENGTH_SHORT).show();
         }
 
 

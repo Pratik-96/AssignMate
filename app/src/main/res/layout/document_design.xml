@@ -6,13 +6,13 @@
     android:layout_height="wrap_content"
   >
 
+
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_margin="10dp"
-
         android:background="@drawable/round_note"
         android:elevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:text="File Name"
                 android:textSize="15sp"
+                android:maxLines="2"
                 android:layout_marginStart="5dp"
                 android:textColor="@color/secondary"
                 android:fontFamily="@font/sarabun"
@@ -68,6 +69,9 @@
         </LinearLayout>
 
 
+
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.rajat.pdfviewer.PdfViewerActivity;
 
 import org.w3c.dom.Text;
 
@@ -76,19 +78,29 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
             @Override
             public void onClick(View view) {
                 Uri url = Uri.parse(model.getUrl());
-                Intent intent = new Intent(Intent.ACTION_VIEW,url);
-//                Intent intent = new Intent();
+                String URL = model.getUrl();
+
 //                intent.setType(Intent.ACTION_VIEW);
 //                intent.setData(Uri.parse(model.getUrl()));
 //                intent.setPackage("com.android.chrome");
 //                context.startActivity(intent);// This will launch a browser
-                try {
-                    context.startActivity(intent);
-                } catch (ActivityNotFoundException ex) {
-                    // Chrome browser presumably not installed so allow user to choose instead
-                    intent.setPackage(null);
+                String fileName = model.getFile_Name();
+                String ext = fileName.substring(fileName.lastIndexOf("."));
+                if (ext.equals(".pdf")) {
+                    context.startActivity(PdfViewerActivity.Companion.launchPdfFromUrl(context.getApplicationContext(), URL, model.getFile_Name(), "", true));
+                }
+                else
+                {
+                    Intent intent = new Intent(Intent.ACTION_VIEW,url);
                     context.startActivity(intent);
                 }
+//                     try {
+//                    context.startActivity(intent);
+//                } catch (ActivityNotFoundException ex) {
+//                    // Chrome browser presumably not installed so allow user to choose instead
+//                    intent.setPackage(null);
+//                    context.startActivity(intent);
+//                }
             }
         });
 

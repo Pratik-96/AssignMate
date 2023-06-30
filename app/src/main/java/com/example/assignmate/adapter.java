@@ -3,6 +3,7 @@ package com.example.assignmate;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.rajat.pdfviewer.PdfViewerActivity;
+import com.squareup.picasso.Picasso;
+
 
 import org.w3c.dom.Text;
 
@@ -26,7 +29,7 @@ import java.util.IdentityHashMap;
 
 public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHolder> {
     RecyclerView recyclerView;
-
+    public static final String URI = "";
 
     ProgressBar progressBar;
     Context context;
@@ -79,11 +82,11 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
             public void onClick(View view) {
                 Uri url = Uri.parse(model.getUrl());
                 String URL = model.getUrl();
+//                Intent intent = new Intent();
+//                    intent.setType(Intent.ACTION_VIEW);
+//                    intent.setData(Uri.parse(model.getUrl()));
+//                    intent.setPackage("com.google.android.apps.photos");
 
-//                intent.setType(Intent.ACTION_VIEW);
-//                intent.setData(Uri.parse(model.getUrl()));
-//                intent.setPackage("com.android.chrome");
-//                context.startActivity(intent);// This will launch a browser
                 String fileName = model.getFile_Name();
                 String ext = fileName.substring(fileName.lastIndexOf("."));
                 if (ext.equals(".pdf")) {
@@ -94,13 +97,7 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
                     Intent intent = new Intent(Intent.ACTION_VIEW,url);
                     context.startActivity(intent);
                 }
-//                     try {
-//                    context.startActivity(intent);
-//                } catch (ActivityNotFoundException ex) {
-//                    // Chrome browser presumably not installed so allow user to choose instead
-//                    intent.setPackage(null);
-//                    context.startActivity(intent);
-//                }
+//
             }
         });
 
@@ -111,6 +108,7 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView descrption,name,timestamp;
+        ImageView imageView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             progressBar=itemView.findViewById(R.id.progressBarID);
@@ -119,6 +117,7 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
             timestamp = itemView.findViewById(R.id.timestamp);
 
             empty = itemView.findViewById(R.id.empty);
+//            imageView= itemView.findViewById(R.id.imageR);
 
 
         }

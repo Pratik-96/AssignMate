@@ -83,12 +83,18 @@ public class SignUp extends AppCompatActivity {
         passly=findViewById(R.id.pasLayout);
         email = (EditText)findViewById(R.id.email);
         progressBar=findViewById(R.id.progressBar);
-        String txt = "<b>I agree to the <a href='www.google.com'>Terms & Conditions</a></b>";
-        chkbox.setText(Html.fromHtml(txt));
+        String txt = "<b><a href='www.google.com'>Terms & Conditions</a></b>";
+        binding.terms.setText(Html.fromHtml(txt));
         String txt2 = "<b>Already have an account ? <a href=''>Log In</a></b>";
         reg.setText(Html.fromHtml(txt2));
         button=findViewById(R.id.button);
 
+        binding.terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    startActivity(new Intent(getApplicationContext(), terms.class));
+            }
+        });
 
 
         Pass2.setLongClickable(false);

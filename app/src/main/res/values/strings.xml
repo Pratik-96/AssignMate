@@ -21,6 +21,31 @@
     <string name="app_description_7"> AssignMate is here to unleash your academic potential and pave the way for success.</string>
 
     <string name="Welcome2">Welcome Back..!!</string>
+    <string name="terms_and_conditions_title">AssignMate App Terms and Conditions</string>
+    <string name="terms_and_conditions_content">
+    <![CDATA[
+1. Acceptance of Terms: By using the AssignMate, you agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, please refrain from using the App.\n\n
+
+2. User Responsibilities: You are responsible for maintaining the confidentiality of your account credentials and for any activity that occurs under your account. You agree to use the App for lawful purposes and to comply with all applicable laws and regulations.\n\n
+
+3. Intellectual Property: All intellectual property rights, including copyrights, trademarks, and any other proprietary rights related to the App, are the property of AssignMate and its developer. You may not modify, distribute, transmit, display, perform, reproduce, publish, license, create derivative works from, transfer, or sell any information, software, products, or services obtained from the App.\n\n
+
+4. Privacy Policy: The collection and use of personal information are governed by our Privacy Policy. By using the App, you consent to the collection and use of your personal information in accordance with the Privacy Policy.\n\n
+
+5. Content Accuracy: While we strive to provide accurate and reliable information within the App, we do not guarantee the accuracy, completeness, or usefulness of any content. Users are responsible for verifying the accuracy and appropriateness of the information obtained through the App.\n\n
+
+6. Limitation of Liability: AssignMate and its developers shall not be liable for any direct, indirect, incidental, special, or consequential damages arising out of or in connection with the use or inability to use the App, even if advised of the possibility of such damages.\n\n
+
+7. Modifications and Termination: AssignMate reserves the right to modify or discontinue the App, with or without notice, at any time. We may also revise these Terms and Conditions from time to time. Continued use of the App after any such changes shall constitute your consent to such changes.\n\n
+
+Please read these Terms and Conditions carefully before using the AssignMate App. By using the App, you signify your agreement to these terms. If you have any questions or concerns regarding these Terms and Conditions, please contact us at pratiknandvikar1404@gmail.com\n\n
+\n
+Last updated: [1/07/2023]
+\n\n
+    ]]>
+</string>
+
+
     <string name="msg_token_fmt"> </string>
     <string-array name="subjects">
         <item>None</item>

@@ -25,6 +25,9 @@
         android:theme="@style/AppTheme.NoForceDark"
         tools:targetApi="31">
         <activity
+            android:name=".terms"
+            android:exported="false" />
+        <activity
             android:name=".aboutAssignMate"
             android:exported="false" />
         <activity

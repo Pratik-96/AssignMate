@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.util.Patterns;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -85,8 +86,16 @@ public class Login extends AppCompatActivity {
         forgotpass.setText(Html.fromHtml(url));
         String txt3 = "Don't have an Account ? <a href=''>Sign Up</a>";
         txt2.setText(Html.fromHtml(txt3));
-        String txt = "<b>I agree to the <a href=''>Terms & Conditions</a></b>";
-        chkbx.setText(Html.fromHtml(txt));
+        String txt = "<b><a href=''>Terms & Conditions</a></b>";
+        binding.terms.setText(Html.fromHtml(txt));
+
+        binding.terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), terms.class));
+            }
+        });
+
         chkbx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -196,41 +205,41 @@ public class Login extends AppCompatActivity {
         }
 
 
-        if (checked[0] == 1 && flag && mailchk) {
+
+            if (checked[0] == 1 && flag && mailchk) {
 
 
-            mAuth.signInWithEmailAndPassword(mail, key)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            inProgress(false);
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Toast.makeText(Login.this, "Login Successful!!", Toast.LENGTH_SHORT).show();
-                                Intent home = new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(home);
-                                finish();
+                mAuth.signInWithEmailAndPassword(mail, key)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
                                 inProgress(false);
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Toast.makeText(Login.this, "Login Successful!!", Toast.LENGTH_SHORT).show();
+                                    Intent home = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(home);
+                                    finish();
+                                    inProgress(false);
 
-                            } else {
-                                // If sign in fails, display a message to the user.
+                                } else {
+                                    // If sign in fails, display a message to the user.
 
-                                Toast.makeText(Login.this, task.getException().getLocalizedMessage(),
-                                        Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Login.this, task.getException().getLocalizedMessage(),
+                                            Toast.LENGTH_SHORT).show();
 
 
+                                }
                             }
-                        }
-                    });
-        }
-        else
-        {
-            Toast.makeText(this, "Please enter all fields..", Toast.LENGTH_SHORT).show();
-            inProgress(false);
+                        });
+            } else {
+                Toast.makeText(this, "Please Accept our Terms And Conditions.", Toast.LENGTH_SHORT).show();
+                inProgress(false);
+            }
         }
 
 
-    }
+
 
     public void signup (View v){
         Intent act2 = new Intent(this, SignUp.class);

@@ -131,8 +131,9 @@ public class MainActivity extends AppCompatActivity {
 
                 PopupMenu menu = new PopupMenu(getApplicationContext(),binding.menu);
                 menu.getMenu().add("About AssignMate");
-                menu.getMenu().add("Logout");
                 menu.getMenu().add("Update AssignMate");
+                menu.getMenu().add("Logout");
+
                 menu.show();
                 menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override

@@ -27,6 +27,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     public static final String SUBJECT_NAME ="";
+
+    FirebaseDatabase database;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -84,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        database = FirebaseDatabase.getInstance();
+
         checkNotificationPermission();
 
         if (!(ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED))
@@ -127,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 PopupMenu menu = new PopupMenu(getApplicationContext(),binding.menu);
                 menu.getMenu().add("About AssignMate");
                 menu.getMenu().add("Logout");
+                menu.getMenu().add("Update AssignMate");
                 menu.show();
                 menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
@@ -141,6 +147,25 @@ public class MainActivity extends AppCompatActivity {
                         if (menuItem.getTitle()=="About AssignMate")
                         {
                             startActivity(new Intent(getApplicationContext(), aboutAssignMate.class));
+
+                        }
+                        if (menuItem.getTitle().equals("Update AssignMate"))
+                        {
+                            DatabaseReference reference = database.getReference();
+
+                            reference.child("Updates").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                    if (task.isSuccessful())
+                                    {
+                                        Uri url = Uri.parse(task.getResult().getValue().toString());
+                                       Intent intent = new Intent(Intent.ACTION_VIEW,url);
+                                        Toast.makeText(getApplicationContext(), "Downloading New Update..", Toast.LENGTH_SHORT).show();
+                                       startActivity(intent);
+                                    }
+                                }
+                            });
+
 
                         }
 

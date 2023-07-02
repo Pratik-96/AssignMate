@@ -199,10 +199,10 @@ public class MainActivity extends AppCompatActivity {
         Calendar c = Calendar.getInstance();
         int hrs = c.get(Calendar.HOUR_OF_DAY);
 
-        if (hrs>=1 && hrs<=12)
+        if (hrs>=1 && hrs<12)
         {
             binding.greet.setText("Good morning");
-        } else if (hrs>12 && hrs<=18) {
+        } else if (hrs>12 && hrs<18) {
             binding.greet.setText("Good afternoon");
         }
         else

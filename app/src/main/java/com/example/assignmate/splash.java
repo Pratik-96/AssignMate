@@ -34,7 +34,6 @@ public class splash extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-        binding.moto.setVisibility(View.GONE);
         new Handler().postDelayed((Runnable) new Runnable() {
             @Override
             public void run() {

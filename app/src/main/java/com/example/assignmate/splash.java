@@ -28,7 +28,7 @@ public class splash extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivitySplashBinding.inflate(getLayoutInflater());
+        binding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -38,44 +38,37 @@ public class splash extends AppCompatActivity {
         new Handler().postDelayed((Runnable) new Runnable() {
             @Override
             public void run() {
-                if (checkConnection(getApplicationContext()))
-                {
-                    if (user!=null)
-                    {
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                if (checkConnection(getApplicationContext())) {
+                    if (user != null) {
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         finish();
-                    }
-                    else
-                    {
+                    } else {
                         startActivity(new Intent(getApplicationContext(), SignUp.class));
                         finish();
                     }
-                }
-                else
-                {
-                        startActivity(new Intent(getApplicationContext(), no_connection.class));
-                        finish();
+                } else {
+                    startActivity(new Intent(getApplicationContext(), no_connection.class));
+                    finish();
                 }
 
 
             }
-        },2000);
+        }, 2000);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                binding.view.setVisibility(View.VISIBLE);
+                binding.appname.setVisibility(View.VISIBLE);
+            }
+        }, 400);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 binding.appname.setText("A");
             }
-        },300);
-
-
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                binding.appname.append("S");
-            }
-        },400);
+        }, 500);
 
 
         new Handler().postDelayed(new Runnable() {
@@ -83,7 +76,15 @@ public class splash extends AppCompatActivity {
             public void run() {
                 binding.appname.append("S");
             }
-        },500);
+        }, 600);
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                binding.appname.append("S");
+            }
+        }, 700);
 
 
         new Handler().postDelayed(new Runnable() {
@@ -91,7 +92,7 @@ public class splash extends AppCompatActivity {
             public void run() {
                 binding.appname.append("I");
             }
-        },600);
+        }, 800);
 
 
         new Handler().postDelayed(new Runnable() {
@@ -99,7 +100,7 @@ public class splash extends AppCompatActivity {
             public void run() {
                 binding.appname.append("G");
             }
-        },700);
+        }, 900);
 
 
         new Handler().postDelayed(new Runnable() {
@@ -107,7 +108,7 @@ public class splash extends AppCompatActivity {
             public void run() {
                 binding.appname.append("N");
             }
-        },800);
+        }, 1000);
 
 
         new Handler().postDelayed(new Runnable() {
@@ -115,7 +116,7 @@ public class splash extends AppCompatActivity {
             public void run() {
                 binding.appname.append("M");
             }
-        },900);
+        }, 1100);
 
 
         new Handler().postDelayed(new Runnable() {
@@ -123,7 +124,7 @@ public class splash extends AppCompatActivity {
             public void run() {
                 binding.appname.append("A");
             }
-        },1000);
+        }, 1200);
 
 
         new Handler().postDelayed(new Runnable() {
@@ -131,7 +132,7 @@ public class splash extends AppCompatActivity {
             public void run() {
                 binding.appname.append("T");
             }
-        },1100);
+        }, 1300);
 
 
         new Handler().postDelayed(new Runnable() {
@@ -139,15 +140,7 @@ public class splash extends AppCompatActivity {
             public void run() {
                 binding.appname.append("E");
             }
-        },1200);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                binding.moto.setText("Assignment Solutions at\n Your Fingertips!!");
-            }
-        },1300);
+        }, 1400);
     }
     public static boolean checkConnection(Context context) {
         final ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

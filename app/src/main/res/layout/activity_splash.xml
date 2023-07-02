@@ -7,7 +7,31 @@
     tools:context=".splash"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/loginbackground2">
+    android:background="@drawable/moonlit_asteroid_gradient">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:layout_margin="10dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/logo"/>
+    </androidx.cardview.widget.CardView>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:id="@+id/view"
+            android:background="@color/white"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,28 +40,29 @@
         android:id="@+id/appname"
         android:layout_gravity="center"
         android:textSize="40sp"
+        android:visibility="gone"
         android:fontFamily="@font/script"
-        android:textColor="@color/black"/>
+        android:textColor="@color/white"/>
 
+    </LinearLayout>
 
     <TextView
+        android:id="@+id/moto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/moto"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/script"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/script"
+        android:text=""
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        />
+        android:textStyle="bold" />
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:indeterminateTint="@color/black"
-        android:layout_marginTop="20dp"/>
+        android:indeterminateTint="@color/white"
+      />
 
 
 

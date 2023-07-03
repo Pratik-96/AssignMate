@@ -69,12 +69,41 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull file_model model) {
-        holder.name.setText("File Name:- "+model.getFile_Name());
+        holder.name.setText(model.getFile_Name());
         holder.descrption.setText("Description:- "+model.getDescription());
         holder.timestamp.setText(model.getTimeStamp());
         urls.add(model.getUrl());
+        String fileName = model.getFile_Name();
+        String ext = fileName.substring(fileName.lastIndexOf("."));
 
+        if (ext.equals(".doc") || ext.equals(".docx")) {
+            holder.imageView.setImageResource(R.drawable.document_icon);
+        }else
+            if (ext.equals(".png"))
+            {
+                holder.imageView.setImageResource(R.drawable.png_icon);
 
+            }
+            else
+        if (ext.equals(".jpg") || ext.equals(".jpeg")) {
+            holder.imageView.setImageResource(R.drawable.jpg_icon);
+        }else
+        if (ext.equals(".ppt")||ext.equals(".pptx"))
+        {
+            holder.imageView.setImageResource(R.drawable.ppt_icon);
+        }else
+        if (ext.equals(".txt"))
+        {
+            holder.imageView.setImageResource(R.drawable.txt_icon);
+        }
+        else
+        if (ext.equals(".pdf")) {
+            holder.imageView.setImageResource(R.drawable.pdf_icon);
+        }
+        else
+        {
+            holder.imageView.setImageResource(R.drawable.icons8_google_docs__1_);
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -88,6 +117,7 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
 
                 String fileName = model.getFile_Name();
                 String ext = fileName.substring(fileName.lastIndexOf("."));
+
                 if (ext.equals(".pdf")) {
                     context.startActivity(PdfViewerActivity.Companion.launchPdfFromUrl(context.getApplicationContext(), URL, model.getFile_Name(), "", true));
                 }
@@ -116,7 +146,7 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
             timestamp = itemView.findViewById(R.id.timestamp);
 
             empty = itemView.findViewById(R.id.empty);
-//            imageView= itemView.findViewById(R.id.imageR);
+            imageView= itemView.findViewById(R.id.doc_icon);
 
 
         }

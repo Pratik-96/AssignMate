@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -20,6 +21,7 @@ import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.*;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
@@ -37,7 +39,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
 
 
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivities(this,1, new Intent[]{intent},PendingIntent.FLAG_IMMUTABLE);
         builder.setContentTitle(remoteMessage.getNotification().getTitle());
         builder.setContentText(remoteMessage.getNotification().getBody());

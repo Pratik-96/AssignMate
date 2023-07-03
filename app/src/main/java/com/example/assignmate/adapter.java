@@ -102,7 +102,7 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
         }
         else
         {
-            holder.imageView.setImageResource(R.drawable.icons8_google_docs__1_);
+            holder.imageView.setImageResource(R.drawable.unknown_doc);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
 

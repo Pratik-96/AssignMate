@@ -91,7 +91,7 @@ public class uploadFile extends AppCompatActivity {
         setContentView(binding.getRoot());
         storage = FirebaseStorage.getInstance();    // Returns an object of Firebase storage
         database = FirebaseDatabase.getInstance();
-
+        binding.description.clearFocus();
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.subjects, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         binding.spinner.setAdapter(adapter);

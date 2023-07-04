@@ -34,6 +34,7 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
     Context context;
 
     ImageView image;
+    FirebaseRecyclerOptions<file_model> options;
 
     TextView empty;
     ArrayList<String> urls = new ArrayList<>();
@@ -131,6 +132,7 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
         });
 
     }
+
 
 
 

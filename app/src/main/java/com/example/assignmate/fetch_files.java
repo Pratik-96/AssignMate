@@ -3,10 +3,13 @@ package com.example.assignmate;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -26,18 +29,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
 
 public class fetch_files extends AppCompatActivity {
 
     private ActivityFetchFilesBinding binding;
 
-    DatabaseReference databaseReference;
 
-    ArrayList<file_model> file;
+
 
     adapter ad;
-    ProgressBar progressBar;
+
 
 
     @Override
@@ -52,7 +55,6 @@ public class fetch_files extends AppCompatActivity {
         binding.selectedCategory.setText(type);
         binding.selectedCategory2.setText(type);
 
-
         binding.progressBarID.setVisibility(View.VISIBLE);
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child(subject).child(type);
 
@@ -63,15 +65,19 @@ public class fetch_files extends AppCompatActivity {
                 if (snapshot.getChildrenCount()==0)
                 {
                     binding.recyclerView.setVisibility(View.VISIBLE);
+//                    binding.fetchLy.setVisibility(View.GONE);
                     binding.nodata.setVisibility(View.VISIBLE);
 
-                }
+
+                }else
+                    binding.recyclerView.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 binding.progressBarID.setVisibility(View.GONE);
                 binding.recyclerView.setVisibility(View.GONE);
+//                binding.fetchLy.setVisibility(View.GONE);
                 binding.nodata.setVisibility(View.VISIBLE);
 
             }
@@ -90,6 +96,46 @@ public class fetch_files extends AppCompatActivity {
         ad = new adapter(options,fetch_files.this);
         binding.recyclerView.setAdapter(ad);
         binding.recyclerView.setVisibility(View.VISIBLE);
+
+        binding.searchBar.clearFocus();
+        binding.searchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                filter_list(charSequence.toString(),subject,type);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
+    private void filter_list(String Text,String subject,String type) {
+
+        if (!Text.isEmpty()) {
+            FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(FirebaseDatabase.getInstance().getReference().child(subject).child(type).orderByChild("description").startAt(Text.toUpperCase()).endAt(Text + "/uf8ff"), file_model.class).build();
+            ad = new adapter(options, fetch_files.this);
+            ad.startListening();
+            binding.recyclerView.setAdapter(ad);
+            ad.notifyDataSetChanged();
+        }
+        else
+        {
+            FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(FirebaseDatabase.getInstance().getReference().child(subject).child(type), file_model.class).build();
+            ad = new adapter(options,fetch_files.this);
+            ad.startListening();
+            binding.recyclerView.setAdapter(ad);
+
+            binding.recyclerView.setVisibility(View.VISIBLE);
+        }
+
+
     }
 
     @Override
@@ -108,4 +154,16 @@ public class fetch_files extends AppCompatActivity {
         super.onStop();
         ad.stopListening();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ad.startListening();
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        ad.startListening();    }
 }

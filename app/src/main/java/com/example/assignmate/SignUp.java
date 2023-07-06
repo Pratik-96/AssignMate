@@ -1,6 +1,7 @@
 package com.example.assignmate;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
@@ -26,6 +27,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.assignmate.databinding.ActivitySignUpBinding;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -51,6 +57,10 @@ public class SignUp extends AppCompatActivity {
     String User_Name;
     FirebaseAuth mAuth;
 
+    GoogleSignInOptions gso;
+    GoogleSignInClient gsc;
+
+
     TextInputLayout passly,mailly,cnfpassly;
 
     final int[] checked = new int[1];
@@ -59,10 +69,27 @@ public class SignUp extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+
+        if(currentUser != null || account!=null){
             Intent home=new Intent(getApplicationContext(),MainActivity.class);
             startActivity(home);
             finish();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==101)
+        {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                task.getResult(ApiException.class);
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            } catch (ApiException e) {
+                Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -88,6 +115,16 @@ public class SignUp extends AppCompatActivity {
         String txt2 = "<b>Already have an account ? <a href=''>Log In</a></b>";
         reg.setText(Html.fromHtml(txt2));
         button=findViewById(R.id.button);
+
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        gsc = GoogleSignIn.getClient(getApplicationContext(),gso);
+        binding.signWithGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent signWithGoogle = gsc.getSignInIntent();
+                startActivityForResult(signWithGoogle,101);
+            }
+        });
 
         binding.terms.setOnClickListener(new View.OnClickListener() {
             @Override

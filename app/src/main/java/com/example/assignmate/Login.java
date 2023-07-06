@@ -20,6 +20,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.assignmate.databinding.ActivityLoginBinding;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -36,6 +40,8 @@ public class Login extends AppCompatActivity {
     Button login;
 
     ProgressBar progressBar;
+    GoogleSignInOptions gso;
+    GoogleSignInClient gsc;
 
     ActivityLoginBinding binding;
     FirebaseAuth mAuth;
@@ -49,7 +55,8 @@ public class Login extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+        if(currentUser != null || account!=null){
             Intent home=new Intent(getApplicationContext(),MainActivity.class);
             startActivity(home);
             finish();
@@ -70,6 +77,15 @@ public class Login extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
         login=findViewById(R.id.button);
 
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        gsc = GoogleSignIn.getClient(getApplicationContext(),gso);
+        binding.signWithGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent signWithGoogle = gsc.getSignInIntent();
+                startActivityForResult(signWithGoogle,101);
+            }
+        });
 
 
         binding.forgotpass.setOnClickListener(new View.OnClickListener() {

@@ -49,17 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseDatabase database;
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
-        if(currentUser == null || account==null){
-            Intent log=new Intent(getApplicationContext(), Login.class);
-            startActivity(log);
-            finish();
-        }
-    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

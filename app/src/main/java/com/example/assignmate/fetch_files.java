@@ -119,7 +119,7 @@ public class fetch_files extends AppCompatActivity {
     private void filter_list(String Text,String subject,String type) {
 
         if (!Text.isEmpty()) {
-            FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(FirebaseDatabase.getInstance().getReference().child(subject).child(type).orderByChild("description").startAt(Text.toUpperCase()).endAt(Text.toLowerCase() + "/uf8ff"), file_model.class).build();
+            FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(FirebaseDatabase.getInstance().getReference().child(subject).child(type).orderByChild("description").startAt(Text).endAt(Text + "/uf8ff"), file_model.class).build();
             ad = new adapter(options, fetch_files.this);
             ad.startListening();
             binding.recyclerView.setAdapter(ad);

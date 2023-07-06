@@ -206,8 +206,8 @@
                 android:textAlignment="center"
                 android:fontFamily="@font/sarabun"
                 android:textStyle="bold"
-                android:textAllCaps="true"
-                android:textColor="@color/black"
+                android:textAllCaps="false"
+                android:textColor="@color/secondary"
                 android:textSize="15sp">
 
             </androidx.appcompat.widget.AppCompatButton>

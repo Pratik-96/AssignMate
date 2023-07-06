@@ -86,10 +86,10 @@ public class SignUp extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 task.getResult(ApiException.class);
+                Toast.makeText(this, "Creating your account.!!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             } catch (ApiException e) {
-                Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
+                Toast.makeText(this, "Something went wrong!!", Toast.LENGTH_SHORT).show();            }
         }
     }
 

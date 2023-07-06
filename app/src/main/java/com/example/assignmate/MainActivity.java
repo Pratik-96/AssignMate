@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.assignmate.databinding.ActivityMainBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -47,6 +48,18 @@ public class MainActivity extends AppCompatActivity {
     public static final String SUBJECT_NAME ="";
 
     FirebaseDatabase database;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+        if(currentUser == null || account==null){
+            Intent log=new Intent(getApplicationContext(), Login.class);
+            startActivity(log);
+            finish();
+        }
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

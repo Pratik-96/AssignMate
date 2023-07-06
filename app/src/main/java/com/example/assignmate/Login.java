@@ -72,9 +72,10 @@ public class Login extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 task.getResult(ApiException.class);
+                Toast.makeText(Login.this, "Login Successful!!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             } catch (ApiException e) {
-                Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Something went wrong!!", Toast.LENGTH_SHORT).show();
             }
         }
     }

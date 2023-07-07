@@ -134,7 +134,7 @@ public class Profile extends Fragment {
                                     {
                                         Uri url = Uri.parse(task.getResult().getValue().toString());
                                        Intent intent = new Intent(Intent.ACTION_VIEW,url);
-                                        Toast.makeText(getContext(), "Downloading New Update..", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), "Downloading Latest Update..", Toast.LENGTH_SHORT).show();
                                        startActivity(intent);
                                     }
                                 }

@@ -89,6 +89,7 @@ public class SignUp extends AppCompatActivity {
                 task.getResult(ApiException.class);
                 Toast.makeText(this, "Creating your account.!!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
             } catch (ApiException e) {
                 Toast.makeText(this, "Something went wrong!!", Toast.LENGTH_SHORT).show();            }
         }

@@ -106,6 +106,7 @@
                 android:layout_margin="20dp"
                 android:drawableStart="@drawable/baseline_info_24"
                 android:drawablePadding="10dp"
+                android:fontFamily="@font/sarabun"
                 android:text="About AssignMate"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
@@ -122,6 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
+                android:fontFamily="@font/sarabun"
                 android:drawableStart="@drawable/baseline_download_24"
                 android:drawablePadding="10dp"
                 android:text="Update AssignMate"
@@ -142,6 +144,7 @@
                 android:layout_margin="20dp"
                 android:drawableStart="@drawable/baseline_logout_24"
                 android:drawablePadding="10dp"
+                android:fontFamily="@font/sarabun"
                 android:text="Logout"
                 android:textColor="@color/white"
                 android:textSize="20sp" />

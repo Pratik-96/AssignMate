@@ -38,6 +38,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -315,6 +316,8 @@ public class SignUp extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Toast.makeText(SignUp.this, "Signing Up..", Toast.LENGTH_SHORT).show();
+                                UserProfileChangeRequest request = new UserProfileChangeRequest.Builder().setDisplayName(User_Name).build();
+                                mAuth.getCurrentUser().updateProfile(request);
                                 Intent home = new Intent(getApplicationContext(), Login.class);
                                 notification();
                                 startActivity(home);

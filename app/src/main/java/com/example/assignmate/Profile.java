@@ -105,7 +105,8 @@ public class Profile extends Fragment {
         else
         {
             email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-            name.setVisibility(View.GONE);  //TODO Store manually entered User name
+            name.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+            name.setVisibility(View.VISIBLE);  //TODO Store manually entered User name
         }
         back.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -6,6 +6,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.PaintKt;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.app.Activity;
@@ -16,6 +20,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
@@ -36,6 +41,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -86,8 +92,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +100,15 @@ public class MainActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
 
+
+
+        GoogleSignInAccount account  = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+       if (account!=null) {
+           if (account.getPhotoUrl() != null) {
+               Picasso.get().load(account.getPhotoUrl()).into(binding.menu);
+
+           }
+       }
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -143,68 +156,72 @@ public class MainActivity extends AppCompatActivity {
             binding.floatingActionButton.setVisibility(View.GONE);
         }
         mAuth=FirebaseAuth.getInstance();
+
         binding.menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                PopupMenu menu = new PopupMenu(getApplicationContext(),binding.menu);
-                menu.getMenu().add("About AssignMate");
-                menu.getMenu().add("Update AssignMate");
-                menu.getMenu().add("Logout");
-
-                menu.show();
-                menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        if (menuItem.getTitle()=="Logout")
-                        {
-                            mAuth.signOut();
-                            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-                            GoogleSignInClient gsc = GoogleSignIn.getClient(getApplicationContext(),gso);
-                            gsc.signOut();
-                            Intent intent = new Intent(getApplicationContext(), Login.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                        if (menuItem.getTitle()=="About AssignMate")
-                        {
-                            startActivity(new Intent(getApplicationContext(), aboutAssignMate.class));
-
-                        }
-                        if (menuItem.getTitle().equals("Update AssignMate"))
-                        {
-                            DatabaseReference reference = database.getReference();
-
-                            reference.child("Updates").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                    if (task.isSuccessful())
-                                    {
-                                        Uri url = Uri.parse(task.getResult().getValue().toString());
-                                       Intent intent = new Intent(Intent.ACTION_VIEW,url);
-                                        Toast.makeText(getApplicationContext(), "Downloading New Update..", Toast.LENGTH_SHORT).show();
-                                       startActivity(intent);
-                                    }
-                                }
-                            });
-
-
-                        }
-
-
-                        return false;
-                    }
-                });
-
-
-
-
-
-
-
-
+               FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+               fragmentTransaction.replace(R.id.frameLayout,new Profile()).commit();
+               binding.mainLayout.setVisibility(View.GONE);
             }
         });
+
+//        binding.menu.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                PopupMenu menu = new PopupMenu(getApplicationContext(),binding.menu);
+//                menu.getMenu().add("About AssignMate");
+//                menu.getMenu().add("Update AssignMate");
+//                menu.getMenu().add("Logout");
+//
+//                menu.show();
+//                menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                    @Override
+//                    public boolean onMenuItemClick(MenuItem menuItem) {
+//                        if (menuItem.getTitle()=="Logout")
+//                        {
+//
+//                        }
+//                        if (menuItem.getTitle()=="About AssignMate")
+//                        {
+//                            startActivity(new Intent(getApplicationContext(), aboutAssignMate.class));
+//
+//                        }
+//                        if (menuItem.getTitle().equals("Update AssignMate"))
+//                        {
+//                            DatabaseReference reference = database.getReference();
+//
+//                            reference.child("Updates").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                                    if (task.isSuccessful())
+//                                    {
+//                                        Uri url = Uri.parse(task.getResult().getValue().toString());
+//                                       Intent intent = new Intent(Intent.ACTION_VIEW,url);
+//                                        Toast.makeText(getApplicationContext(), "Downloading New Update..", Toast.LENGTH_SHORT).show();
+//                                       startActivity(intent);
+//                                    }
+//                                }
+//                            });
+//
+//
+//                        }
+//
+//
+//                        return false;
+//                    }
+//                });
+
+
+
+
+
+
+//
+//
+//            }
+//        });
         Calendar c = Calendar.getInstance();
         int hrs = c.get(Calendar.HOUR_OF_DAY);
 
@@ -273,5 +290,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
 }
+

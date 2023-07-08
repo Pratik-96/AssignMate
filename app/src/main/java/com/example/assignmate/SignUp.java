@@ -91,7 +91,7 @@ public class SignUp extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
             } catch (ApiException e) {
-                Toast.makeText(this, "Something went wrong!!", Toast.LENGTH_SHORT).show();            }
+                Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();            }
         }
     }
 

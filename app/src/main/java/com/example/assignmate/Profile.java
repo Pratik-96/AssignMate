@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,9 +97,12 @@ public class Profile extends Fragment {
         LinearLayout update = view.findViewById(R.id.update);
         LinearLayout logout = view.findViewById(R.id.logout);
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
+
         if (account!=null)
         {
-            Picasso.get().load(account.getPhotoUrl()).into(profileImage);
+            if (account.getPhotoUrl()!=null) {
+                Picasso.get().load(account.getPhotoUrl()).into(profileImage);
+            }
             name.setText(account.getDisplayName());
             email.setText(account.getEmail());
         }
@@ -112,6 +116,7 @@ public class Profile extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), MainActivity.class));
+                getActivity().finish();
 
             }
         });

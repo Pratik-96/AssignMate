@@ -213,7 +213,7 @@ public class uploadFile extends AppCompatActivity {
                     public void onSuccess(Uri uri) {
                         String url = uri.toString();     // Extracting url from result uri
                         DatabaseReference reference = database.getReference().child(selectedSub).child(selectedType).push();
-                        String description = binding.description.getText().toString();
+                        String description = binding.description.getText().toString().toLowerCase();
                         SimpleDateFormat ts = new SimpleDateFormat("dd/MM/yyyy");
                         Date date = new Date();
                         String timestamp = ts.format(date);

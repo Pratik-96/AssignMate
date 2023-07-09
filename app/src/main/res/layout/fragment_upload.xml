@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".UploadFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/moonlit_asteroid_gradient"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/sarabun"
+            android:text="Upload Your File"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/round_note"
+            android:elevation="100dp"
+
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/selected_file"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:drawableStart="@drawable/baseline_attach_file_24"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/sarabun"
+                        android:paddingTop="6dp"
+                        android:text="No file selected.."
+                        android:textColor="@color/secondary"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:elevation="20dp"
+                        android:fontFamily="@font/sarabun"
+                        android:text="Select type of Document *"
+                        android:textColor="@color/secondary"
+
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/doctype"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/dashed_rec"
+                        android:elevation="10dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:elevation="10dp"
+                        android:fontFamily="@font/sarabun"
+
+                        android:text="Select Subject *"
+                        android:textColor="@color/secondary"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/dashed_rec"
+                        android:elevation="10dp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/description_ly"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:elevation="10dp"
+                        android:hint="Description *"
+                        android:textColorHint="@color/secondary"
+                        app:boxBackgroundMode="outline"
+                        app:boxCornerRadiusBottomEnd="10dp"
+                        app:boxCornerRadiusBottomStart="10dp"
+                        app:boxCornerRadiusTopEnd="10dp"
+                        app:boxCornerRadiusTopStart="10dp"
+                        app:boxStrokeColor="@color/secondary"
+                        app:counterEnabled="false"
+                        app:counterMaxLength="16"
+                        app:endIconMode="clear_text"
+                        app:endIconTint="@color/secondary"
+                        app:errorEnabled="true"
+                        app:hintTextColor="@color/secondary"
+                        app:startIconDrawable="@drawable/baseline_description_24"
+                        app:startIconTint="@color/secondary">
+                        >
+
+                        <EditText
+                            android:id="@+id/description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/white"
+                            android:fontFamily="@font/sarabun"
+                            android:inputType="textMultiLine"
+                            android:maxLines="2"
+                            android:paddingEnd="50dp"
+                            android:paddingBottom="20dp"
+                            android:textColor="@color/secondary" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:id="@+id/dropbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="20dp"
+                        android:background="@drawable/dashed"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/select_file"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+
+                            android:src="@drawable/upload_document_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/sarabun"
+                            android:text="Browse an Image or Pdf to Upload."
+
+                            android:textAlignment="center"
+                            android:textColor="@color/secondary"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/upload"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="20dp"
+                        android:background="@drawable/roundbtn"
+                        android:drawableStart="@drawable/cloud_btn"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/sarabun"
+                        android:padding="10dp"
+                        android:text="UPLOAD"
+
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>

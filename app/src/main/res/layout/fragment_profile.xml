@@ -24,6 +24,7 @@
             android:layout_height="30dp"
             android:id="@+id/backToMain"
         android:layout_gravity="center"
+        android:visibility="invisible"
             android:layout_marginStart="20dp"
             android:src="@drawable/baseline_arrow_back_24"/>
         <TextView

@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.PaintKt;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -35,6 +36,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationBarItemView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -56,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseDatabase database;
 
+    public void replaceFragment(Fragment fragment)
+    {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout,fragment);
+        fragmentTransaction.commit();
+    }
 
 
     @Override
@@ -98,37 +106,68 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        replaceFragment(new HomeFragment());
 
-        database = FirebaseDatabase.getInstance();
 
-        mAuth = FirebaseAuth.getInstance();
 
-        GoogleSignInAccount account  = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
-       if (account!=null) {
-           if (account.getPhotoUrl() != null) {
-               Picasso.get().load(account.getPhotoUrl()).into(binding.menu);
+//
+//        database = FirebaseDatabase.getInstance();
+//
+//        mAuth = FirebaseAuth.getInstance();
+//
+//        GoogleSignInAccount account  = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+//       if (account!=null) {
+//           if (account.getPhotoUrl() != null) {
+//               Picasso.get().load(account.getPhotoUrl()).into(binding.menu);
+//
+//           }
+//       }
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                binding.progressBar.setVisibility(View.GONE);
+//                binding.cards.setVisibility(View.VISIBLE);
+//
+//            }
+//        },1000);
+//
+//        checkNotificationPermission();
+//
+////        if (!(ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED))
+////        {
+////            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},100);
+////        }
+//
+//
+        NavigationBarItemView upload = findViewById(R.id.upload);
+        binding.navBar.setOnItemSelectedListener(item -> {
 
-           }
-       }
+            if (item.getItemId()==R.id.home)
+            {
+                replaceFragment(new HomeFragment());
+            } else if (item.getTitle().equals("Upload")) {
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+                if (!Objects.equals(FirebaseAuth.getInstance().getUid(), "Atda2EZUKxXMNlaTQ4IyUHMVyJ02"))
+                {
+                    Toast.makeText(this, "Admin access only..!!", Toast.LENGTH_SHORT).show();
 
-                binding.progressBar.setVisibility(View.GONE);
-                binding.cards.setVisibility(View.VISIBLE);
-
+                }
+                else {
+                    replaceFragment(new UploadFragment());
+                }
             }
-        },1000);
+            else if (item.getTitle().equals("Profile"))
+            {
 
-        checkNotificationPermission();
-
-//        if (!(ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED))
-//        {
-//            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},100);
-//        }
-
-
+                replaceFragment(new Profile());
+            }
+            return true;
+        });
+//
+//
+//
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
                     @Override
@@ -149,147 +188,146 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        if (Objects.equals(FirebaseAuth.getInstance().getUid(), "Atda2EZUKxXMNlaTQ4IyUHMVyJ02"))
-        {
-            binding.floatingActionButton.setVisibility(View.VISIBLE);
-        }
-        else {
-            binding.floatingActionButton.setVisibility(View.GONE);
-        }
+
+
+
+
+        
         mAuth=FirebaseAuth.getInstance();
-
-        binding.menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-               fragmentTransaction.replace(R.id.frameLayout,new Profile()).commit();
-               binding.mainLayout.setVisibility(View.GONE);
-            }
-        });
-
+    }}
+//
 //        binding.menu.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//
-//                PopupMenu menu = new PopupMenu(getApplicationContext(),binding.menu);
-//                menu.getMenu().add("About AssignMate");
-//                menu.getMenu().add("Update AssignMate");
-//                menu.getMenu().add("Logout");
-//
-//                menu.show();
-//                menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//                    @Override
-//                    public boolean onMenuItemClick(MenuItem menuItem) {
-//                        if (menuItem.getTitle()=="Logout")
-//                        {
-//
-//                        }
-//                        if (menuItem.getTitle()=="About AssignMate")
-//                        {
-//                            startActivity(new Intent(getApplicationContext(), aboutAssignMate.class));
-//
-//                        }
-//                        if (menuItem.getTitle().equals("Update AssignMate"))
-//                        {
-//                            DatabaseReference reference = database.getReference();
-//
-//                            reference.child("Updates").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                                    if (task.isSuccessful())
-//                                    {
-//                                        Uri url = Uri.parse(task.getResult().getValue().toString());
-//                                       Intent intent = new Intent(Intent.ACTION_VIEW,url);
-//                                        Toast.makeText(getApplicationContext(), "Downloading New Update..", Toast.LENGTH_SHORT).show();
-//                                       startActivity(intent);
-//                                    }
-//                                }
-//                            });
-//
-//
-//                        }
-//
-//
-//                        return false;
-//                    }
-//                });
-
-
-
-
-
-
-//
-//
+//               FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//               fragmentTransaction.replace(R.id.frameLayout,new Profile()).commit();
+//               binding.mainLayout.setVisibility(View.GONE);
 //            }
 //        });
-        Calendar c = Calendar.getInstance();
-        int hrs = c.get(Calendar.HOUR_OF_DAY);
-
-        if (hrs>=1 && hrs<12)
-        {
-            binding.greet.setText("Good morning");
-        } else if (hrs>12 && hrs<18) {
-            binding.greet.setText("Good afternoon");
-        }
-        else
-        {
-            binding.greet.setText("Good evening");
-        }
-
-        binding.floatingActionButton.setOnClickListener(view -> uploadFile());
-
-        binding.javaCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), documentType.class);
-                intent.putExtra(SUBJECT_NAME,"Programming in Java");
-                startActivity(intent);
-                }
-        });
-
-        binding.dsCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), documentType.class);
-                intent.putExtra(SUBJECT_NAME,"Data Mining & Data Science");
-                startActivity(intent);
-            }
-        });
-
-        binding.osCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), documentType.class);
-                intent.putExtra(SUBJECT_NAME,"Principles of Operating Systems");
-                startActivity(intent);
-            }
-        });
-
-        binding.aiCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), documentType.class);
-                intent.putExtra(SUBJECT_NAME,"Artificial Intelligence");
-                startActivity(intent);
-            }
-        });
-
-        binding.cloudCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), documentType.class);
-                intent.putExtra(SUBJECT_NAME,"Cloud Computing");
-                startActivity(intent);
-            }
-        });
-
-    }
-    public void uploadFile()
-    {
-        this.startActivity(new Intent(getApplicationContext(), uploadFile.class));
-
-    }
-
-}
-
+//
+////        binding.menu.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View view) {
+////
+////                PopupMenu menu = new PopupMenu(getApplicationContext(),binding.menu);
+////                menu.getMenu().add("About AssignMate");
+////                menu.getMenu().add("Update AssignMate");
+////                menu.getMenu().add("Logout");
+////
+////                menu.show();
+////                menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+////                    @Override
+////                    public boolean onMenuItemClick(MenuItem menuItem) {
+////                        if (menuItem.getTitle()=="Logout")
+////                        {
+////
+////                        }
+////                        if (menuItem.getTitle()=="About AssignMate")
+////                        {
+////                            startActivity(new Intent(getApplicationContext(), aboutAssignMate.class));
+////
+////                        }
+////                        if (menuItem.getTitle().equals("Update AssignMate"))
+////                        {
+////                            DatabaseReference reference = database.getReference();
+////
+////                            reference.child("Updates").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+////                                @Override
+////                                public void onComplete(@NonNull Task<DataSnapshot> task) {
+////                                    if (task.isSuccessful())
+////                                    {
+////                                        Uri url = Uri.parse(task.getResult().getValue().toString());
+////                                       Intent intent = new Intent(Intent.ACTION_VIEW,url);
+////                                        Toast.makeText(getApplicationContext(), "Downloading New Update..", Toast.LENGTH_SHORT).show();
+////                                       startActivity(intent);
+////                                    }
+////                                }
+////                            });
+////
+////
+////                        }
+////
+////
+////                        return false;
+////                    }
+////                });
+//
+//
+//
+//
+//
+//
+////
+////
+////            }
+////        });
+//        Calendar c = Calendar.getInstance();
+//        int hrs = c.get(Calendar.HOUR_OF_DAY);
+//
+//        if (hrs>=1 && hrs<12)
+//        {
+//            binding.greet.setText("Good morning");
+//        } else if (hrs>12 && hrs<18) {
+//            binding.greet.setText("Good afternoon");
+//        }
+//        else
+//        {
+//            binding.greet.setText("Good evening");
+//        }
+//
+//        binding.floatingActionButton.setOnClickListener(view -> uploadFile());
+//
+//        binding.javaCard.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), documentType.class);
+//                intent.putExtra(SUBJECT_NAME,"Programming in Java");
+//                startActivity(intent);
+//                }
+//        });
+//
+//        binding.dsCard.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), documentType.class);
+//                intent.putExtra(SUBJECT_NAME,"Data Mining & Data Science");
+//                startActivity(intent);
+//            }
+//        });
+//
+//        binding.osCard.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), documentType.class);
+//                intent.putExtra(SUBJECT_NAME,"Principles of Operating Systems");
+//                startActivity(intent);
+//            }
+//        });
+//
+//        binding.aiCard.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), documentType.class);
+//                intent.putExtra(SUBJECT_NAME,"Artificial Intelligence");
+//                startActivity(intent);
+//            }
+//        });
+//
+//        binding.cloudCard.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), documentType.class);
+//                intent.putExtra(SUBJECT_NAME,"Cloud Computing");
+//                startActivity(intent);
+//            }
+//        });
+//
+//    }
+//    public void uploadFile()
+//    {
+//        this.startActivity(new Intent(getApplicationContext(), uploadFile.class));
+//
+//    }
+//
+//}
+//

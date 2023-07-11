@@ -1,6 +1,9 @@
 package com.example.assignmate;
 
+import static com.example.assignmate.MainActivity.SUBJECT_NAME;
+
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
@@ -19,6 +22,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.material.navigation.NavigationBarItemView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -26,6 +30,7 @@ import com.squareup.picasso.Picasso;
 import org.w3c.dom.Text;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -73,6 +78,7 @@ public class HomeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    LinearLayout java,dm,os,ai,cc;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,7 +92,55 @@ public class HomeFragment extends Fragment {
         LinearLayout cards = view.findViewById(R.id.cards);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         TextView greet = view.findViewById(R.id.greet);
+        java = view.findViewById(R.id.javaCard);
+        dm = view.findViewById(R.id.dsCard);
+        os = view.findViewById(R.id.osCard);
+        ai = view.findViewById(R.id.aiCard);
+        cc = view.findViewById(R.id.cloudCard);
 
+       java.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), documentType.class);
+                intent.putExtra(SUBJECT_NAME,"Programming in Java");
+                startActivity(intent);
+                }
+        });
+        dm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), documentType.class);
+                intent.putExtra(SUBJECT_NAME,"Data Mining & Data Science");
+                startActivity(intent);
+            }
+        });
+
+        os.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), documentType.class);
+                intent.putExtra(SUBJECT_NAME,"Principles of Operating Systems");
+                startActivity(intent);
+            }
+        });
+
+        ai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), documentType.class);
+                intent.putExtra(SUBJECT_NAME,"Artificial Intelligence");
+                startActivity(intent);
+            }
+        });
+
+        cc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), documentType.class);
+                intent.putExtra(SUBJECT_NAME,"Cloud Computing");
+                startActivity(intent);
+            }
+        });
 
         Calendar c = Calendar.getInstance();
         int hrs = c.get(Calendar.HOUR_OF_DAY);
@@ -119,6 +173,9 @@ public class HomeFragment extends Fragment {
 
             }
         },1000);
+
+
+        mAuth=FirebaseAuth.getInstance();
 
 
 

@@ -25,6 +25,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationBarItemView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +34,7 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.util.Objects;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -97,6 +99,10 @@ public class Profile extends Fragment {
         LinearLayout update = view.findViewById(R.id.update);
         LinearLayout logout = view.findViewById(R.id.logout);
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
+        NavigationBarItemView upload = view.findViewById(R.id.upload);
+
+
+
 
         if (account!=null)
         {

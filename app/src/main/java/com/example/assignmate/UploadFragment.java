@@ -8,6 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.navigation.NavigationBarItemView;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link UploadFragment#newInstance} factory method to
@@ -59,6 +64,10 @@ public class UploadFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_upload, container, false);
+        View view =  inflater.inflate(R.layout.fragment_upload, container, false);
+
+
+
+        return view;
     }
 }

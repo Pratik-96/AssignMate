@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="Home" android:icon="@drawable/baseline_home_24" android:iconTint="@color/secondary"
-        android:id="@+id/home"/>
-    <item android:title="Upload" android:iconTint="@color/secondary" android:icon="@drawable/baseline_file_upload_24" android:id="@+id/upload" />
-    <item android:title="Profile" android:icon="@drawable/baseline_person" android:iconTint="@color/secondary" android:id="@+id/profile"/>
+    <item android:title="Home" android:icon="@drawable/baseline_home_24" app:cnb_iconColor="@color/white"
+        android:id="@+id/home_nav"/>
+    <item android:title="Upload" app:cnb_iconColor="@color/white" android:icon="@drawable/baseline_file_upload_24" android:id="@+id/upload_nav" />
+    <item android:title="Profile" android:icon="@drawable/baseline_person" app:cnb_iconColor="@color/white" android:id="@+id/profile_nav"/>
 </menu>

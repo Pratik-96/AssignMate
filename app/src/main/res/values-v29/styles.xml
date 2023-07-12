@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <style name="AppTheme.NoForceDark" parent="Theme.Material3.Light.NoActionBar">
         <!-- Disable force dark mode -->
         <item name="android:forceDarkAllowed"  tools:targetApi="q">false</item>
-        <item name="android:statusBarColor" type="style">@color/secondary</item>
+        <item name="android:statusBarColor" type="style" >@color/secondary</item>
 
         <!-- Add any custom style attributes here -->
     </style>
-
 </resources>

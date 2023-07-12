@@ -75,6 +75,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation 'com.squareup.picasso:picasso:2.8'
     implementation("com.google.android.gms:play-services-auth:20.6.0")
+    implementation 'com.github.ismaeldivita:chip-navigation-bar:1.4.0'
 
 
 }

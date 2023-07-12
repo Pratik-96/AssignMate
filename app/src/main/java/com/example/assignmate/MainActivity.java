@@ -37,6 +37,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationBarItemView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -44,6 +45,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
@@ -109,6 +112,36 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(new HomeFragment());
 
 
+        checkNotificationPermission();
+        mAuth=FirebaseAuth.getInstance();
+        binding.navBar.setItemSelected(R.id.home_nav,true);
+
+
+        binding.navBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int i) {
+                int selectedItem = binding.navBar.getSelectedItemId();
+//
+//                Log.d("TAG", "onItemSelected: "+selectedItem+"      "+i);
+            if (selectedItem==R.id.home_nav)
+            {
+                replaceFragment(new HomeFragment());
+            }
+            else if (selectedItem==R.id.upload_nav){
+                if (Objects.equals(FirebaseAuth.getInstance().getUid(), "Atda2EZUKxXMNlaTQ4IyUHMVyJ02")) {
+//                    startActivity(new Intent(getApplicationContext(), uploadFile.class));
+                    replaceFragment(new UploadFragment());
+                }
+                else
+                {
+                    Toast.makeText(MainActivity.this, "Admin access only..!!", Toast.LENGTH_SHORT).show();
+                }
+            } else if (selectedItem==R.id.profile_nav) {
+                replaceFragment(new Profile());
+            }
+
+            }
+        });
 
 //
 //        database = FirebaseDatabase.getInstance();
@@ -141,30 +174,7 @@ public class MainActivity extends AppCompatActivity {
 ////        }
 //
 //
-        NavigationBarItemView upload = findViewById(R.id.upload);
-        binding.navBar.setOnItemSelectedListener(item -> {
 
-            if (item.getItemId()==R.id.home)
-            {
-                replaceFragment(new HomeFragment());
-            } else if (item.getTitle().equals("Upload")) {
-
-                if (!Objects.equals(FirebaseAuth.getInstance().getUid(), "Atda2EZUKxXMNlaTQ4IyUHMVyJ02"))
-                {
-                    Toast.makeText(this, "Admin access only..!!", Toast.LENGTH_SHORT).show();
-
-                }
-                else {
-                    replaceFragment(new UploadFragment());
-                }
-            }
-            else if (item.getTitle().equals("Profile"))
-            {
-
-                replaceFragment(new Profile());
-            }
-            return true;
-        });
 //
 //
 //
@@ -192,8 +202,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        
-        mAuth=FirebaseAuth.getInstance();
+
     }}
 //
 //        binding.menu.setOnClickListener(new View.OnClickListener() {

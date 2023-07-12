@@ -88,7 +88,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         ProgressBar progressBar = view.findViewById(R.id.progressBar);
-        ImageView menu = view.findViewById(R.id.menu);
+//        ImageView menu = view.findViewById(R.id.menu);
         LinearLayout cards = view.findViewById(R.id.cards);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         TextView greet = view.findViewById(R.id.greet);
@@ -159,7 +159,7 @@ public class HomeFragment extends Fragment {
         GoogleSignInAccount account  = GoogleSignIn.getLastSignedInAccount(getContext());
        if (account!=null) {
            if (account.getPhotoUrl() != null) {
-               Picasso.get().load(account.getPhotoUrl()).into(menu);
+//               Picasso.get().load(account.getPhotoUrl()).into(menu);
 
            }
        }

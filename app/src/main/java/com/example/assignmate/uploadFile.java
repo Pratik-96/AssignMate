@@ -7,6 +7,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import android.Manifest;
@@ -51,12 +55,14 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 import java.io.ByteArrayOutputStream;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 public class uploadFile extends AppCompatActivity {
@@ -83,6 +89,13 @@ public class uploadFile extends AppCompatActivity {
 
 
     }
+    public void replaceFragment(Fragment fragment)
+    {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout,fragment);
+        fragmentTransaction.commit();
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +107,28 @@ public class uploadFile extends AppCompatActivity {
         binding.description.clearFocus();
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.subjects, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        binding.spinner.setAdapter(adapter);
+        binding.spinner1.setAdapter(adapter);
+
+        binding.navBar.setItemSelected(R.id.upload_nav,true);
+        binding.navBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int i) {
+                int selectedItem = binding.navBar.getSelectedItemId();
+//
+//                Log.d("TAG", "onItemSelected: "+selectedItem+"      "+i);
+                if (selectedItem==R.id.home_nav)
+                {
+                    finish();
+                    replaceFragment(new HomeFragment());
+                }
+                else if (selectedItem==R.id.profile_nav) {
+                    finish();
+                    replaceFragment(new Profile());
+                }
+
+            }
+        });
+
         binding.description.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -114,7 +148,7 @@ public class uploadFile extends AppCompatActivity {
 
         ArrayAdapter<CharSequence> docTypeAd = ArrayAdapter.createFromResource(getApplicationContext(), R.array.documentType, android.R.layout.simple_spinner_item);
         docTypeAd.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        binding.doctype.setAdapter(docTypeAd);
+        binding.doctype1.setAdapter(docTypeAd);
 
 
         binding.selectFile.setOnClickListener(new View.OnClickListener() {
@@ -133,8 +167,8 @@ public class uploadFile extends AppCompatActivity {
         binding.upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sub = binding.spinner.getSelectedItem().toString();
-                type = binding.doctype.getSelectedItem().toString();
+                sub = binding.spinner1.getSelectedItem().toString();
+                type = binding.doctype1.getSelectedItem().toString();
 
                 if (uri != null) {
                     if (binding.description.getText().toString().isEmpty()) {
@@ -201,8 +235,8 @@ public class uploadFile extends AppCompatActivity {
         String path = str.replaceAll("\\.", "").replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("\\[", "").replaceAll("]", "").replaceAll("#", "").replaceAll("\\$", "");
 
         StorageReference storageReference = storage.getReference();         //Get Reference returns root    path
-        String selectedSub = binding.spinner.getSelectedItem().toString();
-        String selectedType = binding.doctype.getSelectedItem().toString();
+        String selectedSub = binding.spinner1.getSelectedItem().toString();
+        String selectedType = binding.doctype1.getSelectedItem().toString();
         storageReference.child(selectedSub).child(selectedType).child(getFileName(uri)).putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot snapshot) {

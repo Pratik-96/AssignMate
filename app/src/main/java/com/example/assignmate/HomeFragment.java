@@ -97,6 +97,13 @@ public class HomeFragment extends Fragment {
         os = view.findViewById(R.id.osCard);
         ai = view.findViewById(R.id.aiCard);
         cc = view.findViewById(R.id.cloudCard);
+        ImageView exit = view.findViewById(R.id.exit_app);
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
 
        java.setOnClickListener(new View.OnClickListener() {
             @Override

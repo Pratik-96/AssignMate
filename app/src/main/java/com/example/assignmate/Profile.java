@@ -1,6 +1,8 @@
 package com.example.assignmate;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -98,8 +100,35 @@ public class Profile extends Fragment {
         LinearLayout about = view.findViewById(R.id.about);
         LinearLayout update = view.findViewById(R.id.update);
         LinearLayout logout = view.findViewById(R.id.logout);
+        LinearLayout share = view.findViewById(R.id.share);
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
 
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+                reference.child("Updates").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            String url = (task.getResult().getValue().toString());
+                            Uri image =  Uri.parse("android.resource://com.example.assignmate" +"/drawable/" + "logo");
+                            String message = "Check out AssignMate - Your Ultimate Companion for Academic Success! AssignMate revolutionizes the way students handle assignments and study materials. It offers comprehensive assignment solutions, organized study materials, and an intuitive interface. Download AssignMate today and unleash your academic potential! "+url;
+                            Intent intent = new Intent();
+                            intent.setAction(Intent.ACTION_SEND);
+                            intent.putExtra(Intent.EXTRA_TEXT,message);
+                            intent.setType("text/plain");
+                            Intent shareIntent = Intent.createChooser(intent, null);
+                            startActivity(shareIntent);
+                        }
+                    }
+
+                });
+            }
+
+        });
 
 
 

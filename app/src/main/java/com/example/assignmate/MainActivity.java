@@ -14,6 +14,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -22,6 +24,7 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
@@ -47,6 +50,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
+
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
@@ -128,14 +132,10 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(new HomeFragment());
             }
             else if (selectedItem==R.id.upload_nav){
-                if (Objects.equals(FirebaseAuth.getInstance().getUid(), "Atda2EZUKxXMNlaTQ4IyUHMVyJ02")) {
 //                    startActivity(new Intent(getApplicationContext(), uploadFile.class));
                     replaceFragment(new UploadFragment());
-                }
-                else
-                {
-                    Toast.makeText(MainActivity.this, "Admin access only..!!", Toast.LENGTH_SHORT).show();
-                }
+
+
             } else if (selectedItem==R.id.profile_nav) {
                 replaceFragment(new Profile());
             }
@@ -203,7 +203,24 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    }}
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(MainActivity.this)
+                 .setMessage("Are you sure you want to exit ?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                }).setNegativeButton("No",null).show();
+
+    }
+}
+
+
 //
 //        binding.menu.setOnClickListener(new View.OnClickListener() {
 //            @Override

@@ -3,6 +3,8 @@ package com.example.assignmate;
 import static com.example.assignmate.MainActivity.SUBJECT_NAME;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -101,7 +103,16 @@ public class HomeFragment extends Fragment {
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().finish();
+                new AlertDialog.Builder(getContext())
+                        .setMessage("Do you really want to exit the app ?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                getActivity().finish();
+                            }
+                        }).setNegativeButton("No",null).show();
+
             }
         });
 

@@ -91,7 +91,7 @@ public class Profile extends Fragment {
         // Inflate the layout for this fragment
 
         View view =  inflater.inflate(R.layout.fragment_profile, container, false);
-        ImageView back = view.findViewById(R.id.backToMain);
+
         ImageView profileImage = view.findViewById(R.id.profilePic);
         TextView name = view.findViewById(R.id.name);
         TextView email = view.findViewById(R.id.mail);
@@ -99,7 +99,7 @@ public class Profile extends Fragment {
         LinearLayout update = view.findViewById(R.id.update);
         LinearLayout logout = view.findViewById(R.id.logout);
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
-        NavigationBarItemView upload = view.findViewById(R.id.upload);
+
 
 
 
@@ -118,14 +118,7 @@ public class Profile extends Fragment {
             name.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
             name.setVisibility(View.VISIBLE);  //TODO Store manually entered User name
         }
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), MainActivity.class));
-                getActivity().finish();
 
-            }
-        });
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

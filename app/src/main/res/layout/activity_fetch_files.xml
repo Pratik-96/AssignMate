@@ -72,7 +72,7 @@
        android:layout_height="wrap_content"
        android:background="@drawable/input"
        android:text=""
-       android:hint="search description here.."
+       android:hint="search here.."
        android:id="@+id/search_bar"
        android:maxLines="1"
        android:paddingStart="15dp"

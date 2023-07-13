@@ -197,11 +197,6 @@ public class HomeFragment extends Fragment {
 
 
 
-        if (!(ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED))
-      {
-            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},100);
-        }
-
         return view;
     }
 }

@@ -114,7 +114,6 @@ public class Profile extends Fragment {
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if (task.isSuccessful()) {
                             String url = (task.getResult().getValue().toString());
-                            Uri image =  Uri.parse("android.resource://com.example.assignmate" +"/drawable/" + "logo");
                             String message = "Check out AssignMate - Your Ultimate Companion for Academic Success! AssignMate revolutionizes the way students handle assignments and study materials. It offers comprehensive assignment solutions, organized study materials, and an intuitive interface. Download AssignMate today and unleash your academic potential! "+url;
                             Intent intent = new Intent();
                             intent.setAction(Intent.ACTION_SEND);

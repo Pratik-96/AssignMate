@@ -98,6 +98,19 @@ public class fetch_files extends AppCompatActivity {
         binding.recyclerView.setVisibility(View.VISIBLE);
 
         binding.searchBar.clearFocus();
+        switch (type)
+        {
+            case "Assignments":binding.searchBar.setHint("Search Assignment here");
+                                        break;
+            case "Practicals":binding.searchBar.setHint("Search Assignment here");
+                                break;
+            case "Question Banks":binding.searchBar.setHint("Search Question Bank here");
+                break;
+            case "Notes":binding.searchBar.setHint("Search unit here");
+                break;
+
+
+        }
         binding.searchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -119,7 +132,7 @@ public class fetch_files extends AppCompatActivity {
     private void filter_list(String Text,String subject,String type) {
 
         if (!Text.isEmpty()) {
-            FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(FirebaseDatabase.getInstance().getReference().child(subject).child(type).orderByChild("description").startAt(Text.toLowerCase()).endAt(Text + "/uf8ff"), file_model.class).build();
+            FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(FirebaseDatabase.getInstance().getReference().child(subject).child(type).orderByChild("description").startAt("[a-zA-Z]{*}[ ][a-zA-Z]").endAt(Text.toLowerCase() + "/uf8ff"), file_model.class).build();
             ad = new adapter(options, fetch_files.this);
             ad.startListening();
             binding.recyclerView.setAdapter(ad);

@@ -85,12 +85,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        if (requestCode==100 && !(grantResults[0] == PackageManager.PERMISSION_GRANTED))
-        {
-            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},100);
-
-            Toast.makeText(getApplicationContext(), "Please grant the permission to use AssignMate!!", Toast.LENGTH_SHORT).show();
-        }
+//        if (requestCode==100 && !(grantResults[0] == PackageManager.PERMISSION_GRANTED))
+//        {
+//            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},100);
+//
+//            Toast.makeText(getApplicationContext(), "Please grant the permission to use AssignMate!!", Toast.LENGTH_SHORT).show();
+//        }
 
     }
 

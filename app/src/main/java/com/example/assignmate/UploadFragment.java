@@ -44,11 +44,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.assignmate.databinding.ActivityUploadFileBinding;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -205,6 +206,18 @@ public class UploadFragment extends Fragment {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.subjects, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 
+        LinearLayout no_access = view.findViewById(R.id.no_access);
+        LinearLayout admin_access = view.findViewById(R.id.upload_layout);
+        if (!Objects.equals(FirebaseAuth.getInstance().getUid(), "Atda2EZUKxXMNlaTQ4IyUHMVyJ02"))
+        {
+            no_access.setVisibility(View.VISIBLE);
+            admin_access.setVisibility(View.GONE);
+        }
+        else
+        {
+            no_access.setVisibility(View.GONE);
+            admin_access.setVisibility(View.VISIBLE);
+        }
          doctype1 = view.findViewById(R.id.doctype);//Get Reference returns root    path
          spinner1 = view.findViewById(R.id.spinner);
         Log.d("spinner", "spinner: "+spinner1);

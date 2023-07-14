@@ -22,6 +22,9 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.1.2"
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+        manifestPlaceholders = [pdftronLicenseKey:PDFTRON_LICENSE_KEY]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
@@ -76,6 +79,11 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.8'
     implementation("com.google.android.gms:play-services-auth:20.6.0")
     implementation 'com.github.ismaeldivita:chip-navigation-bar:1.4.0'
+
+    implementation "com.pdftron:pdftron:10.2.0"
+    implementation "com.pdftron:tools:10.2.0"
+
+    implementation 'androidx.multidex:multidex:2.0.1'
 
 
 }

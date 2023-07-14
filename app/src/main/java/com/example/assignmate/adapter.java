@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -118,6 +119,7 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
             public void onClick(View view) {
                 Uri url = Uri.parse(model.getUrl());
                 String URL = model.getUrl();
+                Toast.makeText(context, "Please wait..", Toast.LENGTH_SHORT).show();
 //                Intent intent = new Intent();
 //                    intent.setType(Intent.ACTION_VIEW);
 //                    intent.setData(Uri.parse(model.getUrl()));
@@ -125,42 +127,14 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
 
                 String fileName = model.getFile_Name();
                 String ext = fileName.substring(fileName.lastIndexOf("."));
+                if (ext.equals(".pdf")||ext.equals(".doc") || ext.equals(".docx")||ext.equals(".jpg") || ext.equals(".jpeg")||ext.equals(".png") ||(ext.equals(".txt"))||(ext.equals(".ppt")||ext.equals(".pptx"))) {
+                    ViewerConfig config = new ViewerConfig.Builder().openUrlCachePath(context.getCacheDir().getAbsolutePath()).build();
+                    final Uri fileLink = Uri.parse(model.getUrl());
+                    DocumentActivity.openDocument(context, fileLink, config);
+                }
+                else
+                {
 
-                if (ext.equals(".pdf")) {
-                    ViewerConfig config = new ViewerConfig.Builder().openUrlCachePath(context.getCacheDir().getAbsolutePath()).build();
-                    final Uri fileLink = Uri.parse(model.getUrl());
-                    DocumentActivity.openDocument(context, fileLink, config);
-//                    context.startActivity(PdfViewerActivity.Companion.launchPdfFromUrl(context.getApplicationContext(), URL, model.getFile_Name(), "", true));
-                }
-                else
-                if (ext.equals(".doc") || ext.equals(".docx"))
-                {
-                    ViewerConfig config = new ViewerConfig.Builder().openUrlCachePath(context.getCacheDir().getAbsolutePath()).build();
-                    final Uri fileLink = Uri.parse(model.getUrl());
-                    DocumentActivity.openDocument(context, fileLink, config);
-                }
-                else
-                if ((ext.equals(".ppt")||ext.equals(".pptx")))
-                {
-                    ViewerConfig config = new ViewerConfig.Builder().openUrlCachePath(context.getCacheDir().getAbsolutePath()).build();
-                    final Uri fileLink = Uri.parse(model.getUrl());
-                    DocumentActivity.openDocument(context, fileLink, config);
-                }
-                else
-                if ((ext.equals(".txt")))
-                {
-                    ViewerConfig config = new ViewerConfig.Builder().openUrlCachePath(context.getCacheDir().getAbsolutePath()).build();
-                    final Uri fileLink = Uri.parse(model.getUrl());
-                    DocumentActivity.openDocument(context, fileLink, config);
-                }
-                else
-                if (ext.equals(".jpg") || ext.equals(".jpeg")||ext.equals(".png")) {
-                    ViewerConfig config = new ViewerConfig.Builder().openUrlCachePath(context.getCacheDir().getAbsolutePath()).build();
-                    final Uri fileLink = Uri.parse(model.getUrl());
-                    DocumentActivity.openDocument(context, fileLink, config);
-                }
-                else
-                {
                     Intent intent = new Intent(Intent.ACTION_VIEW,url);
                     context.startActivity(intent);
                 }

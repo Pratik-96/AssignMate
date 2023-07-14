@@ -5,6 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
+
+import android.net.Uri;
+import java.io.File;
+import com.pdftron.pdf.config.ViewerConfig;
+import com.pdftron.pdf.controls.DocumentActivity;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,6 +98,7 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
         if (ext.equals(".ppt")||ext.equals(".pptx"))
         {
             holder.imageView.setImageResource(R.drawable.ppt_icon);
+
         }else
         if (ext.equals(".txt"))
         {
@@ -120,7 +127,37 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
                 String ext = fileName.substring(fileName.lastIndexOf("."));
 
                 if (ext.equals(".pdf")) {
-                    context.startActivity(PdfViewerActivity.Companion.launchPdfFromUrl(context.getApplicationContext(), URL, model.getFile_Name(), "", true));
+                    ViewerConfig config = new ViewerConfig.Builder().openUrlCachePath(context.getCacheDir().getAbsolutePath()).build();
+                    final Uri fileLink = Uri.parse(model.getUrl());
+                    DocumentActivity.openDocument(context, fileLink, config);
+//                    context.startActivity(PdfViewerActivity.Companion.launchPdfFromUrl(context.getApplicationContext(), URL, model.getFile_Name(), "", true));
+                }
+                else
+                if (ext.equals(".doc") || ext.equals(".docx"))
+                {
+                    ViewerConfig config = new ViewerConfig.Builder().openUrlCachePath(context.getCacheDir().getAbsolutePath()).build();
+                    final Uri fileLink = Uri.parse(model.getUrl());
+                    DocumentActivity.openDocument(context, fileLink, config);
+                }
+                else
+                if ((ext.equals(".ppt")||ext.equals(".pptx")))
+                {
+                    ViewerConfig config = new ViewerConfig.Builder().openUrlCachePath(context.getCacheDir().getAbsolutePath()).build();
+                    final Uri fileLink = Uri.parse(model.getUrl());
+                    DocumentActivity.openDocument(context, fileLink, config);
+                }
+                else
+                if ((ext.equals(".txt")))
+                {
+                    ViewerConfig config = new ViewerConfig.Builder().openUrlCachePath(context.getCacheDir().getAbsolutePath()).build();
+                    final Uri fileLink = Uri.parse(model.getUrl());
+                    DocumentActivity.openDocument(context, fileLink, config);
+                }
+                else
+                if (ext.equals(".jpg") || ext.equals(".jpeg")||ext.equals(".png")) {
+                    ViewerConfig config = new ViewerConfig.Builder().openUrlCachePath(context.getCacheDir().getAbsolutePath()).build();
+                    final Uri fileLink = Uri.parse(model.getUrl());
+                    DocumentActivity.openDocument(context, fileLink, config);
                 }
                 else
                 {

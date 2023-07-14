@@ -15,6 +15,9 @@ dependencyResolutionManagement {
         mavenCentral()
         jcenter()
         maven { url "https://jitpack.io" }
+        maven {
+            url "https://pdftron-maven.s3.amazonaws.com/release"
+        }
     }
 
 }

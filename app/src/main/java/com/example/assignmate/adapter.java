@@ -1,5 +1,6 @@
 package com.example.assignmate;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.rajat.pdfviewer.PdfViewerActivity;
+
 
 
 import org.w3c.dom.Text;
@@ -56,7 +57,6 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
         super(options);
         this.context = context;
     }
-
 
     @NonNull
     @Override
@@ -128,16 +128,18 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
                 String fileName = model.getFile_Name();
                 String ext = fileName.substring(fileName.lastIndexOf("."));
                 if (ext.equals(".pdf")||ext.equals(".doc") || ext.equals(".docx")||ext.equals(".jpg") || ext.equals(".jpeg")||ext.equals(".png") ||(ext.equals(".txt"))||(ext.equals(".ppt")||ext.equals(".pptx"))) {
-                    ViewerConfig config = new ViewerConfig.Builder().openUrlCachePath(context.getCacheDir().getAbsolutePath()).build();
-                    final Uri fileLink = Uri.parse(model.getUrl());
-                    DocumentActivity.openDocument(context, fileLink, config);
+
+                       ViewerConfig config = new ViewerConfig.Builder().openUrlCachePath(view.getContext().getCacheDir().getAbsolutePath()).build();
+                       final Uri fileLink = Uri.parse(model.getUrl());
+                        DocumentActivity.openDocument(view.getContext(), fileLink, config);
+
                 }
                 else
                 {
-
                     Intent intent = new Intent(Intent.ACTION_VIEW,url);
                     context.startActivity(intent);
                 }
+
 //
             }
         });

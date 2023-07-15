@@ -46,12 +46,10 @@ import java.util.concurrent.Semaphore;
  */
 public class Profile extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -67,7 +65,6 @@ public class Profile extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment Profile.
      */
-    // TODO: Rename and change types and number of parameters
     public static Profile newInstance(String param1, String param2) {
         Profile fragment = new Profile();
         Bundle args = new Bundle();
@@ -144,7 +141,7 @@ public class Profile extends Fragment {
         {
             email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
             name.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-            name.setVisibility(View.VISIBLE);  //TODO Store manually entered User name
+            name.setVisibility(View.VISIBLE);
         }
 
         about.setOnClickListener(new View.OnClickListener() {

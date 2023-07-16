@@ -38,6 +38,7 @@ import org.w3c.dom.Text;
 
 import java.util.Objects;
 import java.util.concurrent.Semaphore;
+import java.util.function.ObjIntConsumer;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -98,8 +99,22 @@ public class Profile extends Fragment {
         LinearLayout update = view.findViewById(R.id.update);
         LinearLayout logout = view.findViewById(R.id.logout);
         LinearLayout share = view.findViewById(R.id.share);
+        LinearLayout feedback = view.findViewById(R.id.feedback);
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
 
+
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"));
+                intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"assignmate.co@gmail.com"});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
+                if (intent.resolveActivity(getContext().getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+            }
+        });
 
         share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,6 +158,7 @@ public class Profile extends Fragment {
             name.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
             name.setVisibility(View.VISIBLE);
         }
+
 
         about.setOnClickListener(new View.OnClickListener() {
             @Override

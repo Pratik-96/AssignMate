@@ -7,7 +7,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Profile"
     android:background="@drawable/moonlit_asteroid_gradient">
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -128,6 +131,24 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/feedback"
+
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:drawableStart="@drawable/baseline_feedback_24"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/sarabun"
+                android:text="Feedback"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/logout"
 
             android:layout_marginTop="20dp">
@@ -147,5 +168,7 @@
 
 
     </LinearLayout>
+    </ScrollView>
+
 
 </FrameLayout>

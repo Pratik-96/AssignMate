@@ -7,6 +7,10 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -41,6 +45,23 @@ public class fetch_files extends AppCompatActivity {
 
     adapter ad;
 
+    public static boolean checkConnection(Context context) {
+        final ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connMgr != null) {
+            NetworkInfo activeNetworkInfo = connMgr.getActiveNetworkInfo();
+
+            if (activeNetworkInfo != null) { // connected to the internet
+                // connected to the mobile provider's data plan
+                if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+                    // connected to wifi
+                    return true;
+                } else return activeNetworkInfo.getType() == ConnectivityManager.TYPE_MOBILE;
+            }
+        }
+        return false;
+    }
+
 
 
     @Override
@@ -48,6 +69,12 @@ public class fetch_files extends AppCompatActivity {
         binding=ActivityFetchFilesBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
+
+        if (!checkConnection(getApplicationContext()))
+        {
+            startActivity(new Intent(getApplicationContext(),no_connection.class));
+        }
+
        Bundle bundle = getIntent().getExtras();
 
            String subject = bundle.getString("name");
@@ -82,6 +109,13 @@ public class fetch_files extends AppCompatActivity {
 
             }
         });
+
+        binding.backtocategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 //
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setReverseLayout(true);
@@ -93,7 +127,7 @@ public class fetch_files extends AppCompatActivity {
 
 
 
-        ad = new adapter(options,fetch_files.this);
+        ad = new adapter(options,getApplicationContext());
         binding.recyclerView.setAdapter(ad);
         binding.recyclerView.setVisibility(View.VISIBLE);
 
@@ -127,6 +161,12 @@ public class fetch_files extends AppCompatActivity {
 
             }
         });
+        try {
+            finalize();
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private void filter_list(String Text,String subject,String type) {
@@ -155,6 +195,11 @@ public class fetch_files extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         ad.startListening();
+
+//        if (!checkConnection(getApplicationContext()))
+//        {
+//            startActivity(new Intent(getApplicationContext(),no_connection.class));
+//        }
         binding.recyclerView.getRecycledViewPool().clear();
         ad.notifyDataSetChanged();
 
@@ -165,6 +210,11 @@ public class fetch_files extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+
+//        if (!checkConnection(getApplicationContext()))
+//        {
+//            startActivity(new Intent(getApplicationContext(),no_connection.class));
+//        }
         ad.stopListening();
     }
 
@@ -173,11 +223,21 @@ public class fetch_files extends AppCompatActivity {
         super.onResume();
         ad.startListening();
 
+        if (!checkConnection(getApplicationContext()))
+        {
+            startActivity(new Intent(getApplicationContext(),no_connection.class));
+        }
+
     }
 
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        ad.startListening();    }
+        ad.startListening();
+
+//        if (!checkConnection(getApplicationContext()))
+//        {
+//            startActivity(new Intent(getApplicationContext(),no_connection.class));
+}
 }

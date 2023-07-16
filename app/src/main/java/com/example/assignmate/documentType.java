@@ -22,6 +22,13 @@ public class documentType extends AppCompatActivity {
         setContentView(binding.getRoot());
         String selectedsub = getIntent().getStringExtra(SUBJECT_NAME);
 
+        binding.backtomain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
 
         binding.assignmentCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +70,9 @@ public class documentType extends AppCompatActivity {
                 bundle.putString("docType","Notes");
                 bundle.putString("name",selectedsub);
                 intent.putExtras(bundle);
-                startActivity(intent);               }
+                startActivity(intent);
+
+            }
         });
 
 

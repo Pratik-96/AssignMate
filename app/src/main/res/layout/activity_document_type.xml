@@ -7,30 +7,60 @@
     tools:context=".documentType"
     android:orientation="vertical"
     android:background="@drawable/moonlit_asteroid_gradient">
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:gravity="center"
         android:orientation="vertical"
         android:layout_height="wrap_content">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Select Category"
-    android:textColor="@color/white"
-    android:textSize="30sp"
-    android:id="@+id/text"
-    android:fontFamily="@font/sarabun"
-    android:textStyle="bold"/>
+        <ImageView
+            android:id="@+id/backtomain"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/baseline_arrow_back_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+             />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/sarabun"
+            android:text="Select Category"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/white"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"/>
-    </LinearLayout>
-    <LinearLayout
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            app:layout_constraintBottom_toBottomOf="@+id/text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
         android:id="@+id/assignmentCard"
         android:layout_marginTop="20dp"
         android:layout_marginStart="10dp"
@@ -50,7 +80,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="30dp"
             android:text="Theory Assignments"
             android:layout_gravity="center"
 
@@ -63,7 +92,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="110dp"
         android:id="@+id/noteCard"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
@@ -79,7 +108,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="30dp"
             android:text="Notes"
             android:textColor="@color/secondary"
             android:textSize="25sp"
@@ -91,7 +119,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="110dp"
         android:id="@+id/practicalCard"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
@@ -107,7 +135,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="30dp"
             android:text="Practicals"
             android:layout_gravity="center"
 
@@ -119,7 +146,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="110dp"
         android:id="@+id/paperCard"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
@@ -135,7 +162,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="30dp"
             android:layout_gravity="center"
 
             android:text="Question Banks"
@@ -145,4 +171,6 @@
             android:fontFamily="@font/sarabun"
             android:textStyle="bold" />
     </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

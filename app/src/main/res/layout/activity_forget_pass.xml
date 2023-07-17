@@ -7,16 +7,17 @@
     android:orientation="vertical"
     android:background="@drawable/moonlit_asteroid_gradient"
     tools:context=".ForgetPass">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="Reset Account Password"
-        android:textSize="30sp"
+        android:layout_gravity="center"
         android:layout_margin="32dp"
         android:fontFamily="@font/sarabun"
-        android:layout_gravity="center"
-        />
+        android:text="Reset Account Password"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"

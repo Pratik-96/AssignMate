@@ -9,9 +9,9 @@ import android.net.Uri;
 
 import android.net.Uri;
 import java.io.File;
-import com.pdftron.pdf.config.ViewerConfig;
-import com.pdftron.pdf.controls.DocumentActivity;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,10 +22,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-
+//import com.pdftron.pdf.config.ViewerConfig;
+//import com.pdftron.pdf.controls.DocumentActivity;
+//import com.rajat.pdfviewer.PdfViewerActivity;
 
 
 import org.w3c.dom.Text;
@@ -45,6 +48,7 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
     FirebaseRecyclerOptions<file_model> options;
 
     TextView empty;
+    public static final String URL = "";
     ArrayList<String> urls = new ArrayList<>();
 
     /**
@@ -118,26 +122,23 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
             @Override
             public void onClick(View view) {
                 Uri url = Uri.parse(model.getUrl());
-                String URL = model.getUrl();
                 Toast.makeText(context, "Please wait..", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent();
-//                    intent.setType(Intent.ACTION_VIEW);
-//                    intent.setData(Uri.parse(model.getUrl()));
-//                    intent.setPackage("com.google.android.apps.photos");
-
                 String fileName = model.getFile_Name();
                 String ext = fileName.substring(fileName.lastIndexOf("."));
-                if (ext.equals(".pdf")||ext.equals(".doc") || ext.equals(".docx")||ext.equals(".jpg") || ext.equals(".jpeg")||ext.equals(".png") ||(ext.equals(".txt"))||(ext.equals(".ppt")||ext.equals(".pptx"))) {
-
-                       ViewerConfig config = new ViewerConfig.Builder().openUrlCachePath(view.getContext().getCacheDir().getAbsolutePath()).build();
-                       final Uri fileLink = Uri.parse(model.getUrl());
-                        DocumentActivity.openDocument(view.getContext(), fileLink, config);
-
+                if (ext.equals(".pdf")) {
+//                    Intent intent = new Intent(context,pdfActivity.class);
+//                    intent.putExtra("URL",model.getUrl());
+//                    intent.putExtra("NAME",model.getFile_Name());
+//                    view.getContext().startActivity(intent);
+//                    view.getContext().startActivity(PdfViewerActivity.Companion.launchPdfFromUrl(view.getContext(), model.getUrl(), model.getFile_Name(), "",true));
+//                    ViewerConfig config = new ViewerConfig.Builder().openUrlCachePath(view.getContext().getCacheDir().getAbsolutePath()).build();
+//                    final Uri fileLink = Uri.parse(model.getUrl());
+//                    DocumentActivity.openDocument(view.getContext(), fileLink, config);
                 }
                 else
                 {
                     Intent intent = new Intent(Intent.ACTION_VIEW,url);
-                    context.startActivity(intent);
+                    view.getContext().startActivity(intent);
                 }
 
 //

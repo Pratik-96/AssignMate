@@ -1,8 +1,8 @@
 package com.example.assignmate;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -14,16 +14,80 @@ import android.view.View;
 
 
 import com.example.assignmate.databinding.ActivitySplashBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.net.InetAddress;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class splash extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     FirebaseUser user;
     private ActivitySplashBinding binding;
+    public void chk_Maintenance()
+    {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+
+
+        reference.child("Maintenance").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+
+
+            @Override
+
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful())
+                {
+
+                    boolean inMaintenance = (boolean) task.getResult().getValue();
+                    Log.d("inMain", String.valueOf(inMaintenance));
+                    new Handler().postDelayed((Runnable) new Runnable() {
+                        @Override
+                        public void run() {
+
+                            if (checkConnection(getApplicationContext())) {
+                                if (!inMaintenance) {
+                                    if (user != null) {
+                                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                        finish();
+                                    }
+                                    else
+                                    {
+                                        startActivity(new Intent(getApplicationContext(), SignUp.class));
+                                        finish();
+                                    }
+                                }
+                                else
+                                {
+                                    startActivity(new Intent(getApplicationContext(), Maintenance.class));
+                                    finish();
+                                }
+
+                            }
+                            else
+                            {
+                                startActivity(new Intent(getApplicationContext(), no_connection.class));
+                                finish();
+                            }
+
+                        }
+                    }, 2000);
+
+
+                }
+
+            }
+        });
+
+
+
+
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,25 +98,9 @@ public class splash extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-        new Handler().postDelayed((Runnable) new Runnable() {
-            @Override
-            public void run() {
-                if (checkConnection(getApplicationContext())) {
-                    if (user != null) {
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        finish();
-                    } else {
-                        startActivity(new Intent(getApplicationContext(), SignUp.class));
-                        finish();
-                    }
-                } else {
-                    startActivity(new Intent(getApplicationContext(), no_connection.class));
-                    finish();
-                }
 
+        chk_Maintenance();
 
-            }
-        }, 2000);
 
         new Handler().postDelayed(new Runnable() {
             @Override

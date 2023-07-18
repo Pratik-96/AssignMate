@@ -85,12 +85,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-//        if (requestCode==100 && !(grantResults[0] == PackageManager.PERMISSION_GRANTED))
-//        {
-//            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},100);
-//
-//            Toast.makeText(getApplicationContext(), "Please grant the permission to use AssignMate!!", Toast.LENGTH_SHORT).show();
-//        }
+        if (requestCode==100 && !(grantResults[0] == PackageManager.PERMISSION_GRANTED))
+        {
+            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},100);
+
+            Toast.makeText(getApplicationContext(), "Please grant the permission to use AssignMate!!", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -108,6 +108,44 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+
+    public boolean chk_Maintenance()
+    {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        final boolean[] Maintenance = new boolean[1];
+        reference.child("Maintenance").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+
+            @Override
+
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful())
+                {
+
+                    Boolean inMaintenance = (Boolean)(task.getResult().getValue());
+                    if (inMaintenance)
+                    {
+                        startActivity(new Intent(getApplicationContext(), Maintenance.class));
+                        finish();
+                        Maintenance[0] =true;
+                    }
+                    else
+                    {
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        finish();
+                        Maintenance[0] =false;
+                    }
+
+                }
+
+            }
+        });
+        return Maintenance[0];
+
+
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,11 +154,10 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(new HomeFragment());
 
 
+
         checkNotificationPermission();
         mAuth=FirebaseAuth.getInstance();
         binding.navBar.setItemSelected(R.id.home_nav,true);
-
-
         binding.navBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int i) {
@@ -149,12 +186,7 @@ public class MainActivity extends AppCompatActivity {
 //        mAuth = FirebaseAuth.getInstance();
 //
 //        GoogleSignInAccount account  = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
-//       if (account!=null) {
-//           if (account.getPhotoUrl() != null) {
-//               Picasso.get().load(account.getPhotoUrl()).into(binding.menu);
-//
-//           }
-//       }
+//        Log.d("TAG", account.getId());
 //
 //        new Handler().postDelayed(new Runnable() {
 //            @Override
@@ -168,10 +200,10 @@ public class MainActivity extends AppCompatActivity {
 //
 //        checkNotificationPermission();
 //
-////        if (!(ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED))
-////        {
-////            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},100);
-////        }
+//        if (!(ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED))
+//        {
+//            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},100);
+//        }
 //
 //
 
@@ -184,7 +216,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<String> task) {
                         if (!task.isSuccessful()) {
                             Log.w("TAG", "Fetching FCM registration token failed", task.getException());
-                            return;
                         }
 
                         // Get new FCM registration token
@@ -220,140 +251,3 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
-
-//
-//        binding.menu.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//               FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//               fragmentTransaction.replace(R.id.frameLayout,new Profile()).commit();
-//               binding.mainLayout.setVisibility(View.GONE);
-//            }
-//        });
-//
-////        binding.menu.setOnClickListener(new View.OnClickListener() {
-////            @Override
-////            public void onClick(View view) {
-////
-////                PopupMenu menu = new PopupMenu(getApplicationContext(),binding.menu);
-////                menu.getMenu().add("About AssignMate");
-////                menu.getMenu().add("Update AssignMate");
-////                menu.getMenu().add("Logout");
-////
-////                menu.show();
-////                menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-////                    @Override
-////                    public boolean onMenuItemClick(MenuItem menuItem) {
-////                        if (menuItem.getTitle()=="Logout")
-////                        {
-////
-////                        }
-////                        if (menuItem.getTitle()=="About AssignMate")
-////                        {
-////                            startActivity(new Intent(getApplicationContext(), aboutAssignMate.class));
-////
-////                        }
-////                        if (menuItem.getTitle().equals("Update AssignMate"))
-////                        {
-////                            DatabaseReference reference = database.getReference();
-////
-////                            reference.child("Updates").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-////                                @Override
-////                                public void onComplete(@NonNull Task<DataSnapshot> task) {
-////                                    if (task.isSuccessful())
-////                                    {
-////                                        Uri url = Uri.parse(task.getResult().getValue().toString());
-////                                       Intent intent = new Intent(Intent.ACTION_VIEW,url);
-////                                        Toast.makeText(getApplicationContext(), "Downloading New Update..", Toast.LENGTH_SHORT).show();
-////                                       startActivity(intent);
-////                                    }
-////                                }
-////                            });
-////
-////
-////                        }
-////
-////
-////                        return false;
-////                    }
-////                });
-//
-//
-//
-//
-//
-//
-////
-////
-////            }
-////        });
-//        Calendar c = Calendar.getInstance();
-//        int hrs = c.get(Calendar.HOUR_OF_DAY);
-//
-//        if (hrs>=1 && hrs<12)
-//        {
-//            binding.greet.setText("Good morning");
-//        } else if (hrs>12 && hrs<18) {
-//            binding.greet.setText("Good afternoon");
-//        }
-//        else
-//        {
-//            binding.greet.setText("Good evening");
-//        }
-//
-//        binding.floatingActionButton.setOnClickListener(view -> uploadFile());
-//
-//        binding.javaCard.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), documentType.class);
-//                intent.putExtra(SUBJECT_NAME,"Programming in Java");
-//                startActivity(intent);
-//                }
-//        });
-//
-//        binding.dsCard.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), documentType.class);
-//                intent.putExtra(SUBJECT_NAME,"Data Mining & Data Science");
-//                startActivity(intent);
-//            }
-//        });
-//
-//        binding.osCard.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), documentType.class);
-//                intent.putExtra(SUBJECT_NAME,"Principles of Operating Systems");
-//                startActivity(intent);
-//            }
-//        });
-//
-//        binding.aiCard.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), documentType.class);
-//                intent.putExtra(SUBJECT_NAME,"Artificial Intelligence");
-//                startActivity(intent);
-//            }
-//        });
-//
-//        binding.cloudCard.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), documentType.class);
-//                intent.putExtra(SUBJECT_NAME,"Cloud Computing");
-//                startActivity(intent);
-//            }
-//        });
-//
-//    }
-//    public void uploadFile()
-//    {
-//        this.startActivity(new Intent(getApplicationContext(), uploadFile.class));
-//
-//    }
-//
-//}
-//

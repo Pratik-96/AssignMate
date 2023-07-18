@@ -331,6 +331,7 @@ public class SignUp extends AppCompatActivity {
                                 inProgress(false);
 
                             }
+
                         }
                     });
 

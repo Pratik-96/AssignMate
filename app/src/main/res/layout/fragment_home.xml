@@ -122,17 +122,16 @@
                 <LinearLayout
                     android:id="@+id/javaCard"
                     android:layout_width="match_parent"
-                    android:layout_height="130dp"
+                    android:layout_height="110dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/round_note"
-                    android:elevation="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
                         android:src="@drawable/java" />
 
 
@@ -152,7 +151,7 @@
                 <LinearLayout
                     android:id="@+id/dsCard"
                     android:layout_width="match_parent"
-                    android:layout_height="130dp"
+                    android:layout_height="110dp"
                     android:layout_below="@+id/javaCard"
 
                     android:layout_marginStart="10dp"
@@ -160,12 +159,11 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/round_note"
-                    android:elevation="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
                         android:src="@drawable/datascience" />
 
                     <TextView
@@ -185,7 +183,7 @@
                 <LinearLayout
                     android:id="@+id/osCard"
                     android:layout_width="match_parent"
-                    android:layout_height="130dp"
+                    android:layout_height="110dp"
                     android:layout_below="@+id/dsCard"
                     android:layout_marginStart="10dp"
 
@@ -193,12 +191,11 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/round_note"
-                    android:elevation="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
                         android:layout_marginStart="5dp"
                         android:src="@drawable/os" />
 
@@ -219,7 +216,7 @@
                 <LinearLayout
                     android:id="@+id/aiCard"
                     android:layout_width="match_parent"
-                    android:layout_height="130dp"
+                    android:layout_height="110dp"
                     android:layout_below="@+id/osCard"
                     android:layout_marginStart="10dp"
 
@@ -227,12 +224,11 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/round_note"
-                    android:elevation="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
                         android:backgroundTint="@color/white"
                         android:paddingStart="10dp"
                         android:src="@drawable/ai" />
@@ -252,7 +248,7 @@
                 <LinearLayout
                     android:id="@+id/cloudCard"
                     android:layout_width="match_parent"
-                    android:layout_height="130dp"
+                    android:layout_height="110dp"
                     android:layout_below="@+id/aiCard"
                     android:layout_marginStart="10dp"
 
@@ -261,12 +257,11 @@
                     android:layout_marginBottom="60dp"
 
                     android:background="@drawable/round_note"
-                    android:elevation="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
                         android:paddingStart="10dp"
                         android:src="@drawable/computing" />
 

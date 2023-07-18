@@ -19,6 +19,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import android.Manifest;
@@ -208,15 +211,20 @@ public class UploadFragment extends Fragment {
 
         LinearLayout no_access = view.findViewById(R.id.no_access);
         LinearLayout admin_access = view.findViewById(R.id.upload_layout);
-        if (!Objects.equals(FirebaseAuth.getInstance().getUid(), "Atda2EZUKxXMNlaTQ4IyUHMVyJ02"))
-        {
+        GoogleSignInAccount account  = GoogleSignIn.getLastSignedInAccount(getContext());
+        if (account!=null) {
+            if (Objects.equals(account.getId(), "116864297586548882439")) {
+                no_access.setVisibility(View.GONE);
+                admin_access.setVisibility(View.VISIBLE);
+
+            } else {
+                no_access.setVisibility(View.VISIBLE);
+                admin_access.setVisibility(View.GONE);
+            }
+        }
+        else {
             no_access.setVisibility(View.VISIBLE);
             admin_access.setVisibility(View.GONE);
-        }
-        else
-        {
-            no_access.setVisibility(View.GONE);
-            admin_access.setVisibility(View.VISIBLE);
         }
          doctype1 = view.findViewById(R.id.doctype);//Get Reference returns root    path
          spinner1 = view.findViewById(R.id.spinner);

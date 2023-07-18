@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:text="File Name"
                 android:textSize="15sp"
-                android:maxLines="2"
+                android:maxLines="1"
                 android:layout_marginStart="5dp"
                 android:textColor="@color/secondary"
                 android:fontFamily="@font/sarabun"

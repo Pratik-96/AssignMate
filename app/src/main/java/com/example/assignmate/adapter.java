@@ -126,14 +126,10 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
                 String fileName = model.getFile_Name();
                 String ext = fileName.substring(fileName.lastIndexOf("."));
                 if (ext.equals(".pdf")) {
-//                    Intent intent = new Intent(context,pdfActivity.class);
-//                    intent.putExtra("URL",model.getUrl());
-//                    intent.putExtra("NAME",model.getFile_Name());
-//                    view.getContext().startActivity(intent);
-//                    view.getContext().startActivity(PdfViewerActivity.Companion.launchPdfFromUrl(view.getContext(), model.getUrl(), model.getFile_Name(), "",true));
-//                    ViewerConfig config = new ViewerConfig.Builder().openUrlCachePath(view.getContext().getCacheDir().getAbsolutePath()).build();
-//                    final Uri fileLink = Uri.parse(model.getUrl());
-//                    DocumentActivity.openDocument(view.getContext(), fileLink, config);
+                    Intent intent = new Intent(context,pdfActivity.class);
+                    intent.putExtra("URL",model.getUrl());
+                    intent.putExtra("NAME",model.getFile_Name());
+                    view.getContext().startActivity(intent);
                 }
                 else
                 {

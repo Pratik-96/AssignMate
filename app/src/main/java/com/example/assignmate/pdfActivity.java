@@ -13,8 +13,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//import com.github.barteksc.pdfviewer.PDFView;
+//import com.github.barteksc.pdfviewer.listener.OnErrorListener;
+//import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
+
 import com.github.barteksc.pdfviewer.PDFView;
-import com.github.barteksc.pdfviewer.listener.OnErrorListener;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 
 import java.io.BufferedInputStream;
@@ -27,7 +30,7 @@ import java.net.URL;
 
 public class pdfActivity extends AppCompatActivity {
 
-    PDFView pdfView;
+        PDFView pdfView;
     ProgressBar progressBar;
 
     @Override
@@ -40,7 +43,9 @@ public class pdfActivity extends AppCompatActivity {
         ImageView download = findViewById(R.id.download);
         ImageView back = findViewById(R.id.backtofetch);
 
-         progressBar = findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar);
+
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

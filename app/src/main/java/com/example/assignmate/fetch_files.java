@@ -91,19 +91,19 @@ public class fetch_files extends AppCompatActivity {
                 binding.progressBarID.setVisibility(View.GONE);
                 if (snapshot.getChildrenCount()==0)
                 {
-                    binding.recyclerView.setVisibility(View.VISIBLE);
+                    binding.data.setVisibility(View.VISIBLE);
 //                    binding.fetchLy.setVisibility(View.GONE);
                     binding.nodata.setVisibility(View.VISIBLE);
 
 
                 }else
-                    binding.recyclerView.setVisibility(View.VISIBLE);
+                    binding.data.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 binding.progressBarID.setVisibility(View.GONE);
-                binding.recyclerView.setVisibility(View.GONE);
+                binding.data.setVisibility(View.GONE);
 //                binding.fetchLy.setVisibility(View.GONE);
                 binding.nodata.setVisibility(View.VISIBLE);
 
@@ -111,6 +111,12 @@ public class fetch_files extends AppCompatActivity {
         });
 
         binding.backtocategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        binding.backtocategory2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();

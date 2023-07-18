@@ -113,6 +113,24 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/joinCommunity"
+
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:drawableStart="@drawable/community"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/sarabun"
+                android:text="Join our community"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/share"
 
             android:layout_marginTop="20dp">

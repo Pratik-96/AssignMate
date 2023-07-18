@@ -36,6 +36,7 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.security.spec.ECField;
 import java.util.Objects;
 import java.util.concurrent.Semaphore;
 import java.util.function.ObjIntConsumer;
@@ -100,19 +101,36 @@ public class Profile extends Fragment {
         LinearLayout logout = view.findViewById(R.id.logout);
         LinearLayout share = view.findViewById(R.id.share);
         LinearLayout feedback = view.findViewById(R.id.feedback);
+        LinearLayout community = view.findViewById(R.id.joinCommunity);
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
 
+
+        community.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri communityUrl = Uri.parse("https://chat.whatsapp.com/BZEy8cUtuHU1mAvxAihI2D");
+                Intent intent = new Intent(Intent.ACTION_VIEW,communityUrl);
+                startActivity(intent);
+            }
+        });
 
         feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setData(Uri.parse("mailto:"));
                 intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"assignmate.co@gmail.com"});
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
-                if (intent.resolveActivity(getContext().getPackageManager()) != null) {
-                    startActivity(intent);
+                intent.setType("message/rfc822");
+                try {
+
+                    intent.setPackage("com.google.android.gm");
                 }
+                catch (Exception e)
+                {
+                    intent.setPackage(null);
+                }
+                startActivity(Intent.createChooser(intent,"Give Feedback Using Mail:"));
             }
         });
 

@@ -20,6 +20,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.auth.api.identity.SignInClient;
+import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -212,8 +214,13 @@ public class UploadFragment extends Fragment {
         LinearLayout no_access = view.findViewById(R.id.no_access);
         LinearLayout admin_access = view.findViewById(R.id.upload_layout);
         GoogleSignInAccount account  = GoogleSignIn.getLastSignedInAccount(getContext());
-        if (account!=null) {
-            if (Objects.equals(account.getId(), "116864297586548882439")) {
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        if (mAuth.getUid()!=null) {
+            Log.d("id", "token:- "+mAuth.getUid());
+            if (Objects.equals(mAuth.getUid(), "Atda2EZUKxXMNlaTQ4IyUHMVyJ02")) {
+
                 no_access.setVisibility(View.GONE);
                 admin_access.setVisibility(View.VISIBLE);
 
@@ -394,6 +401,7 @@ public class UploadFragment extends Fragment {
         });
 
     }
+
     public String getFileName(Uri uri) {
         String fileName;
         if (uri.getScheme().equals("file")) {
@@ -418,5 +426,6 @@ public class UploadFragment extends Fragment {
         }
         return "No file Selected";
     }
+
 
 }

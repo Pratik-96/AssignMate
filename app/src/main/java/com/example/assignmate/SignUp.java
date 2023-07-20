@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -27,11 +28,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.assignmate.databinding.ActivitySignUpBinding;
+import com.google.android.gms.auth.api.identity.BeginSignInRequest;
+
+import com.google.android.gms.auth.api.identity.SignInClient;
+import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.signin.SignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -88,6 +94,10 @@ public class SignUp extends AppCompatActivity {
             try {
                 task.getResult(ApiException.class);
                 Toast.makeText(this, "Creating your account.!!", Toast.LENGTH_SHORT).show();
+
+
+                // Create the One Tap sign-in client
+
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
             } catch (ApiException e) {
@@ -118,7 +128,7 @@ public class SignUp extends AppCompatActivity {
         reg.setText(Html.fromHtml(txt2));
         button=findViewById(R.id.button);
 
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestIdToken("660056468922-cqpahr9lrkufo2ndhsnun12mf4j3ee3v.apps.googleusercontent.com").build();
         gsc = GoogleSignIn.getClient(getApplicationContext(),gso);
         binding.signWithGoogle.setOnClickListener(new View.OnClickListener() {
             @Override

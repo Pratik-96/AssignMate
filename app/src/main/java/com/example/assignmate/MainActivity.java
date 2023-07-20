@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -31,6 +32,8 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.assignmate.databinding.ActivityMainBinding;
+import com.google.android.gms.auth.api.identity.SignInClient;
+import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -154,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(new HomeFragment());
 
 
-
         checkNotificationPermission();
         mAuth=FirebaseAuth.getInstance();
         binding.navBar.setItemSelected(R.id.home_nav,true);
@@ -245,6 +247,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         MainActivity.this.finish();
+
                     }
                 }).setNegativeButton("No",null).show();
 

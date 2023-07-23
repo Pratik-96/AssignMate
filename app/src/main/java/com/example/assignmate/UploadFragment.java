@@ -219,7 +219,7 @@ public class UploadFragment extends Fragment {
 
         if (mAuth.getUid()!=null) {
             Log.d("id", "token:- "+mAuth.getUid());
-            if (Objects.equals(mAuth.getUid(), "Atda2EZUKxXMNlaTQ4IyUHMVyJ02")) {
+            if (Objects.equals(mAuth.getUid(), "RYmuvMvQn3WpjHpgIjDMgrazSpq1")) {
 
                 no_access.setVisibility(View.GONE);
                 admin_access.setVisibility(View.VISIBLE);

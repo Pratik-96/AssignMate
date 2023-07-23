@@ -38,6 +38,7 @@ public class ForgetPass extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), Login.class));
+                finish();
             }
         });
 
@@ -96,6 +97,7 @@ public class ForgetPass extends AppCompatActivity {
                 {
                     Toast.makeText(ForgetPass.this, "Email sent successfully!!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(), Login.class));
+                    finish();
                     inProgress(false);
                 }
 

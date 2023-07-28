@@ -46,6 +46,7 @@ Last updated: [24/07/2023]
     ]]>
 </string>
 
+    <string name="waving">👋Hey, </string>
 
     <string name="msg_token_fmt"> </string>
     <string-array name="subjects">

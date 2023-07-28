@@ -96,6 +96,37 @@ public class HomeFragment extends Fragment {
         os = view.findViewById(R.id.osCard);
         ai = view.findViewById(R.id.aiCard);
         cc = view.findViewById(R.id.cloudCard);
+        TextView uname = view.findViewById(R.id.uname);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
+
+        if (account!=null) {
+            String name;
+            if (account.getDisplayName().split("\\w+").length > 1) {
+                int firstSpace = account.getDisplayName().indexOf(" ");
+                name = account.getDisplayName().substring(0, firstSpace);
+            } else
+            {
+                name = account.getDisplayName();
+            }
+            uname.setText(name+" !");
+        }
+        else
+        {
+            String name;
+            if (mAuth.getCurrentUser().getDisplayName().split("\\w+").length > 1) {
+                int firstSpace = FirebaseAuth.getInstance().getCurrentUser().getDisplayName().indexOf(" ");
+                 name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName().substring(0, firstSpace);
+
+            }
+            else
+            {
+                name=mAuth.getCurrentUser().getDisplayName();
+            }
+
+                uname.setText(name+" !");
+            }
+
+
         ImageView exit = view.findViewById(R.id.exit_app);
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +137,7 @@ public class HomeFragment extends Fragment {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                getActivity().moveTaskToBack(true);
                                 getActivity().finish();
                             }
                         }).setNegativeButton("No",null).show();
@@ -171,7 +203,7 @@ public class HomeFragment extends Fragment {
            greet.setText("Good evening");
         }
 
-        GoogleSignInAccount account  = GoogleSignIn.getLastSignedInAccount(getContext());
+
        if (account!=null) {
            if (account.getPhotoUrl() != null) {
 //               Picasso.get().load(account.getPhotoUrl()).into(menu);

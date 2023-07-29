@@ -33,9 +33,7 @@
             android:name=".Maintenance"
             android:exported="false" />
 
-        <meta-data
-            android:name="pdftron_license_key"
-            android:value="${pdftronLicenseKey}" />
+
         <activity
             android:name=".terms"
             android:exported="false"

@@ -131,12 +131,7 @@
                     android:textStyle="bold" />
             </RelativeLayout>
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:indeterminateTint="@color/white" />
+
 
 
             <LinearLayout
@@ -150,16 +145,16 @@
                 <LinearLayout
                     android:id="@+id/javaCard"
                     android:layout_width="match_parent"
-                    android:layout_height="110dp"
+                    android:layout_height="100dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/round_note"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="110dp"
-                        android:layout_height="110dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:src="@drawable/java" />
 
 
@@ -179,19 +174,19 @@
                 <LinearLayout
                     android:id="@+id/dsCard"
                     android:layout_width="match_parent"
-                    android:layout_height="110dp"
+                    android:layout_height="100dp"
                     android:layout_below="@+id/javaCard"
 
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/round_note"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="110dp"
-                        android:layout_height="110dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:src="@drawable/datascience" />
 
                     <TextView
@@ -211,19 +206,19 @@
                 <LinearLayout
                     android:id="@+id/osCard"
                     android:layout_width="match_parent"
-                    android:layout_height="110dp"
+                    android:layout_height="100dp"
                     android:layout_below="@+id/dsCard"
                     android:layout_marginStart="10dp"
 
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/round_note"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="110dp"
-                        android:layout_height="110dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_marginStart="5dp"
                         android:src="@drawable/os" />
 
@@ -234,7 +229,6 @@
                         android:fontFamily="@font/sarabun"
                         android:paddingStart="5dp"
                         android:text="Principles of Operating Systems"
-
                         android:textColor="@color/secondary"
                         android:textSize="23sp"
                         android:textStyle="bold" />
@@ -244,19 +238,19 @@
                 <LinearLayout
                     android:id="@+id/aiCard"
                     android:layout_width="match_parent"
-                    android:layout_height="110dp"
+                    android:layout_height="100dp"
                     android:layout_below="@+id/osCard"
                     android:layout_marginStart="10dp"
 
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/round_note"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="110dp"
-                        android:layout_height="110dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:backgroundTint="@color/white"
                         android:paddingStart="10dp"
                         android:src="@drawable/ai" />
@@ -276,20 +270,20 @@
                 <LinearLayout
                     android:id="@+id/cloudCard"
                     android:layout_width="match_parent"
-                    android:layout_height="110dp"
+                    android:layout_height="100dp"
                     android:layout_below="@+id/aiCard"
                     android:layout_marginStart="10dp"
 
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="60dp"
+                    android:layout_marginBottom="10dp"
 
                     android:background="@drawable/round_note"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="110dp"
-                        android:layout_height="110dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:paddingStart="10dp"
                         android:src="@drawable/computing" />
 
@@ -304,12 +298,50 @@
                         android:textSize="25sp"
                         android:textStyle="bold" />
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/Activities"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/cloudCard"
+                    android:layout_marginStart="10dp"
+
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+
+                    android:background="@drawable/round_note"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:paddingStart="10dp"
+                        android:src="@drawable/activity" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/sarabun"
+                        android:paddingStart="5dp"
+                        android:text="Activities"
+                        android:textColor="@color/secondary"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
 
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
-    </RelativeLayout>
 
+
+    </RelativeLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/white" />
 </FrameLayout>

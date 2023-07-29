@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -77,7 +78,7 @@ public class HomeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-    LinearLayout java,dm,os,ai,cc;
+    LinearLayout java,dm,os,ai,cc,activity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -97,6 +98,7 @@ public class HomeFragment extends Fragment {
         ai = view.findViewById(R.id.aiCard);
         cc = view.findViewById(R.id.cloudCard);
         TextView uname = view.findViewById(R.id.uname);
+        activity = view.findViewById(R.id.Activities);
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
 
         if (account!=null) {
@@ -145,6 +147,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        java.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
+
        java.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,6 +157,7 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
                 }
         });
+        dm.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
         dm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,6 +167,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        os.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
         os.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,6 +177,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        ai.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
         ai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -179,12 +186,25 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        cc.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
 
         cc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), documentType.class);
                 intent.putExtra(SUBJECT_NAME,"Cloud Computing");
+                startActivity(intent);
+            }
+        });
+        activity.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
+        activity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), fetch_files.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("docType"," ");
+                bundle.putString("name","Activities");
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -204,12 +224,6 @@ public class HomeFragment extends Fragment {
         }
 
 
-       if (account!=null) {
-           if (account.getPhotoUrl() != null) {
-//               Picasso.get().load(account.getPhotoUrl()).into(menu);
-
-           }
-       }
 
         new Handler().postDelayed(new Runnable() {
             @Override

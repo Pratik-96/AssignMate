@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/moonlit_asteroid_gradient"
     android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".fetch_files">
     <LinearLayout
         android:id="@+id/nodata"

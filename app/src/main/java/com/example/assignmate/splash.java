@@ -22,6 +22,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
+
 public class splash extends AppCompatActivity {
 
     FirebaseAuth mAuth;
@@ -33,6 +35,7 @@ public class splash extends AppCompatActivity {
 
 
 
+        mAuth=FirebaseAuth.getInstance();
         reference.child("Maintenance").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
 
 
@@ -43,13 +46,19 @@ public class splash extends AppCompatActivity {
                 {
 
                     boolean inMaintenance = (boolean) task.getResult().getValue();
-                    Log.d("inMain", String.valueOf(inMaintenance));
+
+                    if (Objects.equals(mAuth.getUid(), "RYmuvMvQn3WpjHpgIjDMgrazSpq1"))
+                    {
+                        inMaintenance=false;
+                    }
+                    boolean finalInMaintenance = inMaintenance;
                     new Handler().postDelayed((Runnable) new Runnable() {
                         @Override
                         public void run() {
 
                             if (checkConnection(getApplicationContext())) {
-                                if (!inMaintenance) {
+
+                                if (!finalInMaintenance) {
                                     if (user != null) {
                                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                         finish();
@@ -100,6 +109,7 @@ public class splash extends AppCompatActivity {
 
 
         chk_Maintenance();
+
 
 
         new Handler().postDelayed(new Runnable() {

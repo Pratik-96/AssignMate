@@ -30,7 +30,7 @@
 
 3. Intellectual Property: All intellectual property rights, including copyrights, trademarks, and any other proprietary rights related to the App, are the property of AssignMate and its developer. You may not modify, distribute, transmit, display, perform, reproduce, publish, license, create derivative works from, transfer, or sell any information, software, products, or services obtained from the App.\n\n
 
-4. Privacy Policy: : We want to assure you that the application does not collect any user personal data. Your privacy is of utmost importance to us, and we are committed to maintaining the confidentiality and security of any information you provide while using the App. Rest assured that there is no collection or use of personal information in any form, and your usage of the App remains completely anonymous. By using the App, you acknowledge and agree that no personal data is being collected or utilized, as we strictly adhere to this privacy commitment.\n\n
+4. Privacy Policy: : We want to assure you that the AssignMate does not collect any user personal data. Your privacy is of utmost importance to us, and we are committed to maintaining the confidentiality and security of any information you provide while using the App. Rest assured that there is no collection or use of personal information in any form, and your usage of the App remains completely anonymous. By using the App, you acknowledge and agree that no personal data is being collected or utilized, as we strictly adhere to this privacy commitment.\n\n
 
 5. Content Accuracy: While we strive to provide accurate and reliable information within the App, we do not guarantee the accuracy, completeness, or usefulness of any content. Users are responsible for verifying the accuracy and appropriateness of the information obtained through the App.\n\n
 
@@ -56,6 +56,7 @@ Last updated: [24/07/2023]
         <item>Principles of Operating Systems</item>
         <item>Artificial Intelligence</item>
         <item>Cloud Computing</item>
+        <item>Activities</item>
 
     </string-array>
     <string-array name="documentType">

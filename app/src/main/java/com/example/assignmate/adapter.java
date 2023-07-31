@@ -16,7 +16,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -84,6 +87,7 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
         holder.name.setText(model.getFile_Name());
         holder.descrption.setText("Description:- "+model.getDescription());
         holder.timestamp.setText(model.getTimeStamp());
+        holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(),R.anim.recycler_view_animation));
         urls.add(model.getUrl());
         String fileName = model.getFile_Name();
         String ext = fileName.substring(fileName.lastIndexOf("."));
@@ -143,6 +147,16 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
 
     }
 
+private int lastPosition=-1;
+    public void setAnimation(View view,int position)
+    {
+
+            Animation slideIn = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+            view.setAnimation(slideIn);
+
+    }
+
+
 
 
 
@@ -150,12 +164,15 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
 
         TextView descrption,name,timestamp;
         ImageView imageView;
+
+        LinearLayout item;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             progressBar=itemView.findViewById(R.id.progressBarID);
             name=itemView.findViewById(R.id.put_filename);
             descrption=itemView.findViewById(R.id.put_description);
             timestamp = itemView.findViewById(R.id.timestamp);
+            item=itemView.findViewById(R.id.item);
 
             empty = itemView.findViewById(R.id.empty);
             imageView= itemView.findViewById(R.id.doc_icon);

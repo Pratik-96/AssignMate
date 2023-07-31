@@ -1,5 +1,7 @@
 package com.example.assignmate;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -209,13 +211,24 @@ public class Profile extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-                            GoogleSignInClient gsc = GoogleSignIn.getClient(getContext(),gso);
-                            gsc.signOut();
-                            Intent intent = new Intent(getContext(), Login.class);
-                            startActivity(intent);
-                            getActivity().finish();
+
+                new AlertDialog.Builder(getContext())
+                        .setMessage("Are you sure you want to Logout from your account ?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                FirebaseAuth.getInstance().signOut();
+                                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+                                GoogleSignInClient gsc = GoogleSignIn.getClient(getContext(),gso);
+                                gsc.signOut();
+                                Intent intent = new Intent(getContext(), Login.class);
+                                startActivity(intent);
+                               getActivity().finish();
+
+                            }
+                        }).setNegativeButton("No",null).show();
+
             }
         });
         return view;

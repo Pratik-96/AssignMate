@@ -289,7 +289,7 @@ public class UploadFragment extends Fragment {
 
                     } else if (sub.equals("None")) {
                         Toast.makeText(getContext(), "Please select a subject..", Toast.LENGTH_SHORT).show();
-                    } else if (type.equals("None")) {
+                    } else if (type.equals("None")&& !sub.equals("Activities")) {
                         Toast.makeText(getContext(), "Please select document type..", Toast.LENGTH_SHORT).show();
                     } else if (!description.getText().toString().isEmpty() && !sub.equals("None") && !type.equals("None")) {
                         upload(uri,view);
@@ -341,6 +341,12 @@ public class UploadFragment extends Fragment {
 
     selectedSub = spinner1.getSelectedItem().toString();
     selectedType = doctype1.getSelectedItem().toString();
+
+
+    if (selectedSub.equals("Activities"))
+    {
+        selectedType=" ";
+    }
 
 
 

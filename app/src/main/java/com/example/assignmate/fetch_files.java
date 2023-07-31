@@ -14,7 +14,9 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 
 import com.example.assignmate.databinding.ActivityFetchFilesBinding;
@@ -64,24 +66,39 @@ public class fetch_files extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         binding=ActivityFetchFilesBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
 
+
+      binding.searchBar.clearFocus();
         if (!checkConnection(getApplicationContext()))
         {
             startActivity(new Intent(getApplicationContext(),no_connection.class));
         }
 
+        binding.searchBar.setFocusableInTouchMode(true);
        Bundle bundle = getIntent().getExtras();
 
            String subject = bundle.getString("name");
            String type = bundle.getString("docType");
+
         binding.selectedCategory.setText(type);
         binding.selectedCategory2.setText(type);
 
+        if (!type.equals("Notes"))
+        {
+            binding.filter.setVisibility(View.GONE);
+        }
+        if (type.equals(" "))
+        {
+            binding.selectedCategory.setText("Activities");
+            binding.selectedCategory2.setText("Activities");
+
+        }
         binding.progressBarID.setVisibility(View.VISIBLE);
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child(subject).child(type);
 
@@ -137,6 +154,42 @@ public class fetch_files extends AppCompatActivity {
         binding.recyclerView.setAdapter(ad);
         binding.recyclerView.setVisibility(View.VISIBLE);
 
+        binding.filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu menu = new PopupMenu(getApplicationContext(),binding.filter);
+                menu.getMenu().add("Show Only Nirali Notes");
+                menu.getMenu().add("Show All");
+                menu.show();
+                menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        if (menuItem.getTitle().equals("Show Only Nirali Notes"))
+                        {
+                            FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(FirebaseDatabase.getInstance().getReference().child(subject).child(type).orderByChild("file_Name").equalTo("Nirali Publication.pdf"), file_model.class).build();
+                            ad = new adapter(options, fetch_files.this);
+                            ad.startListening();
+                            binding.recyclerView.setAdapter(ad);
+                            ad.notifyDataSetChanged();
+                            return true;
+                        }
+                        else if (menuItem.getTitle().equals("Show All"))
+                        {
+                            FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(databaseReference, file_model.class).build();
+                            ad = new adapter(options, fetch_files.this);
+                            ad.startListening();
+                            binding.recyclerView.setAdapter(ad);
+                            ad.notifyDataSetChanged();
+                            return true;
+                        }
+                        return false;
+
+                    }
+                });
+            }
+        });
+
+
         binding.searchBar.clearFocus();
         switch (type)
         {
@@ -175,6 +228,10 @@ public class fetch_files extends AppCompatActivity {
 
     }
 
+
+
+
+
     private void filter_list(String Text,String subject,String type) {
 
         if (!Text.isEmpty()) {
@@ -202,6 +259,7 @@ public class fetch_files extends AppCompatActivity {
         super.onStart();
         ad.startListening();
 
+        binding.searchBar.clearFocus();
 //        if (!checkConnection(getApplicationContext()))
 //        {
 //            startActivity(new Intent(getApplicationContext(),no_connection.class));
@@ -227,6 +285,7 @@ public class fetch_files extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        binding.searchBar.clearFocus();
         ad.startListening();
 
         if (!checkConnection(getApplicationContext()))
@@ -240,6 +299,7 @@ public class fetch_files extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
+        binding.searchBar.clearFocus();
         ad.startListening();
 
 //        if (!checkConnection(getApplicationContext()))

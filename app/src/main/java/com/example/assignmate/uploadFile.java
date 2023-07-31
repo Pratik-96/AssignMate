@@ -179,7 +179,7 @@ public class uploadFile extends AppCompatActivity {
                         Toast.makeText(uploadFile.this, "Please select a subject..", Toast.LENGTH_SHORT).show();
                     } else if (type.equals("None")) {
                         Toast.makeText(uploadFile.this, "Please select document type..", Toast.LENGTH_SHORT).show();
-                    } else if (!binding.description.getText().toString().isEmpty() && !sub.equals("None") && !type.equals("None")) {
+                    } else if (!binding.description.getText().toString().isEmpty() && (!sub.equals("None") && !type.equals("None"))) {
                         upload(uri);
 
                     }

@@ -8,11 +8,11 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="10dp"
+        android:layout_margin="8dp"
         android:background="@drawable/round_note"
         android:elevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"

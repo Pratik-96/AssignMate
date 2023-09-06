@@ -4,33 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/moonlit_asteroid_gradient"
+    android:background="@color/gray"
     tools:context=".SignUp" android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
-        >
+        android:scrollbars="none">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
 
-
             <TextView
-                android:elevation="10dp"
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_gravity="left"
                 android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:elevation="10dp"
                 android:fontFamily="@font/sarabun"
                 android:text="Get Started..!!"
                 android:textColor="@color/primary"
                 android:textSize="23sp"
-                android:layout_gravity="left"
                 android:textStyle="bold" />
 
 
@@ -40,10 +39,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/sarabun"
                 android:layout_marginEnd="20dp"
-                android:text="Sign Up"
                 android:elevation="10dp"
+                android:fontFamily="@font/sarabun"
+                android:text="Sign Up"
                 android:textColor="@color/primary"
                 android:textSize="40sp"
                 android:textStyle="bold" />
@@ -61,205 +60,204 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/nameLayout"
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:hint="Name"
-                app:boxStrokeColor="@color/primary"
-                android:textColorHint="@color/primary"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusTopEnd="10dp"
-                app:boxCornerRadiusBottomEnd="10dp"
-                app:boxCornerRadiusTopStart="10dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:endIconMode="clear_text"
-                app:endIconTint="@color/primary"
-                app:errorEnabled="true"
-                android:backgroundTint="@color/white"
-                app:hintEnabled="true"
-                app:hintTextColor="@color/primary"
-                app:startIconDrawable="@drawable/custom_person"
-                app:startIconTint="@color/primary">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/nameLayout"
 
-                <EditText
-                    android:id="@+id/name"
-                    android:layout_width="match_parent"
-                    android:paddingBottom="20dp"
-                    android:fontFamily="@font/sarabun"
-
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/primary"
-                    android:backgroundTint="@color/white"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:id="@+id/emailLayout"
-                android:layout_height="wrap_content"
-                app:boxCornerRadiusTopEnd="10dp"
-                app:boxCornerRadiusBottomEnd="10dp"
-                app:boxCornerRadiusTopStart="10dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxBackgroundMode="outline"
-                android:layout_marginTop="5dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:clipToPadding="false"
-                android:elevation="10dp"
-                android:hint="Email"
-                android:layout_marginEnd="20dp"
-                android:textColorHint="@color/primary"
-                app:boxStrokeColor="@color/primary"
-                app:endIconMode="clear_text"
-                app:endIconTint="@color/primary"
-                app:errorEnabled="true"
-                app:hintTextColor="@color/primary"
-
-
-                app:startIconDrawable="@drawable/email"
-                app:startIconTint="@color/primary">
-
-                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/email"
-                    android:inputType="textEmailAddress"
-                    android:paddingBottom="20dp"
-                    android:textColor="@color/primary"
-                    android:fontFamily="@font/sarabun"
-
-                    android:paddingEnd="50dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
                     android:backgroundTint="@color/white"
+                    android:hint="Name"
                     android:textColorHint="@color/primary"
-
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:boxBackgroundMode="outline"
-                android:id="@+id/pasLayout"
-                android:layout_marginTop="5dp"
-
-                android:layout_marginStart="20dp"
-                android:clipToPadding="false"
-                android:elevation="10dp"
-                android:hint="Password"
-
-                app:boxCornerRadiusTopEnd="10dp"
-                app:boxCornerRadiusBottomEnd="10dp"
-                app:boxCornerRadiusTopStart="10dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                android:layout_marginEnd="20dp"
-                android:textColorHint="@color/primary"
-                app:boxStrokeColor="@color/primary"
-                app:counterEnabled="false"
-                app:counterMaxLength="16"
-                app:endIconMode="password_toggle"
-                app:endIconTint="@color/primary"
-                app:errorEnabled="true"
-                app:hintTextColor="@color/primary"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:boxStrokeColor="@color/primary"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/primary"
+                    app:errorEnabled="true"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/primary"
+                    app:startIconDrawable="@drawable/custom_person"
+                    app:startIconTint="@color/primary">
 
 
-                app:startIconDrawable="@drawable/lock"
-                app:startIconTint="@color/primary">
+                    <EditText
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
 
-                <EditText
+                        android:fontFamily="@font/sarabun"
+                        android:inputType="textPersonName"
+                        android:paddingBottom="20dp"
+                        android:textColor="@color/primary">
+
+                    </EditText>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/emailLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/password"
-                    android:paddingEnd="50dp"
-                    android:backgroundTint="@color/white"
-                    android:paddingBottom="20dp"
-                    android:textColor="@color/primary"
-                    android:fontFamily="@font/sarabun"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:clipToPadding="false"
+                    android:elevation="10dp"
+                    android:hint="Email"
+                    android:textColorHint="@color/primary"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:boxStrokeColor="@color/primary"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/primary"
+                    app:errorEnabled="true"
+                    app:hintTextColor="@color/primary"
 
-                    android:inputType="textPassword"
-                    android:textColorHint="@color/primary" />
-            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                    app:startIconDrawable="@drawable/email"
+                    app:startIconTint="@color/primary">
 
-                android:id="@+id/cnfpassLayout"
-                android:layout_gravity="center"
-                app:boxCornerRadiusTopEnd="10dp"
-                app:boxCornerRadiusBottomEnd="10dp"
-                app:boxCornerRadiusTopStart="10dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                android:layout_marginStart="20dp"
-                android:elevation="10dp"
-                android:hint="Confirm Password"
-                android:layout_marginEnd="20dp"
-                android:textColorHint="@color/primary"
-                app:boxStrokeColor="@color/primary"
-                app:counterEnabled="true"
-                app:counterMaxLength="16"
-                app:endIconMode="password_toggle"
-                app:endIconTint="@color/primary"
-                app:errorEnabled="true"
-                app:hintTextColor="@color/primary"
+                    <EditText
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:fontFamily="@font/sarabun"
+                        android:inputType="textEmailAddress"
+                        android:paddingEnd="50dp"
 
-                app:boxBackgroundMode="outline"
-                app:startIconDrawable="@drawable/lock"
-                app:startIconTint="@color/primary">
+                        android:paddingBottom="20dp"
+                        android:textColor="@color/primary"
+                        android:textColorHint="@color/primary"
 
-                <EditText
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/pasLayout"
                     android:layout_width="match_parent"
-                    android:id="@+id/cnfpass"
-                    android:inputType="textPassword"
-                    android:paddingEnd="50dp"
-                    android:paddingBottom="20dp"
-                    android:textColor="@color/primary"
-                    android:fontFamily="@font/sarabun"
-
-                    android:backgroundTint="@color/white"
                     android:layout_height="wrap_content"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                    android:layout_marginEnd="20dp"
+                    android:clipToPadding="false"
+                    android:elevation="10dp"
+                    android:hint="Password"
 
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/checkBox"
+                    android:textColorHint="@color/primary"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:boxStrokeColor="@color/primary"
+                    app:counterEnabled="false"
+                    app:counterMaxLength="16"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@color/primary"
+                    app:errorEnabled="true"
+                    app:hintTextColor="@color/primary"
+
+
+                    app:startIconDrawable="@drawable/lock"
+                    app:startIconTint="@color/primary">
+
+                    <EditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:fontFamily="@font/sarabun"
+                        android:inputType="textPassword"
+                        android:paddingEnd="50dp"
+                        android:paddingBottom="20dp"
+
+                        android:textColor="@color/primary"
+                        android:textColorHint="@color/primary" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/cnfpassLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:elevation="10dp"
+                    android:hint="Confirm Password"
+                    android:textColorHint="@color/primary"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:boxStrokeColor="@color/primary"
+                    app:endIconTint="@color/primary"
+                    app:errorEnabled="true"
+                    app:hintTextColor="@color/primary"
+                    app:startIconDrawable="@drawable/lock"
+                    app:startIconTint="@color/primary">
+
+                    <EditText
+                        android:id="@+id/cnfpass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:fontFamily="@font/sarabun"
+                        android:inputType="textPassword"
+                        android:paddingEnd="50dp"
+                        android:paddingBottom="20dp"
+                        android:textColor="@color/primary" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/sarabun"
-                android:text="I agree to the "
+                android:orientation="horizontal">
 
-                android:textColor="@color/primary"
-                android:textColorHint="@color/white"
-                android:textColorLink="@color/primary"
-                android:textSize="15sp"
-                android:textStyle="bold"/>
-            <TextView
-                android:id="@+id/terms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Terms and Conditions"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/primary"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                />
-        </LinearLayout>
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/sarabun"
+                    android:text="I agree to the "
 
+                    android:textColor="@color/primary"
+                    android:textColorHint="@color/white"
+                    android:textColorLink="@color/primary"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Terms and Conditions"
+                    android:textColor="@color/primary"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button"
@@ -268,70 +266,72 @@
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:textAllCaps="false"
-
-                android:backgroundTint="@color/primary"
                 android:background="@drawable/roundbtn"
-                android:text="Sign Up "
-                android:elevation="10dp"
-                android:onClick="signup"
-                android:textAlignment="center"
+
+
+                android:backgroundTint="#101010"
+                android:elevation="100dp"
                 android:fontFamily="@font/sarabun"
-                android:textStyle="bold"
-                android:textColor="@color/secondary"
-                android:textSize="15sp"/>
+                android:onClick="signup"
+                android:text="Sign Up "
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
             <ProgressBar
+                android:id="@+id/progressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/progressBar"
-                android:visibility="gone"
+                android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:indeterminateTint="@color/primary"
-                android:layout_gravity="center"/>
+                android:visibility="gone" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="--OR--"
                 android:layout_gravity="center"
-                android:textSize="20sp"
                 android:fontFamily="@font/sarabun"
+                android:text="--OR--"
                 android:textColor="@color/white"
-                />
+                android:textSize="20sp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/signWithGoogle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/secondary"
                 android:layout_margin="10dp"
-                android:textStyle="bold"
                 android:background="@drawable/roundbtn"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="#101010"
                 android:drawableStart="@drawable/google"
                 android:drawablePadding="5dp"
-                android:textAllCaps="false"
+                android:fontFamily="@font/sarabun"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:fontFamily="@font/sarabun"
+                android:text="Continue with Google"
                 android:textAlignment="center"
-                android:text="Continue with Google" />
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/noacc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
                 android:layout_marginTop="20dp"
-                android:textColorLink="@color/primary"
+                android:layout_marginBottom="20dp"
                 android:fontFamily="@font/sarabun"
                 android:onClick="register"
-                android:layout_marginBottom="20dp"
+                android:text=""
                 android:textAlignment="center"
-                android:textColor="@color/primary" />
+                android:textColor="@color/primary"
+                android:textColorLink="@color/primary" />
 
         </LinearLayout>
 
 
     </ScrollView>
-    </LinearLayout>
+</LinearLayout>

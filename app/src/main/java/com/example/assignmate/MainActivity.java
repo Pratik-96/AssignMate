@@ -59,6 +59,7 @@ import com.squareup.picasso.Picasso;
 import java.util.Calendar;
 import java.util.Objects;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
@@ -96,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+
 
     private void checkNotificationPermission() {
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
@@ -154,6 +157,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        if (FirebaseAuth.getInstance().getCurrentUser()!=null)
+        {
+            String name = getIntent().getStringExtra("uname");
+            if (name!=null)
+            {
+                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                        .setDisplayName(name)
+                        .build();
+                FirebaseAuth.getInstance().getCurrentUser().updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful())
+                        {
+                            Log.d("uname", "Name updated..: ");
+                        }
+                    }
+                });
+            }
+        }
         replaceFragment(new HomeFragment());
 
 

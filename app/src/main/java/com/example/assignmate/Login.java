@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
@@ -57,9 +58,14 @@ public class Login extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        String name = getIntent().getStringExtra("uname");
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
         if(currentUser != null || account!=null){
             Intent home=new Intent(getApplicationContext(),MainActivity.class);
+            if (name!=null)
+            {
+                home.putExtra("uname",name);
+            }
             startActivity(home);
             finish();
         }
@@ -91,6 +97,8 @@ public class Login extends AppCompatActivity {
         Pass=findViewById(R.id.password);
         mAuth=FirebaseAuth.getInstance();
         login=findViewById(R.id.button);
+
+
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(getApplicationContext(),gso);

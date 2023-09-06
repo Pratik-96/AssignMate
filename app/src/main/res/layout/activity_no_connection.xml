@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@color/black"
     android:layout_height="match_parent"
     tools:context=".no_connection">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        android:src="@drawable/no_connecion"
+        android:src="@drawable/no_internet"
         android:layout_gravity="center"/>
     <TextView
         android:layout_width="wrap_content"
@@ -19,7 +19,7 @@
         android:text="No Internet Connection Found"
         android:layout_gravity="center"
         android:fontFamily="@font/sarabun"
-        android:textColor="@color/secondary"
+        android:textColor="@color/primary"
         android:textSize="20sp"/>
     <TextView
         android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
         android:text="Check your connection"
         android:layout_gravity="center"
         android:fontFamily="@font/sarabun"
-        android:textColor="@color/secondary"
+        android:textColor="@color/primary"
         android:textSize="20sp"/>
     <ProgressBar
         android:layout_width="wrap_content"
@@ -45,6 +45,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/roundbtn"
+        android:backgroundTint="@color/gray"
         android:text="Retry "
         android:elevation="10dp"
         android:onClick="login"

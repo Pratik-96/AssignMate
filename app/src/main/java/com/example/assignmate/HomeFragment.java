@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.navigation.NavigationBarItemView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
@@ -78,6 +80,7 @@ public class HomeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
     LinearLayout java,dm,os,ai,cc,activity;
 
     @Override
@@ -115,14 +118,18 @@ public class HomeFragment extends Fragment {
         else
         {
             String name;
-            if (mAuth.getCurrentUser().getDisplayName().split("\\w+").length > 1) {
-                int firstSpace = FirebaseAuth.getInstance().getCurrentUser().getDisplayName().indexOf(" ");
-                 name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName().substring(0, firstSpace);
+            if (FirebaseAuth.getInstance().getCurrentUser().getDisplayName()!=null) {
+                if (FirebaseAuth.getInstance().getCurrentUser().getDisplayName().split("\\w+").length > 1) {
+                    int firstSpace = FirebaseAuth.getInstance().getCurrentUser().getDisplayName().indexOf(" ");
+                    name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName().substring(0, firstSpace);
 
+                } else {
+                    name = mAuth.getCurrentUser().getDisplayName();
+                }
             }
             else
             {
-                name=mAuth.getCurrentUser().getDisplayName();
+                name="User";
             }
 
                 uname.setText(name+" !");
@@ -211,11 +218,12 @@ public class HomeFragment extends Fragment {
 
         Calendar c = Calendar.getInstance();
         int hrs = c.get(Calendar.HOUR_OF_DAY);
+        Log.d("hrs", "onCreateView: "+hrs);
 
         if (hrs>=1 && hrs<12)
         {
          greet.setText("Good morning");
-        } else if (hrs>12 && hrs<18) {
+        } else if (hrs>=12 && hrs<16) {
            greet.setText("Good afternoon");
         }
         else
@@ -242,4 +250,5 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+
 }

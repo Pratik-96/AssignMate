@@ -33,7 +33,7 @@
         android:layout_height="match_parent"
         android:visibility="visible"
         android:id="@+id/upload_layout"
-        android:background="@drawable/moonlit_asteroid_gradient"
+        android:background="@color/black"
         android:orientation="vertical">
 
         <TextView
@@ -66,6 +66,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/round_note"
+                    android:backgroundTint="@color/gray"
                     android:orientation="vertical">
 
                     <TextView
@@ -80,7 +82,7 @@
                         android:fontFamily="@font/sarabun"
                         android:paddingTop="6dp"
                         android:text="No file selected.."
-                        android:textColor="@color/secondary"
+                        android:textColor="@color/white"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -93,7 +95,7 @@
                         android:elevation="20dp"
                         android:fontFamily="@font/sarabun"
                         android:text="Select type of Document *"
-                        android:textColor="@color/secondary"
+                        android:textColor="@color/white"
 
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -105,6 +107,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/dashed_rec"
+
                         android:elevation="10dp" />
 
                     <TextView
@@ -117,7 +120,7 @@
                         android:fontFamily="@font/sarabun"
 
                         android:text="Select Subject *"
-                        android:textColor="@color/secondary"
+                        android:textColor="@color/white"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -140,21 +143,21 @@
                         android:layout_marginEnd="20dp"
                         android:elevation="10dp"
                         android:hint="Description *"
-                        android:textColorHint="@color/secondary"
+                        android:textColorHint="@color/white"
                         app:boxBackgroundMode="outline"
                         app:boxCornerRadiusBottomEnd="10dp"
                         app:boxCornerRadiusBottomStart="10dp"
                         app:boxCornerRadiusTopEnd="10dp"
                         app:boxCornerRadiusTopStart="10dp"
-                        app:boxStrokeColor="@color/secondary"
+                        app:boxStrokeColor="@color/white"
                         app:counterEnabled="false"
                         app:counterMaxLength="16"
                         app:endIconMode="clear_text"
-                        app:endIconTint="@color/secondary"
+                        app:endIconTint="@color/white"
                         app:errorEnabled="true"
-                        app:hintTextColor="@color/secondary"
+                        app:hintTextColor="@color/white"
                         app:startIconDrawable="@drawable/baseline_description_24"
-                        app:startIconTint="@color/secondary">
+                        app:startIconTint="@color/white">
                         >
 
                         <EditText
@@ -167,7 +170,7 @@
                             android:maxLines="2"
                             android:paddingEnd="50dp"
                             android:paddingBottom="20dp"
-                            android:textColor="@color/secondary" />
+                            android:textColor="@color/white" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <LinearLayout
@@ -175,6 +178,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:backgroundTint="@color/white"
                         android:layout_margin="20dp"
                         android:background="@drawable/dashed"
                         android:orientation="vertical">
@@ -196,7 +200,7 @@
                             android:text="Browse an Image or Pdf to Upload."
 
                             android:textAlignment="center"
-                            android:textColor="@color/secondary"
+                            android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -209,13 +213,14 @@
                         android:layout_gravity="center"
                         android:layout_margin="20dp"
                         android:background="@drawable/roundbtn"
+                        android:backgroundTint="@color/white"
                         android:drawableStart="@drawable/cloud_btn"
                         android:drawablePadding="10dp"
                         android:fontFamily="@font/sarabun"
                         android:padding="10dp"
                         android:text="UPLOAD"
 
-                        android:textColor="@color/white" />
+                        android:textColor="@color/black" />
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>

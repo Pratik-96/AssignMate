@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">AssignMate</string>
     <string name="Logdetails">Please fill the details below to continue</string>
+
     <string name="forgetdetails">Enter your email and we\'ll send you a link to reset your password.</string>
     <string name="signdetails">Please fill the details below to Create your Account</string>
     <string name="log_message">We are Glad to have you back..!!</string>

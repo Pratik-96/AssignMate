@@ -13,8 +13,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_margin="8dp"
+
         android:background="@drawable/round_note"
         android:elevation="20dp"
+        android:backgroundTint="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +25,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="60dp"
             android:layout_margin="10dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/gray"
             android:layout_height="65dp"
             android:layout_gravity="center"
 
@@ -39,6 +41,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:backgroundTint="@color/gray"
+            android:background="@drawable/round_note"
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -47,7 +51,7 @@
                 android:textSize="15sp"
                 android:maxLines="1"
                 android:layout_marginStart="5dp"
-                android:textColor="@color/secondary"
+                android:textColor="@color/white"
                 android:fontFamily="@font/sarabun"
                 android:id="@+id/put_filename"
                 android:layout_marginTop="10dp"
@@ -61,7 +65,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginStart="5dp"
 
-                android:textColor="@color/secondary"
+                android:textColor="@color/white"
                 android:fontFamily="@font/sarabun"
                 android:layout_marginTop="10dp"/>
             <TextView
@@ -72,7 +76,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_gravity="right"
                 android:textStyle="bold"
-                android:textColor="@color/secondary"
+                android:textColor="@color/white"
                 android:fontFamily="@font/sarabun"
                 />
         </LinearLayout>

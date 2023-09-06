@@ -46,6 +46,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -311,7 +312,7 @@ public class SignUp extends AppCompatActivity {
 
         if (checked[0] == 1 && flag && mailchk && !str.isEmpty()) {
 
-             User_Name = name.getText().toString();
+             User_Name = binding.name.getText().toString();
             String User_Email = email.getText().toString();
             String User_Pass = Pass2.getText().toString();
 
@@ -327,9 +328,10 @@ public class SignUp extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Toast.makeText(SignUp.this, "Signing Up..", Toast.LENGTH_SHORT).show();
-                                UserProfileChangeRequest request = new UserProfileChangeRequest.Builder().setDisplayName(User_Name).build();
-                                mAuth.getCurrentUser().updateProfile(request);
+                                Log.d("uname", "onComplete: "+binding.name.getText().toString());
+
                                 Intent home = new Intent(getApplicationContext(), Login.class);
+                                home.putExtra("uname",str);
                                 notification();
                                 startActivity(home);
                                 finish();

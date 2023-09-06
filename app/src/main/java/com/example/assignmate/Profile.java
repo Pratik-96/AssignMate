@@ -5,12 +5,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +36,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationBarItemView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -78,6 +84,7 @@ public class Profile extends Fragment {
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +94,7 @@ public class Profile extends Fragment {
         }
 
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -104,8 +112,25 @@ public class Profile extends Fragment {
         LinearLayout share = view.findViewById(R.id.share);
         LinearLayout feedback = view.findViewById(R.id.feedback);
         LinearLayout community = view.findViewById(R.id.joinCommunity);
+        LinearLayout changeProfileInfo = view.findViewById(R.id.updateProfile);
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
 
+
+            changeProfileInfo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                        replaceFragment(new reauthenticate());
+                    }
+
+                 else
+                {
+                    Toast.makeText(getContext(), "Cannot update a google profile..!!", Toast.LENGTH_SHORT).show();
+                }
+                }
+
+            });
 
         community.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,6 +189,7 @@ public class Profile extends Fragment {
 
 
 
+        profileImage.setImageResource(R.drawable.profile);
         if (account!=null)
         {
             if (account.getPhotoUrl()!=null) {
@@ -172,7 +198,7 @@ public class Profile extends Fragment {
             name.setText(account.getDisplayName());
             email.setText(account.getEmail());
         }
-        else
+        else if (FirebaseAuth.getInstance().getCurrentUser()!=null)
         {
             email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
             name.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
@@ -232,5 +258,11 @@ public class Profile extends Fragment {
             }
         });
         return view;
+    }
+    public void replaceFragment(Fragment fragment)
+    {
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout,fragment);
+        fragmentTransaction.commit();
     }
 }

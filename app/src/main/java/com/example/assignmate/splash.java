@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -56,7 +57,7 @@ public class splash extends AppCompatActivity {
                         @Override
                         public void run() {
 
-                            if (checkConnection(getApplicationContext())) {
+
 
                                 if (!finalInMaintenance) {
                                     if (user != null) {
@@ -76,13 +77,9 @@ public class splash extends AppCompatActivity {
                                 }
 
                             }
-                            else
-                            {
-                                startActivity(new Intent(getApplicationContext(), no_connection.class));
-                                finish();
-                            }
 
-                        }
+
+
                     }, 1600);
 
 
@@ -107,9 +104,14 @@ public class splash extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-
-        chk_Maintenance();
-
+        if (checkConnection(getApplicationContext())) {
+            chk_Maintenance();
+        }
+        else
+        {
+            startActivity(new Intent(getApplicationContext(),no_connection.class));
+            finish();
+        }
 
 
         new Handler().postDelayed(new Runnable() {
@@ -203,16 +205,17 @@ public class splash extends AppCompatActivity {
         final ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         if (connMgr != null) {
-            NetworkInfo activeNetworkInfo = connMgr.getActiveNetworkInfo();
+            NetworkCapabilities networkCapabilities = connMgr.getNetworkCapabilities(connMgr.getActiveNetwork());
 
-            if (activeNetworkInfo != null) { // connected to the internet
-                // connected to the mobile provider's data plan
-                if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
-                    // connected to wifi
-                    return true;
-                } else return activeNetworkInfo.getType() == ConnectivityManager.TYPE_MOBILE;
+            if (networkCapabilities != null) {
+                if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                    return true; // Connected to WiFi
+                } else if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                    return true; // Connected to mobile data
+                }
             }
         }
-        return false;
+        return false; // Not connected to any network
     }
+
 }

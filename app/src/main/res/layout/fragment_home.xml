@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/moonlit_asteroid_gradient"
+    android:background="@color/black"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HomeFragment">
@@ -149,13 +149,18 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
+                    android:backgroundTint="@color/gray"
                     android:background="@drawable/round_note"
                     android:orientation="horizontal">
-
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_note">
                     <ImageView
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:src="@drawable/java" />
+                    </LinearLayout>
 
 
                     <TextView
@@ -163,9 +168,9 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/sarabun"
-                        android:paddingStart="5dp"
+                        android:paddingStart="15dp"
                         android:text="Programming in Java"
-                        android:textColor="@color/secondary"
+                        android:textColor="@color/white"
                         android:textSize="23sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -176,28 +181,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_below="@+id/javaCard"
-
+                    android:backgroundTint="@color/gray"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/round_note"
                     android:orientation="horizontal">
-
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_note">
                     <ImageView
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:src="@drawable/datascience" />
-
+                    </LinearLayout>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/sarabun"
-                        android:paddingStart="5dp"
+                        android:paddingStart="15dp"
                         android:text="Data Mining &amp; Data Science"
 
-                        android:textColor="@color/secondary"
+                        android:textColor="@color/white"
                         android:textSize="23sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -206,31 +214,34 @@
                 <LinearLayout
                     android:id="@+id/osCard"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="110dp"
                     android:layout_below="@+id/dsCard"
                     android:layout_marginStart="10dp"
-
+                    android:backgroundTint="@color/gray"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/round_note"
                     android:orientation="horizontal">
-
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_note">
                     <ImageView
                         android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_height="110dp"
                         android:layout_marginStart="5dp"
                         android:src="@drawable/os" />
-
+                </LinearLayout>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/sarabun"
-                        android:paddingStart="5dp"
+                        android:paddingStart="15dp"
                         android:text="Principles of Operating Systems"
-                        android:textColor="@color/secondary"
-                        android:textSize="23sp"
+                        android:textColor="@color/white"
+                        android:textSize="22sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -241,28 +252,30 @@
                     android:layout_height="100dp"
                     android:layout_below="@+id/osCard"
                     android:layout_marginStart="10dp"
-
+                    android:backgroundTint="@color/gray"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/round_note"
                     android:orientation="horizontal">
-
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_note">
                     <ImageView
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:backgroundTint="@color/white"
-                        android:paddingStart="10dp"
+                        android:padding="10dp"
                         android:src="@drawable/ai" />
-
+                    </LinearLayout>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/sarabun"
-                        android:paddingStart="5dp"
+                        android:paddingStart="15dp"
                         android:text="Artificial Intelligence"
-                        android:textColor="@color/secondary"
+                        android:textColor="@color/white"
                         android:textSize="25sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -277,24 +290,28 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-
+                    android:backgroundTint="@color/gray"
                     android:background="@drawable/round_note"
                     android:orientation="horizontal">
-
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_note">
                     <ImageView
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:paddingStart="10dp"
+                        android:padding="10dp"
                         android:src="@drawable/computing" />
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/sarabun"
-                        android:paddingStart="5dp"
+                        android:paddingStart="15dp"
                         android:text="Cloud Computing"
-                        android:textColor="@color/secondary"
+                        android:textColor="@color/white"
                         android:textSize="25sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -308,24 +325,27 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-
+                    android:backgroundTint="@color/gray"
                     android:background="@drawable/round_note"
                     android:orientation="horizontal">
-
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_note">
                     <ImageView
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:paddingStart="10dp"
                         android:src="@drawable/activity" />
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/sarabun"
-                        android:paddingStart="5dp"
+                        android:paddingStart="15dp"
                         android:text="Activities"
-                        android:textColor="@color/secondary"
+                        android:textColor="@color/white"
                         android:textSize="25sp"
                         android:textStyle="bold" />
                 </LinearLayout>

@@ -36,6 +36,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class fetch_files extends AppCompatActivity {
@@ -235,7 +236,7 @@ public class fetch_files extends AppCompatActivity {
     private void filter_list(String Text,String subject,String type) {
 
         if (!Text.isEmpty()) {
-            FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(FirebaseDatabase.getInstance().getReference().child(subject).child(type).orderByChild("description").startAt("[a-zA-Z]{*}[ ][a-zA-Z]").endAt(Text.toLowerCase() + "/uf8ff"), file_model.class).build();
+            FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(FirebaseDatabase.getInstance().getReference().child(subject).child(type).orderByChild("description").startAt(Text).endAt(Text.toLowerCase()+ "/uf8ff"), file_model.class).build();
             ad = new adapter(options, fetch_files.this);
             ad.startListening();
             binding.recyclerView.setAdapter(ad);

@@ -133,6 +133,7 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
                     Intent intent = new Intent(context,pdfActivity.class);
                     intent.putExtra("URL",model.getUrl());
                     intent.putExtra("NAME",model.getFile_Name());
+                    intent.putExtra("DESCRIPTION",model.getDescription());
                     view.getContext().startActivity(intent);
                 }
                 else

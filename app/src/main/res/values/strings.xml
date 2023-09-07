@@ -58,6 +58,8 @@ Last updated: [24/07/2023]
         <item>Artificial Intelligence</item>
         <item>Cloud Computing</item>
         <item>Activities</item>
+        <item>Placement Preparation</item>
+
 
     </string-array>
     <string-array name="documentType">
@@ -66,6 +68,8 @@ Last updated: [24/07/2023]
         <item>Notes</item>
         <item>Practicals</item>
         <item>Question Banks</item>
+        <item>Placement</item>
+
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -139,6 +139,8 @@ public class update_Profile extends Fragment {
                         Toast.makeText(getContext(), "Name Updated Successfully..!!", Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);
                         updateProfile.setVisibility(View.VISIBLE);
+
+
                     }
                     else
                     {

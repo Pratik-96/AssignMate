@@ -100,6 +100,12 @@ public class fetch_files extends AppCompatActivity {
             binding.selectedCategory2.setText("Activities");
 
         }
+        if (type.equals("Placement"))
+        {
+            binding.selectedCategory.setText("Placement");
+            binding.selectedCategory2.setText("Placement");
+
+        }
         binding.progressBarID.setVisibility(View.VISIBLE);
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child(subject).child(type);
 

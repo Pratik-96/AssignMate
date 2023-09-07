@@ -81,7 +81,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    LinearLayout java,dm,os,ai,cc,activity;
+    LinearLayout java,dm,os,ai,cc,activity,placement;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -102,6 +102,8 @@ public class HomeFragment extends Fragment {
         cc = view.findViewById(R.id.cloudCard);
         TextView uname = view.findViewById(R.id.uname);
         activity = view.findViewById(R.id.Activities);
+        placement=view.findViewById(R.id.Placement);
+
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
 
         if (account!=null) {
@@ -211,6 +213,18 @@ public class HomeFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString("docType"," ");
                 bundle.putString("name","Activities");
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        placement.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
+        placement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), fetch_files.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("docType","Placement");
+                bundle.putString("name","Placement Preparation");
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

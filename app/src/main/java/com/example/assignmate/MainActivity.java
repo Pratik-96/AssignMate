@@ -186,21 +186,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(int i) {
                 int selectedItem = binding.navBar.getSelectedItemId();
+                GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
 //
 //                Log.d("TAG", "onItemSelected: "+selectedItem+"      "+i);
-            if (selectedItem==R.id.home_nav)
-            {
-                replaceFragment(new HomeFragment());
-            }
-            else if (selectedItem==R.id.upload_nav){
+                if (FirebaseAuth.getInstance().getCurrentUser() != null || account != null) {
+                    if (selectedItem == R.id.home_nav) {
+                        replaceFragment(new HomeFragment());
+                    } else if (selectedItem == R.id.upload_nav) {
 //                    startActivity(new Intent(getApplicationContext(), uploadFile.class));
-                    replaceFragment(new UploadFragment());
+                        replaceFragment(new UploadFragment());
 
 
-            } else if (selectedItem==R.id.profile_nav) {
-                replaceFragment(new Profile());
-            }
+                    } else if (selectedItem == R.id.profile_nav) {
+                        replaceFragment(new Profile());
+                    }
 
+                } else {
+                    Toast.makeText(MainActivity.this, "You've been logged out, Please Login Again to continue..", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

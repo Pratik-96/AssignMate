@@ -62,8 +62,8 @@ public class pdfActivity extends AppCompatActivity {
 
         String link = getIntent().getStringExtra("URL");
 
-
-
+        String des = getIntent().getStringExtra("DESCRIPTION");
+        
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

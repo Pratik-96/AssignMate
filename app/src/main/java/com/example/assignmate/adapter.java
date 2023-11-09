@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.net.Uri;
 import java.io.File;
 
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -41,7 +42,7 @@ import java.util.ConcurrentModificationException;
 import java.util.IdentityHashMap;
 
 public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHolder> {
-    RecyclerView recyclerView;
+    RecyclerView recyclerView; 
     public static final String URI = "";
 
     ProgressBar progressBar;
@@ -88,6 +89,9 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
         holder.descrption.setText("Description:- "+model.getDescription());
         holder.timestamp.setText(model.getTimeStamp());
         holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(),R.anim.recycler_view_animation));
+
+
+
         urls.add(model.getUrl());
         String fileName = model.getFile_Name();
         String ext = fileName.substring(fileName.lastIndexOf("."));

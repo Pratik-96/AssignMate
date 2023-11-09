@@ -19,6 +19,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -128,6 +129,9 @@ public class SignUp extends AppCompatActivity {
         String txt2 = "<b>Already have an account ? <a href=''>Log In</a></b>";
         reg.setText(Html.fromHtml(txt2));
         button=findViewById(R.id.button);
+
+
+
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestIdToken("660056468922-cqpahr9lrkufo2ndhsnun12mf4j3ee3v.apps.googleusercontent.com").build();
         gsc = GoogleSignIn.getClient(getApplicationContext(),gso);
@@ -330,7 +334,7 @@ public class SignUp extends AppCompatActivity {
                                 Toast.makeText(SignUp.this, "Signing Up..", Toast.LENGTH_SHORT).show();
                                 Log.d("uname", "onComplete: "+binding.name.getText().toString());
 
-                                Intent home = new Intent(getApplicationContext(), Login.class);
+                                Intent home = new Intent(getApplicationContext(), choose_sem.class);
                                 home.putExtra("uname",str);
                                 notification();
                                 startActivity(home);

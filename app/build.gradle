@@ -78,6 +78,7 @@ dependencies {
     implementation 'com.github.ismaeldivita:chip-navigation-bar:1.4.0'
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.28'
 
 
 

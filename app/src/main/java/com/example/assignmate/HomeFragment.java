@@ -1,6 +1,5 @@
 package com.example.assignmate;
 
-import static android.view.View.GONE;
 import static com.example.assignmate.MainActivity.SUBJECT_NAME;
 
 import android.Manifest;
@@ -135,8 +134,8 @@ public class HomeFragment extends Fragment {
                 name="User";
             }
 
-                uname.setText(name+" !");
-            }
+            uname.setText(name+" !");
+        }
 
 
         ImageView exit = view.findViewById(R.id.exit_app);
@@ -157,46 +156,17 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        java.setVisibility(GONE);
-        os.setVisibility(GONE);
-        ai.setVisibility(GONE);
-        cc.setVisibility(GONE);
-        placement.setVisibility(GONE);
-        dm.setVisibility(GONE);
-        activity.setVisibility(GONE);
+        java.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
 
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                java.setVisibility(View.VISIBLE);
-                java.startAnimation(AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.home_anim));
-            }
-        },1100);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                dm.setVisibility(View.VISIBLE);
-                dm.startAnimation(AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.home_anim));
-            }
-        },1200);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                os.setVisibility(View.VISIBLE);
-                os.startAnimation(AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.home_anim));
-            }
-        },1300);
-
-       java.setOnClickListener(new View.OnClickListener() {
+        java.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), documentType.class);
                 intent.putExtra(SUBJECT_NAME,"Programming in Java");
                 startActivity(intent);
-                }
+            }
         });
-
+        dm.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
         dm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -206,6 +176,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        os.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
         os.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -215,13 +186,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ai.setVisibility(View.VISIBLE);
-                ai.startAnimation(AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.home_anim));
-            }
-        },1400);
+        ai.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
         ai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -230,13 +195,7 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                cc.setVisibility(View.VISIBLE);
-                cc.startAnimation(AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.home_anim));
-            }
-        },1500);
+        cc.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
 
         cc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -246,13 +205,7 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                activity.setVisibility(View.VISIBLE);
-                activity.startAnimation(AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.home_anim));
-            }
-        },1600);
+        activity.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
         activity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -264,13 +217,7 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                placement.setVisibility(View.VISIBLE);
-                placement.startAnimation(AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.home_anim));
-            }
-        },1700);
+        placement.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
         placement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -289,13 +236,13 @@ public class HomeFragment extends Fragment {
 
         if (hrs>=1 && hrs<12)
         {
-         greet.setText("Good morning");
+            greet.setText("Good morning");
         } else if (hrs>=12 && hrs<16) {
-           greet.setText("Good afternoon");
+            greet.setText("Good afternoon");
         }
         else
         {
-           greet.setText("Good evening");
+            greet.setText("Good evening");
         }
 
 
@@ -304,7 +251,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void run() {
 
-                progressBar.setVisibility(GONE);
+                progressBar.setVisibility(View.GONE);
                 cards.setVisibility(View.VISIBLE);
 
             }

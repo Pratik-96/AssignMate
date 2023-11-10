@@ -27,6 +27,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".add_sem_det"
+            android:exported="false" />
+        <activity
             android:name=".choose_sem"
             android:exported="false" />
         <activity

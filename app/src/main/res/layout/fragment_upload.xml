@@ -221,6 +221,22 @@
                         android:text="UPLOAD"
 
                         android:textColor="@color/black" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/add_sem_det"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="20dp"
+                        android:background="@drawable/roundbtn"
+                        android:backgroundTint="@color/white"
+                        android:drawableStart="@drawable/cloud_btn"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/sarabun"
+                        android:padding="10dp"
+                        android:text="Update Sem Details"
+
+                        android:textColor="@color/black" />
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>

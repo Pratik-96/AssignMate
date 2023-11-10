@@ -68,7 +68,7 @@ public class splash extends AppCompatActivity {
                                     }
                                     else
                                     {
-                                        startActivity(new Intent(getApplicationContext(), choose_sem.class));  //signup
+                                        startActivity(new Intent(getApplicationContext(), SignUp.class));  //signup
                                         finish();
                                     }
                                 }

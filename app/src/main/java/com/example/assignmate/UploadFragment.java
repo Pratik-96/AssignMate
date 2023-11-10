@@ -213,6 +213,14 @@ public class UploadFragment extends Fragment {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.subjects, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 
+        Button update_sem_det = view.findViewById(R.id.add_sem_det);
+        update_sem_det.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), add_sem_det.class));
+            }
+        });
+
         LinearLayout no_access = view.findViewById(R.id.no_access);
         LinearLayout admin_access = view.findViewById(R.id.upload_layout);
         GoogleSignInAccount account  = GoogleSignIn.getLastSignedInAccount(getContext());

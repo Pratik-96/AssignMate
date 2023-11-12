@@ -1,4 +1,4 @@
-package com.example.assignmate;
+package com.example.assignmate.authentication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.assignmate.Models.User;
 import com.example.assignmate.databinding.ActivityChooseSemBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -58,7 +59,7 @@ public class choose_sem extends AppCompatActivity {
                         if (task.isSuccessful())
                         {
                             Toast.makeText(choose_sem.this, "Welcome "+name+" to AssignMate..!!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),Login.class));
+                            startActivity(new Intent(getApplicationContext(), Login.class));
                             finish();
                         }
                     }

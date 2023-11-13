@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".choose_sem">
+    tools:context=".authentication.choose_sem">
 
 
 
@@ -133,7 +133,7 @@
                             android:layout_margin="20dp"
                             android:background="@drawable/sem_bg"
                             android:id="@+id/sem_1"
-                            android:text="Semester-1"
+                            android:text="Semester 1"
                             android:textAlignment="center"
                             android:textColor="@color/white"
                             android:textSize="20sp"
@@ -144,7 +144,7 @@
                             android:layout_margin="20dp"
                             android:background="@drawable/sem_bg"
                             android:id="@+id/sem_2"
-                            android:text="Semester-2"
+                            android:text="Semester 2"
                             android:textAlignment="center"
                             android:textColor="@color/white"
                             android:textSize="20sp"
@@ -166,7 +166,7 @@
                             android:layout_margin="20dp"
                             android:background="@drawable/sem_bg"
                             android:id="@+id/sem_3"
-                            android:text="Semester-3"
+                            android:text="Semester 3"
                             android:textAlignment="center"
                             android:textColor="@color/white"
                             android:textSize="20sp"
@@ -178,7 +178,7 @@
                             android:layout_margin="20dp"
                             android:background="@drawable/sem_bg"
                             android:id="@+id/sem_4"
-                            android:text="Semester-4"
+                            android:text="Semester 4"
                             android:textAlignment="center"
                             android:textColor="@color/white"
                             android:textSize="20sp"
@@ -199,7 +199,7 @@
                             android:layout_margin="20dp"
                             android:background="@drawable/sem_bg"
                             android:id="@+id/sem_5"
-                            android:text="Semester-5"
+                            android:text="Semester 5"
                             android:textAlignment="center"
                             android:textColor="@color/white"
                             android:textSize="20sp"
@@ -210,7 +210,7 @@
                             android:layout_margin="20dp"
                             android:background="@drawable/sem_bg"
                             android:id="@+id/sem_6"
-                            android:text="Semester-6"
+                            android:text="Semester 6"
                             android:textAlignment="center"
                             android:textColor="@color/white"
                             android:textSize="20sp"
@@ -233,6 +233,24 @@
                             android:layout_gravity="center"
                             android:padding="10dp"
                             />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Update"
+                            android:id="@+id/update"
+                            android:visibility="gone"
+                            android:background="@drawable/roundbtn"
+                            android:backgroundTint="@color/btn"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/sarabun"
+                            android:textSize="20sp"
+                            android:layout_margin="20dp"
+                            android:layout_gravity="center"
+                            android:padding="10dp"
+                            />
+
+
 
 
 

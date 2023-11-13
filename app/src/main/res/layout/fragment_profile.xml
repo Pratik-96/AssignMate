@@ -88,6 +88,24 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/updateSemester"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:drawableStart="@drawable/baseline_edit_24"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/sarabun"
+                android:text="Update Semester"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/about"

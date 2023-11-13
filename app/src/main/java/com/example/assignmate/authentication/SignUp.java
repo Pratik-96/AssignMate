@@ -1,4 +1,4 @@
-package com.example.assignmate;
+package com.example.assignmate.authentication;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +19,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -28,26 +27,23 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.assignmate.databinding.ActivitySignUpBinding;
-import com.google.android.gms.auth.api.identity.BeginSignInRequest;
+import com.example.assignmate.MainActivity;
+import com.example.assignmate.R;
 
-import com.google.android.gms.auth.api.identity.SignInClient;
-import com.google.android.gms.auth.api.identity.SignInCredential;
+import com.example.assignmate.databinding.ActivitySignUpBinding;
+import com.example.assignmate.terms;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.signin.SignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -81,7 +77,7 @@ public class SignUp extends AppCompatActivity {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
 
         if(currentUser != null || account!=null){
-            Intent home=new Intent(getApplicationContext(),MainActivity.class);
+            Intent home=new Intent(getApplicationContext(), MainActivity.class);
             startActivity(home);
             finish();
         }
@@ -100,7 +96,7 @@ public class SignUp extends AppCompatActivity {
 
                 // Create the One Tap sign-in client
 
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), choose_sem.class));
                 finish();
             } catch (ApiException e) {
                 Toast.makeText(this, "Something went wrong!!", Toast.LENGTH_SHORT).show();            }
@@ -266,7 +262,7 @@ public class SignUp extends AppCompatActivity {
 
     }
     public void register(View v){
-        Intent act2 = new Intent(this,Login.class);            // Login Listener
+        Intent act2 = new Intent(this, Login.class);            // Login Listener
         startActivity(act2);
         finish();
     }

@@ -1,4 +1,4 @@
-package com.example.assignmate;
+package com.example.assignmate.authentication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,7 @@ import android.view.View;
 import android.window.SplashScreen;
 
 import com.example.assignmate.databinding.ActivityNoConnectionBinding;
+import com.example.assignmate.splash;
 
 import java.net.InetAddress;
 

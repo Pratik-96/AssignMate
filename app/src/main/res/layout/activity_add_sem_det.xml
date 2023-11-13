@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray"
     android:orientation="vertical"
-    tools:context=".add_sem_det">
+    tools:context=".authentication.add_sem_det">
 
     <TextView
         android:layout_width="wrap_content"

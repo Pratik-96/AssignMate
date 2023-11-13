@@ -1,41 +1,37 @@
 package com.example.assignmate;
 
-import static com.example.assignmate.MainActivity.SUBJECT_NAME;
-
-import android.Manifest;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.example.assignmate.Models.*;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.assignmate.Models.User;
+import com.example.assignmate.adapters.adapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.material.navigation.NavigationBarItemView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
+import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
 
 import java.util.Calendar;
-import java.util.Objects;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -81,7 +77,11 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    String user;
+
     LinearLayout java,dm,os,ai,cc,activity,placement;
+
+    FirebaseAuth mAuth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,17 +92,13 @@ public class HomeFragment extends Fragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         ProgressBar progressBar = view.findViewById(R.id.progressBar);
 //        ImageView menu = view.findViewById(R.id.menu);
-        LinearLayout cards = view.findViewById(R.id.cards);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         TextView greet = view.findViewById(R.id.greet);
-        java = view.findViewById(R.id.javaCard);
-        dm = view.findViewById(R.id.dsCard);
-        os = view.findViewById(R.id.osCard);
-        ai = view.findViewById(R.id.aiCard);
-        cc = view.findViewById(R.id.cloudCard);
+
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+
         TextView uname = view.findViewById(R.id.uname);
-        activity = view.findViewById(R.id.Activities);
-        placement=view.findViewById(R.id.Placement);
+
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
 
@@ -138,97 +134,12 @@ public class HomeFragment extends Fragment {
         }
 
 
-        ImageView exit = view.findViewById(R.id.exit_app);
-        exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new AlertDialog.Builder(getContext())
-                        .setMessage("Do you really want to exit the app ?")
-                        .setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                getActivity().moveTaskToBack(true);
-                                getActivity().finish();
-                            }
-                        }).setNegativeButton("No",null).show();
 
-            }
-        });
 
-        java.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
 
-        java.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), documentType.class);
-                intent.putExtra(SUBJECT_NAME,"Programming in Java");
-                startActivity(intent);
-            }
-        });
-        dm.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
-        dm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), documentType.class);
-                intent.putExtra(SUBJECT_NAME,"Data Mining & Data Science");
-                startActivity(intent);
-            }
-        });
 
-        os.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
-        os.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), documentType.class);
-                intent.putExtra(SUBJECT_NAME,"Principles of Operating Systems");
-                startActivity(intent);
-            }
-        });
 
-        ai.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
-        ai.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), documentType.class);
-                intent.putExtra(SUBJECT_NAME,"Artificial Intelligence");
-                startActivity(intent);
-            }
-        });
-        cc.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
 
-        cc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), documentType.class);
-                intent.putExtra(SUBJECT_NAME,"Cloud Computing");
-                startActivity(intent);
-            }
-        });
-        activity.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
-        activity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), fetch_files.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("docType"," ");
-                bundle.putString("name","Activities");
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        });
-        placement.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.recycler_view_animation));
-        placement.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), fetch_files.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("docType","Placement");
-                bundle.putString("name","Placement Preparation");
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        });
 
         Calendar c = Calendar.getInstance();
         int hrs = c.get(Calendar.HOUR_OF_DAY);
@@ -252,7 +163,7 @@ public class HomeFragment extends Fragment {
             public void run() {
 
                 progressBar.setVisibility(View.GONE);
-                cards.setVisibility(View.VISIBLE);
+
 
             }
         },1000);
@@ -262,7 +173,74 @@ public class HomeFragment extends Fragment {
 
 
 
+
+        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+
+
+        if (FirebaseAuth.getInstance().getCurrentUser()!=null) {
+            user = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+        }
+        else if (account!=null)
+        {
+            user = account.getId().toString();
+        }
+
+        final String[] semName = {""};
+
+
+        databaseReference.child("Users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                recyclerView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+
+
+                    if (snapshot1.child("uid").getValue().equals(user)) {
+
+                        Log.d("TAG", "onDataChange: "+ snapshot1.child("sem").getValue().toString());
+                        fetchData(snapshot1.child("sem").getValue().toString(),view);
+
+
+                                            }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
+
+
+
+
+
         return view;
+    }
+
+    public void fetchData(String semName,View view)
+    {
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        Log.d("TAG", "fetchData: "+semName);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference semesterDataRef = databaseReference.child("Semester_data").child(semName);
+        FirebaseRecyclerOptions<sem_model> sem_options = new FirebaseRecyclerOptions.Builder<sem_model>().setQuery(semesterDataRef, sem_model.class).build();
+        sem_adapter adapter = new sem_adapter(sem_options,getContext());
+        adapter.startListening();
+        recyclerView.setAdapter(adapter);
     }
 
 }

@@ -1,4 +1,6 @@
-package com.example.assignmate;
+package com.example.assignmate.Models;
+
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 public class User {
     private String uid;
@@ -6,6 +8,9 @@ public class User {
     private String name;
 
     private String sem;
+
+    User(){}
+
 
     public User(String uid, String name, String sem) {
         this.uid = uid;

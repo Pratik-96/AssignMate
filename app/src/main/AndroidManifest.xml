@@ -27,31 +27,31 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".add_sem_det"
+            android:name=".authentication.add_sem_det"
             android:exported="false" />
         <activity
-            android:name=".choose_sem"
+            android:name=".authentication.choose_sem"
             android:exported="false" />
         <activity
             android:name=".pdfActivity"
             android:exported="false" />
         <activity
-            android:name=".Maintenance"
+            android:name=".authentication.Maintenance"
             android:exported="false" />
         <activity
             android:name=".terms"
             android:exported="false"
             android:screenOrientation="sensorPortrait" />
         <activity
-            android:name=".aboutAssignMate"
+            android:name=".authentication.aboutAssignMate"
             android:exported="false"
             android:screenOrientation="sensorPortrait" />
         <activity
-            android:name=".no_connection"
+            android:name=".authentication.no_connection"
             android:exported="false"
             android:screenOrientation="sensorPortrait" />
         <activity
-            android:name=".ForgetPass"
+            android:name=".authentication.ForgetPass"
             android:exported="false"
             android:screenOrientation="sensorPortrait" />
         <activity
@@ -77,11 +77,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Login"
+            android:name=".authentication.Login"
             android:exported="false"
             android:screenOrientation="sensorPortrait" />
         <activity
-            android:name=".SignUp"
+            android:name=".authentication.SignUp"
             android:exported="true"
             android:screenOrientation="sensorPortrait" />
         <activity

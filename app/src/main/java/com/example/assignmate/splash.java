@@ -7,13 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.view.View;
 
 
+import com.example.assignmate.authentication.Maintenance;
+import com.example.assignmate.authentication.SignUp;
+import com.example.assignmate.authentication.no_connection;
 import com.example.assignmate.databinding.ActivitySplashBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,8 +24,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
-
-import pl.droidsonroids.gif.GifDrawable;
 
 public class splash extends AppCompatActivity {
 
@@ -111,7 +109,7 @@ public class splash extends AppCompatActivity {
         }
         else
         {
-            startActivity(new Intent(getApplicationContext(),no_connection.class));
+            startActivity(new Intent(getApplicationContext(), no_connection.class));
             finish();
         }
 

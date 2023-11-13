@@ -1,4 +1,4 @@
-package com.example.assignmate;
+package com.example.assignmate.authentication;
 
 import static android.app.PendingIntent.getActivity;
 
@@ -9,7 +9,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,8 +20,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.example.assignmate.Models.sem_model;
+import com.example.assignmate.R;
 import com.example.assignmate.databinding.ActivityAddSemDetBinding;
-import com.example.assignmate.databinding.ActivityChooseSemBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

@@ -1,9 +1,13 @@
-package com.example.assignmate;
+package com.example.assignmate.Models;
 
 public class sem_model {
     private String sub_name;
     private String img_url;
 
+    public sem_model()
+    {
+
+    }
     public String getSub_name() {
         return sub_name;
     }

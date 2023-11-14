@@ -230,6 +230,7 @@
                             android:fontFamily="@font/sarabun"
                             android:textSize="20sp"
                             android:layout_margin="20dp"
+                            android:visibility="gone"
                             android:layout_gravity="center"
                             android:padding="10dp"
                             />

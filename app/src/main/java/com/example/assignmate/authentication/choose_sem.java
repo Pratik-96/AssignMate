@@ -51,6 +51,44 @@ public class choose_sem extends AppCompatActivity {
         binding = ActivityChooseSemBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+
+        if (FirebaseAuth.getInstance().getCurrentUser()!=null) {
+            name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName().toString();
+            id = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+        }
+        else if (account!=null)
+        {
+            name = account.getDisplayName().toString();
+            id= account.getId().toString();
+        }
+        DatabaseReference fetchref = FirebaseDatabase.getInstance().getReference().child("Users");
+        fetchref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    if (id.equals(dataSnapshot.child("uid").getValue())) {
+                        binding.update.setVisibility(View.VISIBLE);
+                        binding.submit.setVisibility(View.GONE);
+                        break;
+                    }
+                    else
+                    {
+
+                        binding.submit.setVisibility(View.VISIBLE);
+                        binding.update.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
 
         if (FirebaseAuth.getInstance().getCurrentUser()!=null)
         {
@@ -84,12 +122,12 @@ public class choose_sem extends AppCompatActivity {
 
 
         String state = getIntent().getStringExtra("fromActivity");
-        if (Objects.equals(state, "Profile"))
-        {
-            binding.submit.setVisibility(View.GONE);
-            binding.update.setVisibility(View.VISIBLE);
-
-        }
+//        if (Objects.equals(state, "Profile"))
+//        {
+//            binding.submit.setVisibility(View.GONE);
+//            binding.update.setVisibility(View.VISIBLE);
+//
+//        }
 
          name = getIntent().getStringExtra("uname");
 
@@ -115,7 +153,7 @@ public class choose_sem extends AppCompatActivity {
         });
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+         account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
 
         if (FirebaseAuth.getInstance().getCurrentUser()!=null) {
             name = mAuth.getCurrentUser().getDisplayName().toString();

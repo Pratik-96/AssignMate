@@ -43,6 +43,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -328,10 +329,28 @@ public class SignUp extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Toast.makeText(SignUp.this, "Signing Up..", Toast.LENGTH_SHORT).show();
-                                Log.d("uname", "onComplete: "+binding.name.getText().toString());
+                                if (FirebaseAuth.getInstance().getCurrentUser()!=null)
+                                {
+
+                                    if (User_Name!=null)
+                                    {
+                                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                .setDisplayName(User_Name)
+                                                .build();
+                                        FirebaseAuth.getInstance().getCurrentUser().updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful())
+                                                {
+                                                    Log.d("uname", "Name updated..: ");
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
 
                                 Intent home = new Intent(getApplicationContext(), choose_sem.class);
-                                home.putExtra("uname",str);
+                                home.putExtra("uname",binding.name.getText().toString());
                                 notification();
                                 startActivity(home);
                                 finish();

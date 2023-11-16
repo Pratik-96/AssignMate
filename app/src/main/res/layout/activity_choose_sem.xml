@@ -30,7 +30,7 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="0dp"
-                android:layout_height="300dp"
+                android:layout_height="200dp"
                 android:padding="40dp"
                 android:src="@drawable/sem_image"
                 app:layout_constraintEnd_toEndOf="parent"

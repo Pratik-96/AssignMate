@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/javaCard"
+            android:id="@+id/Card"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginStart="10dp"
@@ -27,14 +27,16 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:gravity="center"
                 android:background="@drawable/round_note">
 
                 <ImageView
-                    android:layout_width="90dp"
+                    android:layout_width="85dp"
                     android:id="@+id/sub_img"
-                    android:layout_height="100dp"
+                    android:layout_height="85dp"
+                    android:layout_gravity="center"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
                      />

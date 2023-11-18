@@ -6,7 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.assignmate.Models.*;
+
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,8 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.assignmate.Models.User;
-import com.example.assignmate.adapters.adapter;
+import com.example.assignmate.adapters.sem_adapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -79,7 +80,7 @@ public class HomeFragment extends Fragment {
 
     String user;
 
-    LinearLayout java,dm,os,ai,cc,activity,placement;
+    LinearLayout java, dm, os, ai, cc, activity, placement;
 
     FirebaseAuth mAuth;
 
@@ -102,21 +103,18 @@ public class HomeFragment extends Fragment {
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
 
-        if (account!=null) {
+        if (account != null) {
             String name;
             if (account.getDisplayName().split("\\w+").length > 1) {
                 int firstSpace = account.getDisplayName().indexOf(" ");
                 name = account.getDisplayName().substring(0, firstSpace);
-            } else
-            {
+            } else {
                 name = account.getDisplayName();
             }
-            uname.setText(name+" !");
-        }
-        else
-        {
+            uname.setText(name + " !");
+        } else {
             String name;
-            if (FirebaseAuth.getInstance().getCurrentUser().getDisplayName()!=null) {
+            if (FirebaseAuth.getInstance().getCurrentUser().getDisplayName() != null) {
                 if (FirebaseAuth.getInstance().getCurrentUser().getDisplayName().split("\\w+").length > 1) {
                     int firstSpace = FirebaseAuth.getInstance().getCurrentUser().getDisplayName().indexOf(" ");
                     name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName().substring(0, firstSpace);
@@ -124,38 +122,25 @@ public class HomeFragment extends Fragment {
                 } else {
                     name = mAuth.getCurrentUser().getDisplayName();
                 }
-            }
-            else
-            {
-                name="User";
+            } else {
+                name = "User";
             }
 
-            uname.setText(name+" !");
+            uname.setText(name + " !");
         }
-
-
-
-
-
-
-
 
 
         Calendar c = Calendar.getInstance();
         int hrs = c.get(Calendar.HOUR_OF_DAY);
-        Log.d("hrs", "onCreateView: "+hrs);
+        Log.d("hrs", "onCreateView: " + hrs);
 
-        if (hrs>=1 && hrs<12)
-        {
+        if (hrs >= 1 && hrs < 12) {
             greet.setText("Good morning");
-        } else if (hrs>=12 && hrs<16) {
+        } else if (hrs >= 12 && hrs < 16) {
             greet.setText("Good afternoon");
-        }
-        else
-        {
+        } else {
             greet.setText("Good evening");
         }
-
 
 
         new Handler().postDelayed(new Runnable() {
@@ -166,30 +151,25 @@ public class HomeFragment extends Fragment {
 
 
             }
-        },1000);
+        }, 1000);
 
 
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
 
-
-
-        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
 
-
-        if (FirebaseAuth.getInstance().getCurrentUser()!=null) {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             user = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
-        }
-        else if (account!=null)
-        {
+        } else if (account != null) {
             user = account.getId().toString();
         }
 
-        final String[] semName = {""};
+
 
 
         databaseReference.child("Users").addValueEventListener(new ValueEventListener() {
@@ -204,11 +184,11 @@ public class HomeFragment extends Fragment {
 
                     if (snapshot1.child("uid").getValue().equals(user)) {
 
-                        Log.d("TAG", "onDataChange: "+ snapshot1.child("sem").getValue().toString());
-                        fetchData(snapshot1.child("sem").getValue().toString(),view);
+                        Log.d("TAG", "onDataChange: " + snapshot1.child("sem").getValue().toString());
+                        fetchData(snapshot1.child("sem").getValue().toString(), view);
 
 
-                                            }
+                    }
                 }
             }
 
@@ -220,25 +200,16 @@ public class HomeFragment extends Fragment {
         });
 
 
-
-
-
-
-
-
-
-
         return view;
     }
 
-    public void fetchData(String semName,View view)
-    {
+    public void fetchData(String semName, View view) {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        Log.d("TAG", "fetchData: "+semName);
+        Log.d("TAG", "fetchData: " + semName);
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         DatabaseReference semesterDataRef = databaseReference.child("Semester_data").child(semName);
         FirebaseRecyclerOptions<sem_model> sem_options = new FirebaseRecyclerOptions.Builder<sem_model>().setQuery(semesterDataRef, sem_model.class).build();
-        sem_adapter adapter = new sem_adapter(sem_options,getContext());
+        sem_adapter adapter = new sem_adapter(sem_options, getContext());
         adapter.startListening();
         recyclerView.setAdapter(adapter);
     }

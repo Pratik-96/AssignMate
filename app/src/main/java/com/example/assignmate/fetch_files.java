@@ -11,6 +11,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
@@ -20,6 +21,9 @@ import com.example.assignmate.adapters.adapter;
 import com.example.assignmate.authentication.no_connection;
 import com.example.assignmate.databinding.ActivityFetchFilesBinding;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +34,9 @@ public class fetch_files extends AppCompatActivity {
 
     private ActivityFetchFilesBinding binding;
 
+
+
+    String user;
 
 
 
@@ -60,7 +67,7 @@ public class fetch_files extends AppCompatActivity {
         binding=ActivityFetchFilesBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
-
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
 
       binding.searchBar.clearFocus();
         if (!checkConnection(getApplicationContext()))
@@ -94,6 +101,57 @@ public class fetch_files extends AppCompatActivity {
 
         }
         binding.progressBarID.setVisibility(View.VISIBLE);
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            user = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+        } else if (account != null) {
+            user = account.getId().toString();
+        }
+
+
+
+
+        DatabaseReference semesterRef = FirebaseDatabase.getInstance().getReference();
+        semesterRef.child("Users").addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+
+
+                            if (snapshot1.child("uid").getValue().equals(user)) {
+
+                                if (snapshot1.child("sem").getValue().equals("Semester 5"))
+                                {
+                                    fetchData(subject,type);
+
+                                }
+                                else {
+
+                                    fetchData(snapshot1.child("sem").getValue().toString(), subject, type);
+                                }
+
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                }
+        );
+
+
+
+
+    }
+
+
+    private void fetchData(String subject, String type)
+    {
+
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child(subject).child(type);
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -151,6 +209,7 @@ public class fetch_files extends AppCompatActivity {
         ad = new adapter(options,getApplicationContext());
         binding.recyclerView.setAdapter(ad);
         binding.recyclerView.setVisibility(View.VISIBLE);
+        ad.startListening();
 
         binding.filter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -192,9 +251,9 @@ public class fetch_files extends AppCompatActivity {
         switch (type)
         {
             case "Assignments":binding.searchBar.setHint("Search Assignment here");
-                                        break;
+                break;
             case "Practicals":binding.searchBar.setHint("Search Assignment here");
-                                break;
+                break;
             case "Question Banks":binding.searchBar.setHint("Search Question Bank here");
                 break;
             case "Notes":binding.searchBar.setHint("Search unit here");
@@ -223,7 +282,142 @@ public class fetch_files extends AppCompatActivity {
         } catch (Throwable e) {
             throw new RuntimeException(e);
         }
+    }
 
+
+    private void fetchData(String selectedSem, String subject, String type)
+    {
+
+        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child(selectedSem).child(subject).child(type);
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                binding.progressBarID.setVisibility(View.GONE);
+                if (snapshot.getChildrenCount()==0)
+                {
+                    binding.data.setVisibility(View.VISIBLE);
+
+//                    binding.fetchLy.setVisibility(View.GONE);
+                    binding.nodata.setVisibility(View.VISIBLE);
+
+
+                }else
+                    binding.data.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                binding.progressBarID.setVisibility(View.GONE);
+                binding.data.setVisibility(View.GONE);
+//                binding.fetchLy.setVisibility(View.GONE);
+                binding.nodata.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        binding.backtocategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        binding.backtocategory2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+//
+        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(getApplicationContext());
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        binding.recyclerView.setLayoutManager(linearLayoutManager);
+
+
+        FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(databaseReference, file_model.class).build();
+
+
+
+
+
+
+        ad = new adapter(options,getApplicationContext());
+        binding.recyclerView.setAdapter(ad);
+        binding.recyclerView.setVisibility(View.VISIBLE);
+        ad.startListening();
+
+        binding.filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu menu = new PopupMenu(getApplicationContext(),binding.filter);
+                menu.getMenu().add("Show Only Nirali Notes");
+                menu.getMenu().add("Show All");
+                menu.show();
+                menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        if (menuItem.getTitle().equals("Show Only Nirali Notes"))
+                        {
+                            FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(FirebaseDatabase.getInstance().getReference().child(subject).child(type).orderByChild("file_Name").equalTo("Nirali Publication.pdf"), file_model.class).build();
+                            ad = new adapter(options, fetch_files.this);
+                            ad.startListening();
+                            binding.recyclerView.setAdapter(ad);
+                            ad.notifyDataSetChanged();
+                            return true;
+                        }
+                        else if (menuItem.getTitle().equals("Show All"))
+                        {
+                            FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(databaseReference, file_model.class).build();
+                            ad = new adapter(options, fetch_files.this);
+                            ad.startListening();
+                            binding.recyclerView.setAdapter(ad);
+                            ad.notifyDataSetChanged();
+                            return true;
+                        }
+                        return false;
+
+                    }
+                });
+            }
+        });
+
+
+        binding.searchBar.clearFocus();
+        switch (type)
+        {
+            case "Assignments":binding.searchBar.setHint("Search Assignment here");
+                break;
+            case "Practicals":binding.searchBar.setHint("Search Assignment here");
+                break;
+            case "Question Banks":binding.searchBar.setHint("Search Question Bank here");
+                break;
+            case "Notes":binding.searchBar.setHint("Search unit here");
+                break;
+
+
+        }
+        binding.searchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                filter_list(charSequence.toString(),subject,type);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        try {
+            finalize();
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -255,16 +449,19 @@ public class fetch_files extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        ad.startListening();
-
+        if (ad!=null) {
+            ad.startListening();
+        }
         binding.searchBar.clearFocus();
 //        if (!checkConnection(getApplicationContext()))
 //        {
 //            startActivity(new Intent(getApplicationContext(),no_connection.class));
 //        }
         binding.recyclerView.getRecycledViewPool().clear();
-        ad.notifyDataSetChanged();
 
+        if (ad!=null) {
+            ad.notifyDataSetChanged();
+        }
     }
 
 
@@ -284,8 +481,9 @@ public class fetch_files extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         binding.searchBar.clearFocus();
-        ad.startListening();
-
+        if (ad!=null) {
+            ad.startListening();
+        }
         if (!checkConnection(getApplicationContext()))
         {
             startActivity(new Intent(getApplicationContext(),no_connection.class));
@@ -298,8 +496,10 @@ public class fetch_files extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         binding.searchBar.clearFocus();
-        ad.startListening();
 
+        if (ad!=null) {
+            ad.startListening();
+        }
 //        if (!checkConnection(getApplicationContext()))
 //        {
 //            startActivity(new Intent(getApplicationContext(),no_connection.class));

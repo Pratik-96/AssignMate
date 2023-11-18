@@ -27,11 +27,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,14 +39,18 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import androidx.fragment.app.Fragment;
@@ -81,16 +85,21 @@ public class UploadFragment extends Fragment {
     String str, sub, type;
     ProgressDialog dialog;
 
+    ArrayList<String> subject_names ;
+
     FirebaseStorage storage;
     FirebaseDatabase database;
-
-    String selectedSub,selectedType;
+    String selectedSem;
+    String selectedSub, selectedType;
     Uri uri;
 
     EditText description;
+    Spinner semSpinner;
 
-    Spinner spinner1,doctype1;
+    Spinner spinner1, doctype1;
     TextView selectedFile;
+
+    ArrayAdapter<String> subadapter;
 
     public UploadFragment() {
         // Required empty public constructor
@@ -128,8 +137,7 @@ public class UploadFragment extends Fragment {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 9 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             select_pdf();
-        }
-        else {
+        } else {
             Toast.makeText(getContext(), "Please Grant Permissions to use the AssignMate!!", Toast.LENGTH_SHORT).show();
         }
 
@@ -145,22 +153,97 @@ public class UploadFragment extends Fragment {
     }
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_upload, container, false);
+        View view = inflater.inflate(R.layout.fragment_upload, container, false);
         selectedFile = view.findViewById(R.id.selected_file);
         TextInputLayout descriptionLy = view.findViewById(R.id.description_ly);
-         description = view.findViewById(R.id.description1);
+        description = view.findViewById(R.id.description1);
         description.clearFocus();
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.subjects, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 
+        Spinner selectSem = view.findViewById(R.id.sem);
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.subjects, android.R.layout.simple_spinner_item);
+//        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+
+        ArrayAdapter<CharSequence> semAdapter = ArrayAdapter.createFromResource(getContext(), R.array.semesters, android.R.layout.simple_spinner_item);
+        semAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        selectSem.setAdapter(semAdapter);
+        semSpinner = view.findViewById(R.id.sem);
 
         Button update_sem_det = view.findViewById(R.id.add_sem_det);
+
+
+        subject_names = new ArrayList<>();
+
+        subadapter =  new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item,subject_names);
+        //        subadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner1 = view.findViewById(R.id.spinner);
+        if (spinner1!=null) {
+            spinner1.setAdapter(subadapter);
+            spinner1.setSelection(0);
+        }
+
+
+        selectSem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String selectedSem = selectSem.getSelectedItem().toString();
+
+                subject_names.clear();
+
+
+                FirebaseDatabase database1 = FirebaseDatabase.getInstance();
+
+
+                database1.getReference().child("Semester_data").child(selectedSem).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            Log.d("SemesterData", "onDataChange: " + dataSnapshot.child("sub_name").getValue());
+
+                            subject_names.add((String) dataSnapshot.child("sub_name").getValue());
+                            subadapter.notifyDataSetChanged();
+
+
+
+
+                            Log.d("sub_data", "onCreateView: "+subject_names);
+                        }
+
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+
+        });
+
+
+        Log.d("sub_spinner", "onCreateView: "+subject_names);
+
+
+
+                                         //TODO Spinner is not selecting the data.!!
+
+
+
+
+
+
+
         update_sem_det.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -170,12 +253,12 @@ public class UploadFragment extends Fragment {
 
         LinearLayout no_access = view.findViewById(R.id.no_access);
         LinearLayout admin_access = view.findViewById(R.id.upload_layout);
-        GoogleSignInAccount account  = GoogleSignIn.getLastSignedInAccount(getContext());
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-        if (mAuth.getUid()!=null) {
-            Log.d("id", "token:- "+mAuth.getUid());
+        if (mAuth.getUid() != null) {
+            Log.d("id", "token:- " + mAuth.getUid());
             if (Objects.equals(mAuth.getUid(), "RYmuvMvQn3WpjHpgIjDMgrazSpq1")) {
 
                 no_access.setVisibility(View.GONE);
@@ -185,18 +268,17 @@ public class UploadFragment extends Fragment {
                 no_access.setVisibility(View.VISIBLE);
                 admin_access.setVisibility(View.GONE);
             }
-        }
-        else {
+        } else {
             no_access.setVisibility(View.VISIBLE);
             admin_access.setVisibility(View.GONE);
         }
-         doctype1 = view.findViewById(R.id.doctype);//Get Reference returns root    path
-         spinner1 = view.findViewById(R.id.spinner);
-        Log.d("spinner", "spinner: "+spinner1);
-        Log.d("spinner", "doctype: "+doctype1);
-        spinner1.setAdapter(adapter);
+        doctype1 = view.findViewById(R.id.doctype);//Get Reference returns root    path
+        spinner1 = view.findViewById(R.id.spinner);
+        Log.d("spinner", "spinner: " + spinner1);
+        Log.d("spinner", "doctype: " + doctype1);
+//        spinner1.setAdapter(adapter);
 
-       description.addTextChangedListener(new TextWatcher() {
+        description.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
@@ -236,20 +318,19 @@ public class UploadFragment extends Fragment {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sub = spinner1.getSelectedItem().toString();
+//                sub = spinner1.getSelectedItem().toString();
                 type = doctype.getSelectedItem().toString();
 
+                String selectedSub = spinner1.getSelectedItem().toString();
                 if (uri != null) {
                     if (description.getText().toString().isEmpty()) {
                         descriptionLy.setError("Description Cannot be Empty");
 
 
-                    } else if (sub.equals("None")) {
-                        Toast.makeText(getContext(), "Please select a subject..", Toast.LENGTH_SHORT).show();
-                    } else if (type.equals("None")&& !sub.equals("Activities")) {
+                    }  else if (type.equals("None")) {
                         Toast.makeText(getContext(), "Please select document type..", Toast.LENGTH_SHORT).show();
-                    } else if (!description.getText().toString().isEmpty() && !sub.equals("None") && !type.equals("None")) {
-                        upload(uri,view);
+                    } else if (!description.getText().toString().isEmpty() && !type.equals("None")) {
+                        upload(uri, view,selectedSub);
 
                     }
 
@@ -263,9 +344,9 @@ public class UploadFragment extends Fragment {
         });
 
 
-
         return view;
     }
+
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 8 && resultCode == RESULT_OK && data != null) {
@@ -277,7 +358,8 @@ public class UploadFragment extends Fragment {
             Toast.makeText(getContext(), "Please select a file to upload", Toast.LENGTH_SHORT).show();
         }
     }
-    private void upload(Uri uri,View view) {          // Uploads the file
+
+    private void upload(Uri uri, View view,String selectedSub) {          // Uploads the file
 
         dialog = new ProgressDialog(getContext());
         dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -296,19 +378,19 @@ public class UploadFragment extends Fragment {
 
 
 
-    selectedSub = spinner1.getSelectedItem().toString();
-    selectedType = doctype1.getSelectedItem().toString();
+        selectedType = doctype1.getSelectedItem().toString();
 
 
-    if (selectedSub.equals("Activities"))
-    {
-        selectedType=" ";
-    }
-
+        if (selectedSub.equals("Activities")) {
+            selectedType = " ";
+        }
 
 
 
-        storageReference.child(selectedSub).child(selectedType).child(getFileName(uri)).putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        selectedSem = semSpinner.getSelectedItem().toString();
+
+
+        storageReference.child(selectedSem).child(selectedSub).child(selectedType).child(getFileName(uri)).putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot snapshot) {
                 Task<Uri> result = snapshot.getStorage().getDownloadUrl();   //gets a task uri
@@ -318,14 +400,14 @@ public class UploadFragment extends Fragment {
                     public void onSuccess(Uri uri) {
                         String url = uri.toString();
                         String descrption;// Extracting url from result uri
-                        DatabaseReference reference = database.getReference().child(selectedSub).child(selectedType).push();
+                        DatabaseReference reference = database.getReference().child(selectedSem).child(selectedSub).child(selectedType).push();
 
                         descrption = description.getText().toString().toLowerCase();
 
                         SimpleDateFormat ts = new SimpleDateFormat("dd/MM/yyyy");
                         Date date = new Date();
                         String timestamp = ts.format(date);
-                        file_model model = new file_model(str, descrption, url,timestamp);
+                        file_model model = new file_model(str, descrption, url, timestamp);
                         reference.setValue(model)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -333,7 +415,7 @@ public class UploadFragment extends Fragment {
                                         if (task.isSuccessful()) {
                                             Toast.makeText(getContext(), "File Uploaded Sucessfully!!", Toast.LENGTH_SHORT).show();
                                             dialog.setTitle("File Uploaded Sucessfully!!");
-                                            notificationsSender notificationsSender = new notificationsSender("/topics/all","New Document.",str+" has been added to "+selectedSub+"/"+selectedType,getContext(),getActivity());
+                                            notificationsSender notificationsSender = new notificationsSender("/topics/admin", "New Document.", str + " has been added to "+selectedSem+"/" + selectedSub + "/" + selectedType, getContext(), getActivity());
                                             notificationsSender.sendNotification();
                                             dialog.dismiss();
                                         } else {

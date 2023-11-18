@@ -85,6 +85,31 @@
                         android:textColor="@color/white"
                         android:textSize="15sp"
                         android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:elevation="20dp"
+                        android:fontFamily="@font/sarabun"
+                        android:text="Select Semester *"
+                        android:textColor="@color/white"
+
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/sem"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/dashed_rec"
+
+                        android:elevation="10dp" />
+
+
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -110,6 +135,7 @@
 
                         android:elevation="10dp" />
 
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -124,14 +150,14 @@
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
-                    <Spinner
+                    <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinner"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/dashed_rec"
-                        android:elevation="10dp" />
+                        />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/description_ly"

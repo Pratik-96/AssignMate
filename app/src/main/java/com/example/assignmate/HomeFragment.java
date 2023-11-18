@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.assignmate.adapters.sem_adapter;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -84,6 +85,9 @@ public class HomeFragment extends Fragment {
 
     FirebaseAuth mAuth;
 
+    ShimmerFrameLayout shimmerFrameLayout;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -91,7 +95,8 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         // Inflate the layout for this fragment
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        ProgressBar progressBar = view.findViewById(R.id.progressBar);
+        shimmerFrameLayout = view.findViewById(R.id.shimmer_view);
+        shimmerFrameLayout.startShimmer();
 //        ImageView menu = view.findViewById(R.id.menu);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         TextView greet = view.findViewById(R.id.greet);
@@ -143,16 +148,6 @@ public class HomeFragment extends Fragment {
         }
 
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                progressBar.setVisibility(View.GONE);
-
-
-            }
-        }, 1000);
-
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -177,7 +172,8 @@ public class HomeFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 recyclerView.setVisibility(View.VISIBLE);
-                progressBar.setVisibility(View.GONE);
+                shimmerFrameLayout.stopShimmer();
+                shimmerFrameLayout.setVisibility(View.GONE);
 
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
 

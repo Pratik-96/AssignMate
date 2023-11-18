@@ -38,12 +38,9 @@ public class choose_sem extends AppCompatActivity {
 
     RadioButton radioButton;
     boolean isUpdating = false;
-    GoogleSignInOptions gso;
-    GoogleSignInClient gsc;
-
     String name;
     String id = null;
-
+    GoogleSignInAccount account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +48,17 @@ public class choose_sem extends AppCompatActivity {
         binding = ActivityChooseSemBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+
+
+
+
+
+
+         account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+        name = null;
 
         if (FirebaseAuth.getInstance().getCurrentUser()!=null) {
-            name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName().toString();
+            name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
             id = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
         }
         else if (account!=null)
@@ -90,27 +94,6 @@ public class choose_sem extends AppCompatActivity {
 
 
 
-        if (FirebaseAuth.getInstance().getCurrentUser()!=null)
-        {
-            String name = getIntent().getStringExtra("uname");
-            if (name!=null)
-            {
-                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                        .setDisplayName(name)
-                        .build();
-                FirebaseAuth.getInstance().getCurrentUser().updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful())
-                        {
-                            Log.d("uname", "Name updated..: ");
-                        }
-                    }
-                });
-            }
-        }
-
-
 
 
 
@@ -129,7 +112,7 @@ public class choose_sem extends AppCompatActivity {
 //
 //        }
 
-         name = getIntent().getStringExtra("uname");
+
 
 
         final String[] selectedSem = {""};
@@ -139,7 +122,7 @@ public class choose_sem extends AppCompatActivity {
                 int id = radioGroup.getCheckedRadioButtonId();
                 radioButton = findViewById(id);
 
-                Log.d("radio", "onCreate: " + radioButton.getText());
+
                 selectedSem[0] = radioButton.getText().toString();
 
             }
@@ -152,24 +135,28 @@ public class choose_sem extends AppCompatActivity {
             }
         });
 
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
          account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
 
-        if (FirebaseAuth.getInstance().getCurrentUser()!=null) {
-            name = mAuth.getCurrentUser().getDisplayName().toString();
-            id = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
-        }
-        else if (account!=null)
-        {
-            name = account.getDisplayName().toString();
-            id= account.getId().toString();
-        }
+         name = null;
+
+
 
         binding.submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (FirebaseAuth.getInstance().getCurrentUser()!=null) {
 
-//
+                    name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+                    id = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+                }
+                else if (account!=null)
+                {
+                    name = account.getDisplayName().toString();
+                    id= account.getId().toString();
+                }
+
+                Log.d("TAG", "onClick: "+name);
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").push();
                 User u = new User(id, name, selectedSem[0]);
                 reference.setValue(u).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -197,10 +184,10 @@ public class choose_sem extends AppCompatActivity {
 
 
 
-                FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                String name = null;
+
+                 name = null;
                 if (FirebaseAuth.getInstance().getCurrentUser()!=null) {
-                     name = mAuth.getCurrentUser().getDisplayName().toString();
+                     name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
                     id = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
                 }
                 else if (account!=null)

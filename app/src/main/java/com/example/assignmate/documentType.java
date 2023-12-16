@@ -37,7 +37,7 @@ public class documentType extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), fetch_files.class);
                 Bundle bundle = new Bundle();
-               bundle.putString("docType","Assignments");//TODO change to theory assignments
+               bundle.putString("docType","Assignments");
                bundle.putString("name",selectedsub);
                intent.putExtras(bundle);
                 startActivity(intent);

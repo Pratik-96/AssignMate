@@ -152,17 +152,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:visibility="gone"
+    android:visibility="visible"
     android:id="@+id/progressBarID"
 
     android:orientation="vertical">
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:indeterminateTint="@color/white"
-        />
+    
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/shimmer_view"
+        app:shimmer_auto_start="true"
+        android:visibility="visible"
+        android:layout_marginTop="5dp">
+
+    <include layout="@layout/document_design_placeholder" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+
 </LinearLayout>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -171,6 +180,8 @@
         android:visibility="gone"
         android:layout_marginTop="5dp"
          />
+
+
     </LinearLayout>
 
 

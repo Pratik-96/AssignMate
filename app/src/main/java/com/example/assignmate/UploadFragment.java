@@ -245,7 +245,6 @@ public class UploadFragment extends Fragment {
 
 
 
-                                         //TODO Spinner is not selecting the data.!!
 
 
 

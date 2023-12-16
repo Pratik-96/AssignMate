@@ -1,5 +1,6 @@
 package com.example.assignmate;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,12 +15,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.assignmate.adapters.sem_adapter;
+import com.example.assignmate.authentication.choose_sem;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -105,6 +108,15 @@ public class HomeFragment extends Fragment {
 
         TextView uname = view.findViewById(R.id.uname);
 
+        Button updatesem = view.findViewById(R.id.update_sem);
+
+        updatesem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), choose_sem.class));
+            }
+        });
+
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
 
@@ -165,6 +177,8 @@ public class HomeFragment extends Fragment {
         }
 
 
+        LinearLayout no_sem = view.findViewById(R.id.no_sem);
+
 
 
         databaseReference.child("Users").addValueEventListener(new ValueEventListener() {
@@ -180,11 +194,13 @@ public class HomeFragment extends Fragment {
 
                     if (snapshot1.child("uid").getValue().equals(user)) {
 
+                        no_sem.setVisibility(View.GONE);
                         Log.d("TAG", "onDataChange: " + snapshot1.child("sem").getValue().toString());
                         fetchData(snapshot1.child("sem").getValue().toString(), view);
 
 
                     }
+
                 }
             }
 

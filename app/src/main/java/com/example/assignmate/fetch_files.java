@@ -69,17 +69,17 @@ public class fetch_files extends AppCompatActivity {
         setContentView(binding.getRoot());
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
 
-      binding.searchBar.clearFocus();
+        binding.searchBar.clearFocus();
         if (!checkConnection(getApplicationContext()))
         {
             startActivity(new Intent(getApplicationContext(), no_connection.class));
         }
 
         binding.searchBar.setFocusableInTouchMode(true);
-       Bundle bundle = getIntent().getExtras();
+        Bundle bundle = getIntent().getExtras();
 
-           String subject = bundle.getString("name");
-           String type = bundle.getString("docType");
+        String subject = bundle.getString("name");
+        String type = bundle.getString("docType");
 
         binding.selectedCategory.setText(type);
         binding.selectedCategory2.setText(type);
@@ -101,6 +101,8 @@ public class fetch_files extends AppCompatActivity {
 
         }
         binding.progressBarID.setVisibility(View.VISIBLE);
+        binding.shimmerView.setVisibility(View.VISIBLE);
+        binding.shimmerView.startShimmer();
 
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             user = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
@@ -125,8 +127,10 @@ public class fetch_files extends AppCompatActivity {
                                 {
                                     fetchData(subject,type);
 
-                                }
-                                else {
+                                } else if (subject.equals("Placement Preparation") && type.equals("Placement")) {
+                                    fetchData(subject,type);
+                                    
+                                } else {
 
                                     fetchData(snapshot1.child("sem").getValue().toString(), subject, type);
                                 }
@@ -158,6 +162,7 @@ public class fetch_files extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 binding.progressBarID.setVisibility(View.GONE);
+                binding.shimmerView.stopShimmer();
                 if (snapshot.getChildrenCount()==0)
                 {
                     binding.data.setVisibility(View.VISIBLE);
@@ -173,6 +178,7 @@ public class fetch_files extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 binding.progressBarID.setVisibility(View.GONE);
+                binding.shimmerView.stopShimmer();
                 binding.data.setVisibility(View.GONE);
 //                binding.fetchLy.setVisibility(View.GONE);
                 binding.nodata.setVisibility(View.VISIBLE);
@@ -294,6 +300,7 @@ public class fetch_files extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 binding.progressBarID.setVisibility(View.GONE);
+                binding.shimmerView.stopShimmer();
                 if (snapshot.getChildrenCount()==0)
                 {
                     binding.data.setVisibility(View.VISIBLE);
@@ -309,6 +316,7 @@ public class fetch_files extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 binding.progressBarID.setVisibility(View.GONE);
+                binding.shimmerView.stopShimmer();
                 binding.data.setVisibility(View.GONE);
 //                binding.fetchLy.setVisibility(View.GONE);
                 binding.nodata.setVisibility(View.VISIBLE);
@@ -503,5 +511,5 @@ public class fetch_files extends AppCompatActivity {
 //        if (!checkConnection(getApplicationContext()))
 //        {
 //            startActivity(new Intent(getApplicationContext(),no_connection.class));
-}
+    }
 }

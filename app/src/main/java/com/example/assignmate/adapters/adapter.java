@@ -23,12 +23,16 @@ import com.example.assignmate.R;
 import com.example.assignmate.pdfActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+
+
 //import com.pdftron.pdf.config.ViewerConfig;
 //import com.pdftron.pdf.controls.DocumentActivity;
 //import com.rajat.pdfviewer.PdfViewerActivity;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHolder> {
     RecyclerView recyclerView; 
@@ -77,7 +81,6 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
         holder.name.setText(model.getFile_Name());
         holder.descrption.setText("Description:- "+model.getDescription());
         holder.timestamp.setText(model.getTimeStamp());
-        holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(),R.anim.recycler_view_animation));
 
 
 
@@ -128,7 +131,8 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
                     intent.putExtra("NAME",model.getFile_Name());
                     intent.putExtra("DESCRIPTION",model.getDescription());
                     view.getContext().startActivity(intent);
-                }
+
+                    }
                 else
                 {
                     Intent intent = new Intent(Intent.ACTION_VIEW,url);

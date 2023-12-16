@@ -80,7 +80,7 @@ public class Login extends AppCompatActivity {
             try {
                 task.getResult(ApiException.class);
                 Toast.makeText(Login.this, "Login Successful!!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), choose_sem.class));
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
             } catch (ApiException e) {
                 Toast.makeText(this, "Something went wrong!!", Toast.LENGTH_SHORT).show();
             }

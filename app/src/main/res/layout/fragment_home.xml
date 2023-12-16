@@ -137,12 +137,50 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/shimmer_view"
+                android:visibility="visible"
                 >
 
                 <include layout="@layout/sub_placeholder"/>
 
             </com.facebook.shimmer.ShimmerFrameLayout>
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/no_sem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/greetLayout"
+            android:gravity="center"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/sarabun"
+                android:textAlignment="center"
+                android:text="Opps...\n It Seems you haven't selected your semester yet."
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/update_sem"
+                android:text="Update Semester >"
+                android:background="@drawable/roundbtn"
+                android:backgroundTint="@color/btn"
+                android:textColor="@color/white"
+                android:padding="10dp"
+                />
+
+
+        </LinearLayout>
+
 
 
 

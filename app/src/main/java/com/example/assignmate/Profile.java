@@ -3,51 +3,37 @@ package com.example.assignmate;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
+
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.assignmate.authentication.Login;
+import com.example.assignmate.authentication.aboutAssignMate;
+import com.example.assignmate.authentication.choose_sem;
+import com.example.assignmate.authentication.reauthenticate;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.navigation.NavigationBarItemView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
-
-import java.security.spec.ECField;
-import java.util.Objects;
-import java.util.concurrent.Semaphore;
-import java.util.function.ObjIntConsumer;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -113,7 +99,18 @@ public class Profile extends Fragment {
         LinearLayout feedback = view.findViewById(R.id.feedback);
         LinearLayout community = view.findViewById(R.id.joinCommunity);
         LinearLayout changeProfileInfo = view.findViewById(R.id.updateProfile);
+        LinearLayout updateSemester = view.findViewById(R.id.updateSemester);
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
+
+
+        updateSemester.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), choose_sem.class);
+                i.putExtra("fromActivity","Profile");
+                startActivity(i);
+            }
+        });
 
 
             changeProfileInfo.setOnClickListener(new View.OnClickListener() {

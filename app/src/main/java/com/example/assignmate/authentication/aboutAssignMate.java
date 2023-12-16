@@ -1,4 +1,4 @@
-package com.example.assignmate;
+package com.example.assignmate.authentication;
 
 import androidx.appcompat.app.AppCompatActivity;
 

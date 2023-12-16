@@ -1,18 +1,9 @@
-package com.example.assignmate;
+package com.example.assignmate.adapters;
 
-import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 
-import android.net.Uri;
-import java.io.File;
-
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.assignmate.Models.file_model;
+import com.example.assignmate.R;
+import com.example.assignmate.pdfActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 //import com.pdftron.pdf.config.ViewerConfig;
@@ -34,14 +28,10 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 //import com.rajat.pdfviewer.PdfViewerActivity;
 
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.IdentityHashMap;
 
 public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHolder> {
-    RecyclerView recyclerView;
+    RecyclerView recyclerView; 
     public static final String URI = "";
 
     ProgressBar progressBar;
@@ -88,6 +78,9 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
         holder.descrption.setText("Description:- "+model.getDescription());
         holder.timestamp.setText(model.getTimeStamp());
         holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(),R.anim.recycler_view_animation));
+
+
+
         urls.add(model.getUrl());
         String fileName = model.getFile_Name();
         String ext = fileName.substring(fileName.lastIndexOf("."));
@@ -130,7 +123,7 @@ public class adapter extends FirebaseRecyclerAdapter<file_model,adapter.ViewHold
                 String fileName = model.getFile_Name();
                 String ext = fileName.substring(fileName.lastIndexOf("."));
                 if (ext.equals(".pdf")) {
-                    Intent intent = new Intent(context,pdfActivity.class);
+                    Intent intent = new Intent(context, pdfActivity.class);
                     intent.putExtra("URL",model.getUrl());
                     intent.putExtra("NAME",model.getFile_Name());
                     intent.putExtra("DESCRIPTION",model.getDescription());

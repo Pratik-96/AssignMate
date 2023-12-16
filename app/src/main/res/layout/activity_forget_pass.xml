@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/gray"
-    tools:context=".ForgetPass">
+    tools:context=".authentication.ForgetPass">
 
     <TextView
         android:layout_width="wrap_content"

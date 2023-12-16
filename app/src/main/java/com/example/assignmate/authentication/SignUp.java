@@ -1,4 +1,4 @@
-package com.example.assignmate;
+package com.example.assignmate.authentication;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,17 +27,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.assignmate.databinding.ActivitySignUpBinding;
-import com.google.android.gms.auth.api.identity.BeginSignInRequest;
+import com.example.assignmate.MainActivity;
+import com.example.assignmate.R;
 
-import com.google.android.gms.auth.api.identity.SignInClient;
-import com.google.android.gms.auth.api.identity.SignInCredential;
+import com.example.assignmate.databinding.ActivitySignUpBinding;
+import com.example.assignmate.terms;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.signin.SignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -46,7 +45,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -80,7 +78,7 @@ public class SignUp extends AppCompatActivity {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
 
         if(currentUser != null || account!=null){
-            Intent home=new Intent(getApplicationContext(),MainActivity.class);
+            Intent home=new Intent(getApplicationContext(), MainActivity.class);
             startActivity(home);
             finish();
         }
@@ -99,7 +97,7 @@ public class SignUp extends AppCompatActivity {
 
                 // Create the One Tap sign-in client
 
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), choose_sem.class));
                 finish();
             } catch (ApiException e) {
                 Toast.makeText(this, "Something went wrong!!", Toast.LENGTH_SHORT).show();            }
@@ -128,6 +126,9 @@ public class SignUp extends AppCompatActivity {
         String txt2 = "<b>Already have an account ? <a href=''>Log In</a></b>";
         reg.setText(Html.fromHtml(txt2));
         button=findViewById(R.id.button);
+
+
+
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestIdToken("660056468922-cqpahr9lrkufo2ndhsnun12mf4j3ee3v.apps.googleusercontent.com").build();
         gsc = GoogleSignIn.getClient(getApplicationContext(),gso);
@@ -262,7 +263,7 @@ public class SignUp extends AppCompatActivity {
 
     }
     public void register(View v){
-        Intent act2 = new Intent(this,Login.class);            // Login Listener
+        Intent act2 = new Intent(this, Login.class);            // Login Listener
         startActivity(act2);
         finish();
     }
@@ -328,10 +329,28 @@ public class SignUp extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Toast.makeText(SignUp.this, "Signing Up..", Toast.LENGTH_SHORT).show();
-                                Log.d("uname", "onComplete: "+binding.name.getText().toString());
+                                if (FirebaseAuth.getInstance().getCurrentUser()!=null)
+                                {
 
-                                Intent home = new Intent(getApplicationContext(), Login.class);
-                                home.putExtra("uname",str);
+                                    if (User_Name!=null)
+                                    {
+                                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                .setDisplayName(User_Name)
+                                                .build();
+                                        FirebaseAuth.getInstance().getCurrentUser().updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful())
+                                                {
+                                                    Log.d("uname", "Name updated..: ");
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
+
+                                Intent home = new Intent(getApplicationContext(), choose_sem.class);
+                                home.putExtra("uname",binding.name.getText().toString());
                                 notification();
                                 startActivity(home);
                                 finish();

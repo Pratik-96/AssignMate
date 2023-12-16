@@ -1,4 +1,4 @@
-package com.example.assignmate;
+package com.example.assignmate.authentication;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,9 +9,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.Patterns;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,7 +19,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.assignmate.MainActivity;
+import com.example.assignmate.R;
 import com.example.assignmate.databinding.ActivityLoginBinding;
+import com.example.assignmate.terms;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -61,7 +62,7 @@ public class Login extends AppCompatActivity {
         String name = getIntent().getStringExtra("uname");
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
         if(currentUser != null || account!=null){
-            Intent home=new Intent(getApplicationContext(),MainActivity.class);
+            Intent home=new Intent(getApplicationContext(), MainActivity.class);
             if (name!=null)
             {
                 home.putExtra("uname",name);
@@ -79,7 +80,7 @@ public class Login extends AppCompatActivity {
             try {
                 task.getResult(ApiException.class);
                 Toast.makeText(Login.this, "Login Successful!!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), choose_sem.class));
             } catch (ApiException e) {
                 Toast.makeText(this, "Something went wrong!!", Toast.LENGTH_SHORT).show();
             }
@@ -97,6 +98,7 @@ public class Login extends AppCompatActivity {
         Pass=findViewById(R.id.password);
         mAuth=FirebaseAuth.getInstance();
         login=findViewById(R.id.button);
+
 
 
 
@@ -256,7 +258,7 @@ public class Login extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
                                     Toast.makeText(Login.this, "Login Successful!!", Toast.LENGTH_SHORT).show();
-                                    Intent home = new Intent(getApplicationContext(), MainActivity.class);
+                                    Intent home = new Intent(getApplicationContext(), MainActivity.class);//main
                                     startActivity(home);
                                     finish();
                                     inProgress(false);

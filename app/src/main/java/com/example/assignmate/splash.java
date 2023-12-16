@@ -7,13 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.view.View;
 
 
+import com.example.assignmate.authentication.Maintenance;
+import com.example.assignmate.authentication.SignUp;
+import com.example.assignmate.authentication.no_connection;
 import com.example.assignmate.databinding.ActivitySplashBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -66,7 +66,7 @@ public class splash extends AppCompatActivity {
                                     }
                                     else
                                     {
-                                        startActivity(new Intent(getApplicationContext(), SignUp.class));
+                                        startActivity(new Intent(getApplicationContext(), SignUp.class));  //signup
                                         finish();
                                     }
                                 }
@@ -109,98 +109,101 @@ public class splash extends AppCompatActivity {
         }
         else
         {
-            startActivity(new Intent(getApplicationContext(),no_connection.class));
+            startActivity(new Intent(getApplicationContext(), no_connection.class));
             finish();
         }
 
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                binding.view.setVisibility(View.VISIBLE);
-                binding.appname.setVisibility(View.VISIBLE);
-            }
-        }, 400);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                binding.appname.setText("A");
-            }
-        }, 500);
 
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                binding.appname.append("S");
-            }
-        }, 600);
 
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                binding.appname.append("S");
-            }
-        }, 700);
-
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                binding.appname.append("I");
-            }
-        }, 800);
-
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                binding.appname.append("G");
-            }
-        }, 900);
-
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                binding.appname.append("N");
-            }
-        }, 1000);
-
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                binding.appname.append("M");
-            }
-        }, 1100);
-
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                binding.appname.append("A");
-            }
-        }, 1200);
-
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                binding.appname.append("T");
-            }
-        }, 1300);
-
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                binding.appname.append("E");
-            }
-        }, 1400);
-    }
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                binding.view.setVisibility(View.VISIBLE);
+//                binding.appname.setVisibility(View.VISIBLE);
+//            }
+//        }, 400);
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                binding.appname.setText("A");
+//            }
+//        }, 500);
+//
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                binding.appname.append("S");
+//            }
+//        }, 600);
+//
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                binding.appname.append("S");
+//            }
+//        }, 700);
+//
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                binding.appname.append("I");
+//            }
+//        }, 800);
+//
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                binding.appname.append("G");
+//            }
+//        }, 900);
+//
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                binding.appname.append("N");
+//            }
+//        }, 1000);
+//
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                binding.appname.append("M");
+//            }
+//        }, 1100);
+//
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                binding.appname.append("A");
+//            }
+//        }, 1200);
+//
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                binding.appname.append("T");
+//            }
+//        }, 1300);
+//
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                binding.appname.append("E");
+//            }
+//        }, 1400);
+}
     public static boolean checkConnection(Context context) {
         final ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 

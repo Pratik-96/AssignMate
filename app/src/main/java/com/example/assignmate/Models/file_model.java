@@ -1,4 +1,4 @@
-package com.example.assignmate;
+package com.example.assignmate.Models;
 
 import java.sql.Timestamp;
 

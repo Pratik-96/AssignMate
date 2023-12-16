@@ -1,8 +1,10 @@
-package com.example.assignmate;
+package com.example.assignmate.authentication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.assignmate.R;
 
 public class Maintenance extends AppCompatActivity {
 

@@ -10,13 +10,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/no_access"
-        android:background="@color/white"
+        android:background="@color/gray"
         >
         <ImageView
             android:layout_width="wrap_content"
             android:layout_gravity="top"
             android:layout_height="500dp"
-            android:src="@drawable/admin"
+            android:src="@drawable/admin_access_only"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -24,6 +24,7 @@
             android:text="Admin Access only!!"
             android:textStyle="bold"
             android:textSize="30sp"
+            android:textColor="@color/white"
             android:fontFamily="@font/sarabun"
             android:layout_gravity="center"
             />
@@ -31,7 +32,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/upload_layout"
         android:background="@color/black"
         android:orientation="vertical">
@@ -85,6 +86,31 @@
                         android:textColor="@color/white"
                         android:textSize="15sp"
                         android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:elevation="20dp"
+                        android:fontFamily="@font/sarabun"
+                        android:text="Select Semester *"
+                        android:textColor="@color/white"
+
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/sem"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/dashed_rec"
+
+                        android:elevation="10dp" />
+
+
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -110,6 +136,7 @@
 
                         android:elevation="10dp" />
 
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -124,14 +151,14 @@
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
-                    <Spinner
+                    <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinner"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/dashed_rec"
-                        android:elevation="10dp" />
+                        />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/description_ly"
@@ -219,6 +246,22 @@
                         android:fontFamily="@font/sarabun"
                         android:padding="10dp"
                         android:text="UPLOAD"
+
+                        android:textColor="@color/black" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/add_sem_det"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="20dp"
+                        android:background="@drawable/roundbtn"
+                        android:backgroundTint="@color/white"
+                        android:drawableStart="@drawable/cloud_btn"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/sarabun"
+                        android:padding="10dp"
+                        android:text="Update Sem Details"
 
                         android:textColor="@color/black" />
                 </LinearLayout>

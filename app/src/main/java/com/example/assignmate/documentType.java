@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.assignmate.databinding.ActivityDocumentTypeBinding;
@@ -11,7 +12,7 @@ import com.example.assignmate.databinding.ActivityDocumentTypeBinding;
 public class documentType extends AppCompatActivity {
 
     private ActivityDocumentTypeBinding binding;
-    public static final String SUBJECT_NAME = "";
+
     public static final String DOCUMENT_TYPE = "";
 
 
@@ -20,7 +21,8 @@ public class documentType extends AppCompatActivity {
         binding=ActivityDocumentTypeBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
-        String selectedsub = getIntent().getStringExtra(SUBJECT_NAME);
+        String selectedsub = getIntent().getStringExtra("SUBJECT_NAME");
+
 
         binding.backtomain.setOnClickListener(new View.OnClickListener() {
             @Override

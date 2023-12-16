@@ -26,8 +26,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     public static final String SUBJECT_NAME ="";
+    String user ;
 
     FirebaseDatabase database;
 
@@ -192,8 +195,71 @@ public class MainActivity extends AppCompatActivity {
 //
 //
 //
+        
+        
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            user = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+        } else if (account != null) {
+            user = account.getId().toString();
+        }
+
+        DatabaseReference semesterRef = FirebaseDatabase.getInstance().getReference();
+        semesterRef.child("Users").addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot snapshot1 : snapshot.getChildren()) {
 
 
+                            if (snapshot1.child("uid").getValue().equals(user)) {
+
+                                if (snapshot1.child("sem").getValue().equals("Semester 1"))
+                                {
+                                    message("Semester_1");
+
+                                } else if (snapshot1.child("sem").getValue().equals("Semester 2")) {
+                                    message("Semester_2");
+                                } else if (snapshot1.child("sem").getValue().equals("Semester 3")){
+                                    message("Semester_3");
+                                    
+                                } else if (snapshot1.child("sem").getValue().equals("Semester 4")) {
+                                    message("Semester_4");
+                                    
+                                } else if (snapshot1.child("sem").getValue().equals("Semester 5")) {
+                                    message("Semester_5");
+                                } else if (snapshot1.child("sem").getValue().equals("Semester 6")) {
+                                    message("Semester_6");
+
+                                }
+
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                }
+        );
+
+
+
+        
+
+
+
+
+
+
+
+
+    }
+    
+    public void message(String Semester)
+    {
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
                     @Override
@@ -204,21 +270,14 @@ public class MainActivity extends AppCompatActivity {
 
                         // Get new FCM registration token
                         String token = task.getResult();
-                        FirebaseMessaging.getInstance().subscribeToTopic("all");
+                        FirebaseMessaging.getInstance().subscribeToTopic(Semester);
                         // Log and toast
 
-                        Log.d("Token", token);
+                        Log.d("Token", token+"  "+Semester);
                     }
                 });
-
-
-
-
-
-
-
-
     }
+    
 
     @Override
     public void onBackPressed() {

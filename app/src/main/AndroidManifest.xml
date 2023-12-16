@@ -26,12 +26,15 @@
         android:theme="@style/AppTheme.NoForceDark"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
             android:name=".authentication.add_sem_det"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".authentication.choose_sem"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".pdfActivity"
             android:exported="false" />

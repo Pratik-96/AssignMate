@@ -82,6 +82,15 @@ public class UploadFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
+    private static final String SEMESTER_1_STORAGE_REF = "gs://java-76623.appspot.com";
+    private static final String SEMESTER_2_STORAGE_REF = "gs://data-mining-102aa.appspot.com";
+    private static final String SEMESTER_3_STORAGE_REF = "gs://cloud-computing-180c7.appspot.com";
+    private static final String SEMESTER_4_STORAGE_REF = "gs://assignmate-pro.appspot.com";
+
+    private static final String SEMESTER_5_STORAGE_REF = "gs://assignmate-df72e.appspot.com";
+    private static final String SEMESTER_6_STORAGE_REF = "gs://fir-login-c10ae.appspot.com";
+
     String str, sub, type;
     ProgressDialog dialog;
 
@@ -321,6 +330,7 @@ public class UploadFragment extends Fragment {
 //                sub = spinner1.getSelectedItem().toString();
                 type = doctype.getSelectedItem().toString();
 
+                String selectedSem = semSpinner.getSelectedItem().toString();
                 String selectedSub = spinner1.getSelectedItem().toString();
                 if (uri != null) {
                     if (description.getText().toString().isEmpty()) {
@@ -330,7 +340,7 @@ public class UploadFragment extends Fragment {
                     }  else if (type.equals("None")) {
                         Toast.makeText(getContext(), "Please select document type..", Toast.LENGTH_SHORT).show();
                     } else if (!description.getText().toString().isEmpty() && !type.equals("None")) {
-                        upload(uri, view,selectedSub);
+                        upload(uri, view,selectedSub,selectedSem);
 
                     }
 
@@ -359,16 +369,38 @@ public class UploadFragment extends Fragment {
         }
     }
 
-    private void upload(Uri uri, View view,String selectedSub) {          // Uploads the file
+    private void upload(Uri uri, View view,String selectedSub,String Semester) {          // Uploads the file
 
         dialog = new ProgressDialog(getContext());
         dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         dialog.setTitle("Uploading File...");
         dialog.setProgress(0);
         dialog.show();
+        String Final_Ref = "";
 
+        switch (Semester)
+        {
+            case "Semester 1":Final_Ref = SEMESTER_1_STORAGE_REF;
+            break;
 
-        FirebaseStorage storage = FirebaseStorage.getInstance();    // Returns an object of Firebase storage
+            case "Semester 2":Final_Ref = SEMESTER_2_STORAGE_REF;
+            break;
+
+            case "Semester 3":Final_Ref = SEMESTER_3_STORAGE_REF;
+            break;
+
+            case "Semester 4":Final_Ref = SEMESTER_4_STORAGE_REF;
+            break;
+
+            case "Semester 5":Final_Ref = SEMESTER_5_STORAGE_REF;
+            break;
+
+            case "Semester 6":Final_Ref = SEMESTER_6_STORAGE_REF;
+            break;
+        }
+
+        FirebaseStorage storage = FirebaseStorage.getInstance(Final_Ref);    // Returns an object of Firebase storage
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         str = getFileName(uri);
         String path = str.replaceAll("\\.", "").replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("\\[", "").replaceAll("]", "").replaceAll("#", "").replaceAll("\\$", "");
@@ -400,30 +432,59 @@ public class UploadFragment extends Fragment {
                     public void onSuccess(Uri uri) {
                         String url = uri.toString();
                         String descrption;// Extracting url from result uri
-                        DatabaseReference reference = database.getReference().child(selectedSem).child(selectedSub).child(selectedType).push();
+                        if (!selectedSem.equals("Semester 5"))
+                        {
+                            DatabaseReference reference = database.getReference().child(selectedSem).child(selectedSub).child(selectedType).push();
 
-                        descrption = description.getText().toString().toLowerCase();
+                            descrption = description.getText().toString().toLowerCase();
 
-                        SimpleDateFormat ts = new SimpleDateFormat("dd/MM/yyyy");
-                        Date date = new Date();
-                        String timestamp = ts.format(date);
-                        file_model model = new file_model(str, descrption, url, timestamp);
-                        reference.setValue(model)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Toast.makeText(getContext(), "File Uploaded Sucessfully!!", Toast.LENGTH_SHORT).show();
-                                            dialog.setTitle("File Uploaded Sucessfully!!");
-                                            notificationsSender notificationsSender = new notificationsSender("/topics/admin", "New Document.", str + " has been added to "+selectedSem+"/" + selectedSub + "/" + selectedType, getContext(), getActivity());
-                                            notificationsSender.sendNotification();
-                                            dialog.dismiss();
-                                        } else {
-                                            Toast.makeText(getContext(), "Upload Failed!!", Toast.LENGTH_SHORT).show();
-                                            dialog.dismiss();
+                            SimpleDateFormat ts = new SimpleDateFormat("dd/MM/yyyy");
+                            Date date = new Date();
+                            String timestamp = ts.format(date);
+                            file_model model = new file_model(str, descrption, url, timestamp);
+                            reference.setValue(model)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(getContext(), "File Uploaded Sucessfully!!", Toast.LENGTH_SHORT).show();
+                                                dialog.setTitle("File Uploaded Sucessfully!!");
+                                                notificationsSender notificationsSender = new notificationsSender("/topics/admin", "New Document.", str + " has been added to "+selectedSem+"/" + selectedSub + "/" + selectedType, getContext(), getActivity());
+                                                notificationsSender.sendNotification();
+                                                dialog.dismiss();
+                                            } else {
+                                                Toast.makeText(getContext(), "Upload Failed!!", Toast.LENGTH_SHORT).show();
+                                                dialog.dismiss();
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                        }
+                        else {
+                            DatabaseReference reference = database.getReference().child(selectedSub).child(selectedType).push();
+
+                            descrption = description.getText().toString().toLowerCase();
+
+                            SimpleDateFormat ts = new SimpleDateFormat("dd/MM/yyyy");
+                            Date date = new Date();
+                            String timestamp = ts.format(date);
+                            file_model model = new file_model(str, descrption, url, timestamp);
+                            reference.setValue(model)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(getContext(), "File Uploaded Sucessfully!!", Toast.LENGTH_SHORT).show();
+                                                dialog.setTitle("File Uploaded Sucessfully!!");
+                                                notificationsSender notificationsSender = new notificationsSender("/topics/admin", "New Document.", str + " has been added to "+selectedSem+"/" + selectedSub + "/" + selectedType, getContext(), getActivity());
+                                                notificationsSender.sendNotification();
+                                                dialog.dismiss();
+                                            } else {
+                                                Toast.makeText(getContext(), "Upload Failed!!", Toast.LENGTH_SHORT).show();
+                                                dialog.dismiss();
+                                            }
+                                        }
+                                    });
+                        }
                     }
 
 

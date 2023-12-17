@@ -51,6 +51,8 @@
                 android:layout_marginTop="18dp"
                 android:layout_marginEnd="10dp">
 
+
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -58,7 +60,8 @@
                     android:fontFamily="@font/sarabun"
                     android:text="👋Hey, "
                     android:textColor="@color/white"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/uname"
@@ -66,9 +69,11 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sarabun"
                     android:text="User_name"
+                    android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
             </LinearLayout>
+
 
             <ImageView
                 android:id="@+id/exit_app"
@@ -105,7 +110,7 @@
                     android:background="@color/white" />
 
                 <TextView
-                    android:id="@+id/greet"
+                    android:id="@+id/assigned_sem"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/view"
@@ -115,6 +120,23 @@
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/greet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/view"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="10dp"
+                    android:text=""
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                  />
+
+
             </RelativeLayout>
 
 

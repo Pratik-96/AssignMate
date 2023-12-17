@@ -35,6 +35,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 
 
@@ -103,6 +105,8 @@ public class HomeFragment extends Fragment {
 //        ImageView menu = view.findViewById(R.id.menu);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         TextView greet = view.findViewById(R.id.greet);
+
+        TextView assigned_sem = view.findViewById(R.id.assigned_sem);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
 
@@ -178,6 +182,7 @@ public class HomeFragment extends Fragment {
 
 
         LinearLayout no_sem = view.findViewById(R.id.no_sem);
+        no_sem.setVisibility(View.VISIBLE);
 
 
 
@@ -197,6 +202,7 @@ public class HomeFragment extends Fragment {
                         no_sem.setVisibility(View.GONE);
                         Log.d("TAG", "onDataChange: " + snapshot1.child("sem").getValue().toString());
                         fetchData(snapshot1.child("sem").getValue().toString(), view);
+                        assigned_sem.setText(snapshot1.child("sem").getValue().toString());
 
 
                     }
@@ -218,6 +224,7 @@ public class HomeFragment extends Fragment {
     public void fetchData(String semName, View view) {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         Log.d("TAG", "fetchData: " + semName);
+
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         DatabaseReference semesterDataRef = databaseReference.child("Semester_data").child(semName);
         FirebaseRecyclerOptions<sem_model> sem_options = new FirebaseRecyclerOptions.Builder<sem_model>().setQuery(semesterDataRef, sem_model.class).build();

@@ -61,172 +61,172 @@
                 android:textStyle="bold" />
 
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/nameLayout"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameLayout"
 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="@color/white"
+                android:hint="Name"
+                android:textColorHint="@color/primary"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/primary"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/primary"
+                app:errorEnabled="true"
+                app:hintEnabled="true"
+                app:hintTextColor="@color/primary"
+                app:startIconDrawable="@drawable/custom_person"
+                app:startIconTint="@color/primary">
+
+
+                <EditText
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
                     android:backgroundTint="@color/white"
-                    android:hint="Name"
-                    android:textColorHint="@color/primary"
-                    app:boxBackgroundMode="outline"
-                    app:boxCornerRadiusBottomEnd="10dp"
-                    app:boxCornerRadiusBottomStart="10dp"
-                    app:boxCornerRadiusTopEnd="10dp"
-                    app:boxCornerRadiusTopStart="10dp"
-                    app:boxStrokeColor="@color/primary"
-                    app:endIconMode="clear_text"
-                    app:endIconTint="@color/primary"
-                    app:errorEnabled="true"
-                    app:hintEnabled="true"
-                    app:hintTextColor="@color/primary"
-                    app:startIconDrawable="@drawable/custom_person"
-                    app:startIconTint="@color/primary">
+
+                    android:fontFamily="@font/sarabun"
+                    android:inputType="textPersonName"
+                    android:paddingBottom="20dp"
+                    android:textColor="@color/primary">
+
+                </EditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-                    <EditText
-                        android:id="@+id/name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/white"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:clipToPadding="false"
+                android:elevation="10dp"
+                android:hint="Email"
+                android:textColorHint="@color/primary"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/primary"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/primary"
+                app:errorEnabled="true"
+                app:hintTextColor="@color/primary"
 
-                        android:fontFamily="@font/sarabun"
-                        android:inputType="textPersonName"
-                        android:paddingBottom="20dp"
-                        android:textColor="@color/primary">
 
-                    </EditText>
+                app:startIconDrawable="@drawable/email"
+                app:startIconTint="@color/primary">
 
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/emailLayout"
+                <EditText
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="20dp"
-                    android:clipToPadding="false"
-                    android:elevation="10dp"
-                    android:hint="Email"
+                    android:backgroundTint="@color/white"
+                    android:fontFamily="@font/sarabun"
+                    android:inputType="textEmailAddress"
+                    android:paddingEnd="50dp"
+
+                    android:paddingBottom="20dp"
+                    android:textColor="@color/primary"
                     android:textColorHint="@color/primary"
-                    app:boxBackgroundMode="outline"
-                    app:boxCornerRadiusBottomEnd="10dp"
-                    app:boxCornerRadiusBottomStart="10dp"
-                    app:boxCornerRadiusTopEnd="10dp"
-                    app:boxCornerRadiusTopStart="10dp"
-                    app:boxStrokeColor="@color/primary"
-                    app:endIconMode="clear_text"
-                    app:endIconTint="@color/primary"
-                    app:errorEnabled="true"
-                    app:hintTextColor="@color/primary"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-                    app:startIconDrawable="@drawable/email"
-                    app:startIconTint="@color/primary">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/pasLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
 
-                    <EditText
-                        android:id="@+id/email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/white"
-                        android:fontFamily="@font/sarabun"
-                        android:inputType="textEmailAddress"
-                        android:paddingEnd="50dp"
+                android:layout_marginEnd="20dp"
+                android:clipToPadding="false"
+                android:elevation="10dp"
+                android:hint="Password"
 
-                        android:paddingBottom="20dp"
-                        android:textColor="@color/primary"
-                        android:textColorHint="@color/primary"
+                android:textColorHint="@color/primary"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/primary"
+                app:counterEnabled="false"
+                app:counterMaxLength="16"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/primary"
+                app:errorEnabled="true"
+                app:hintTextColor="@color/primary"
 
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
 
+                app:startIconDrawable="@drawable/lock"
+                app:startIconTint="@color/primary">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/pasLayout"
+                <EditText
+                    android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"
+                    android:backgroundTint="@color/white"
+                    android:fontFamily="@font/sarabun"
+                    android:inputType="textPassword"
+                    android:paddingEnd="50dp"
+                    android:paddingBottom="20dp"
 
-                    android:layout_marginEnd="20dp"
-                    android:clipToPadding="false"
-                    android:elevation="10dp"
-                    android:hint="Password"
+                    android:textColor="@color/primary"
+                    android:textColorHint="@color/primary" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                    android:textColorHint="@color/primary"
-                    app:boxBackgroundMode="outline"
-                    app:boxCornerRadiusBottomEnd="10dp"
-                    app:boxCornerRadiusBottomStart="10dp"
-                    app:boxCornerRadiusTopEnd="10dp"
-                    app:boxCornerRadiusTopStart="10dp"
-                    app:boxStrokeColor="@color/primary"
-                    app:counterEnabled="false"
-                    app:counterMaxLength="16"
-                    app:endIconMode="password_toggle"
-                    app:endIconTint="@color/primary"
-                    app:errorEnabled="true"
-                    app:hintTextColor="@color/primary"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cnfpassLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:elevation="10dp"
+                android:hint="Confirm Password"
+                android:textColorHint="@color/primary"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/primary"
+                app:endIconTint="@color/primary"
+                app:errorEnabled="true"
+                app:hintTextColor="@color/primary"
+                app:startIconDrawable="@drawable/lock"
+                app:startIconTint="@color/primary">
 
-                    app:startIconDrawable="@drawable/lock"
-                    app:startIconTint="@color/primary">
-
-                    <EditText
-                        android:id="@+id/password"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/white"
-                        android:fontFamily="@font/sarabun"
-                        android:inputType="textPassword"
-                        android:paddingEnd="50dp"
-                        android:paddingBottom="20dp"
-
-                        android:textColor="@color/primary"
-                        android:textColorHint="@color/primary" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/cnfpassLayout"
+                <EditText
+                    android:id="@+id/cnfpass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-                    android:layout_gravity="center"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="20dp"
-                    android:elevation="10dp"
-                    android:hint="Confirm Password"
-                    android:textColorHint="@color/primary"
-                    app:boxBackgroundMode="outline"
-                    app:boxCornerRadiusBottomEnd="10dp"
-                    app:boxCornerRadiusBottomStart="10dp"
-                    app:boxCornerRadiusTopEnd="10dp"
-                    app:boxCornerRadiusTopStart="10dp"
-                    app:boxStrokeColor="@color/primary"
-                    app:endIconTint="@color/primary"
-                    app:errorEnabled="true"
-                    app:hintTextColor="@color/primary"
-                    app:startIconDrawable="@drawable/lock"
-                    app:startIconTint="@color/primary">
-
-                    <EditText
-                        android:id="@+id/cnfpass"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/white"
-                        android:fontFamily="@font/sarabun"
-                        android:inputType="textPassword"
-                        android:paddingEnd="50dp"
-                        android:paddingBottom="20dp"
-                        android:textColor="@color/primary" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:backgroundTint="@color/white"
+                    android:fontFamily="@font/sarabun"
+                    android:inputType="textPassword"
+                    android:paddingEnd="50dp"
+                    android:paddingBottom="20dp"
+                    android:textColor="@color/primary" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
             <LinearLayout

@@ -271,6 +271,7 @@ public class MainActivity extends AppCompatActivity {
                         // Get new FCM registration token
                         String token = task.getResult();
                         FirebaseMessaging.getInstance().subscribeToTopic(Semester);
+                        FirebaseMessaging.getInstance().subscribeToTopic("all");
                         // Log and toast
 
                         Log.d("Token", token+"  "+Semester);

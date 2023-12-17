@@ -129,6 +129,7 @@ public class Login extends AppCompatActivity {
         txt2.setText(Html.fromHtml(txt3));
         String txt = "<b><a href=''>Terms & Conditions</a></b>";
         binding.terms.setText(Html.fromHtml(txt));
+        binding.signup.setText(Html.fromHtml(txt3));
 
         binding.terms.setOnClickListener(new View.OnClickListener() {
             @Override

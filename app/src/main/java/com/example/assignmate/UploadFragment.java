@@ -448,7 +448,7 @@ public class UploadFragment extends Fragment {
                                             if (task.isSuccessful()) {
                                                 Toast.makeText(getContext(), "File Uploaded Sucessfully!!", Toast.LENGTH_SHORT).show();
                                                 dialog.setTitle("File Uploaded Sucessfully!!");
-                                                notificationsSender notificationsSender = new notificationsSender("/topics/admin", "New Document.", str + " has been added to "+selectedSem+"/" + selectedSub + "/" + selectedType, getContext(), getActivity());
+                                                notificationsSender notificationsSender = new notificationsSender("/topics/"+selectedSem, "New Document.", str + " has been added to "+selectedSem+"/" + selectedSub + "/" + selectedType, getContext(), getActivity());
                                                 notificationsSender.sendNotification();
                                                 dialog.dismiss();
                                             } else {
@@ -474,7 +474,7 @@ public class UploadFragment extends Fragment {
                                             if (task.isSuccessful()) {
                                                 Toast.makeText(getContext(), "File Uploaded Sucessfully!!", Toast.LENGTH_SHORT).show();
                                                 dialog.setTitle("File Uploaded Sucessfully!!");
-                                                notificationsSender notificationsSender = new notificationsSender("/topics/admin", "New Document.", str + " has been added to "+selectedSem+"/" + selectedSub + "/" + selectedType, getContext(), getActivity());
+                                                notificationsSender notificationsSender = new notificationsSender("/topics/"+selectedSem, "New Document.", str + " has been added to "+selectedSem+"/" + selectedSub + "/" + selectedType, getContext(), getActivity());
                                                 notificationsSender.sendNotification();
                                                 dialog.dismiss();
                                             } else {

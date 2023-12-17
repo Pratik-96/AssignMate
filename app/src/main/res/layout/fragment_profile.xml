@@ -105,6 +105,7 @@
                 android:textColor="@color/white"
                 android:textSize="15sp" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/updateSemester"
             android:layout_width="wrap_content"
@@ -131,19 +132,23 @@
         </LinearLayout>
         </LinearLayout>
         </ScrollView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"/>
         <LinearLayout
             android:id="@+id/about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_marginTop="10dp"
 
             >
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_margin="10dp"
                 android:drawableStart="@drawable/baseline_info_24"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/sarabun"
@@ -151,18 +156,22 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/update"
 
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_margin="10dp"
                 android:fontFamily="@font/sarabun"
                 android:drawableStart="@drawable/baseline_download_24"
                 android:drawablePadding="10dp"
@@ -170,17 +179,21 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/joinCommunity"
 
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_margin="10dp"
                 android:drawableStart="@drawable/community"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/sarabun"
@@ -188,17 +201,21 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/share"
 
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_margin="10dp"
                 android:drawableStart="@drawable/baseline_share_24"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/sarabun"
@@ -206,17 +223,21 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/feedback"
 
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_margin="10dp"
                 android:drawableStart="@drawable/baseline_feedback_24"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/sarabun"
@@ -224,17 +245,21 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/logout"
 
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_margin="10dp"
                 android:drawableStart="@drawable/baseline_logout_24"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/sarabun"
@@ -242,6 +267,11 @@
                 android:textColor="#FF0000"
                 android:textSize="20sp" />
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"/>
+
 
 
 

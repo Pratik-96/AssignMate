@@ -367,21 +367,43 @@ public class fetch_files extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         if (menuItem.getTitle().equals("Show Only Nirali Notes"))
                         {
-                            FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(FirebaseDatabase.getInstance().getReference().child(subject).child(type).orderByChild("file_Name").equalTo("Nirali Publication.pdf"), file_model.class).build();
-                            ad = new adapter(options, fetch_files.this);
-                            ad.startListening();
-                            binding.recyclerView.setAdapter(ad);
-                            ad.notifyDataSetChanged();
-                            return true;
+                           if(selectedSem.equals("Semester 5"))
+                           {
+                               FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(FirebaseDatabase.getInstance().getReference().child(subject).child(type).orderByChild("file_Name").equalTo("Nirali Publication.pdf"), file_model.class).build();
+                               ad = new adapter(options, fetch_files.this);
+                               ad.startListening();
+                               binding.recyclerView.setAdapter(ad);
+                               ad.notifyDataSetChanged();
+                               return true;
+                           }
+                           else {
+                               FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(FirebaseDatabase.getInstance().getReference().child(selectedSem).child(subject).child(type).orderByChild("file_Name").equalTo("Nirali Publication.pdf"), file_model.class).build();
+                               ad = new adapter(options, fetch_files.this);
+                               ad.startListening();
+                               binding.recyclerView.setAdapter(ad);
+                               ad.notifyDataSetChanged();
+                               return true;
+                           }
                         }
                         else if (menuItem.getTitle().equals("Show All"))
                         {
-                            FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(databaseReference, file_model.class).build();
-                            ad = new adapter(options, fetch_files.this);
-                            ad.startListening();
-                            binding.recyclerView.setAdapter(ad);
-                            ad.notifyDataSetChanged();
-                            return true;
+                            if(selectedSem.equals("Semester 5"))
+                            {
+                                FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(FirebaseDatabase.getInstance().getReference().child(subject).child(type), file_model.class).build();
+                                ad = new adapter(options, fetch_files.this);
+                                ad.startListening();
+                                binding.recyclerView.setAdapter(ad);
+                                ad.notifyDataSetChanged();
+                                return true;
+                            }
+                            else {
+                                FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(FirebaseDatabase.getInstance().getReference().child(selectedSem).child(subject).child(type), file_model.class).build();
+                                ad = new adapter(options, fetch_files.this);
+                                ad.startListening();
+                                binding.recyclerView.setAdapter(ad);
+                                ad.notifyDataSetChanged();
+                                return true;
+                            }
                         }
                         return false;
 
@@ -413,7 +435,13 @@ public class fetch_files extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                filter_list(charSequence.toString(),subject,type);
+
+                if (selectedSem.equals("Semester 5")) {
+                    filter_list(charSequence.toString(), subject, type);
+                }
+                else {
+                    filter_list(charSequence.toString(),selectedSem,subject,type);
+                }
             }
 
             @Override
@@ -454,6 +482,30 @@ public class fetch_files extends AppCompatActivity {
 
     }
 
+
+    private void filter_list(String Text,String selectedSem,String subject,String type) {
+
+        if (!Text.isEmpty()) {
+            FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(FirebaseDatabase.getInstance().getReference().child(selectedSem).child(subject).child(type).orderByChild("description").startAt(Text).endAt(Text.toLowerCase()+ "/uf8ff"), file_model.class).build();
+            ad = new adapter(options, fetch_files.this);
+            ad.startListening();
+            binding.recyclerView.setAdapter(ad);
+            ad.notifyDataSetChanged();
+        }
+        else
+        {
+            FirebaseRecyclerOptions<file_model> options = new FirebaseRecyclerOptions.Builder<file_model>().setQuery(FirebaseDatabase.getInstance().getReference().child(selectedSem).child(subject).child(type), file_model.class).build();
+            ad = new adapter(options,fetch_files.this);
+            ad.startListening();
+            binding.recyclerView.setAdapter(ad);
+
+            binding.recyclerView.setVisibility(View.VISIBLE);
+        }
+
+
+    }
+
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -471,6 +523,8 @@ public class fetch_files extends AppCompatActivity {
             ad.notifyDataSetChanged();
         }
     }
+
+
 
 
 

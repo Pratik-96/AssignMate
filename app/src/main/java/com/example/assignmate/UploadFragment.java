@@ -419,7 +419,8 @@ public class UploadFragment extends Fragment {
 
 
         selectedSem = semSpinner.getSelectedItem().toString();
-
+        String token = "/topics/"+selectedSem.replace(' ','_');
+        Log.d("Token upload", token);
 
         storageReference.child(selectedSem).child(selectedSub).child(selectedType).child(getFileName(uri)).putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -448,7 +449,9 @@ public class UploadFragment extends Fragment {
                                             if (task.isSuccessful()) {
                                                 Toast.makeText(getContext(), "File Uploaded Sucessfully!!", Toast.LENGTH_SHORT).show();
                                                 dialog.setTitle("File Uploaded Sucessfully!!");
-                                                notificationsSender notificationsSender = new notificationsSender("/topics/"+selectedSem, "New Document.", str + " has been added to "+selectedSem+"/" + selectedSub + "/" + selectedType, getContext(), getActivity());
+                                                String token = "/topics/"+selectedSem.replace(' ','_');
+                                                Log.d("Token upload", token);
+                                                notificationsSender notificationsSender = new notificationsSender(token, "New Document.", str + " has been added to "+selectedSem+"/" + selectedSub + "/" + selectedType, getContext(), getActivity());
                                                 notificationsSender.sendNotification();
                                                 dialog.dismiss();
                                             } else {

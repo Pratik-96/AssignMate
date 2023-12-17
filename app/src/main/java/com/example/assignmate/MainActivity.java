@@ -217,19 +217,23 @@ public class MainActivity extends AppCompatActivity {
                                 if (snapshot1.child("sem").getValue().equals("Semester 1"))
                                 {
                                     message("Semester_1");
+                                    message("Semester1");
+
 
                                 } else if (snapshot1.child("sem").getValue().equals("Semester 2")) {
                                     message("Semester_2");
+                                    message("Semester2");
                                 } else if (snapshot1.child("sem").getValue().equals("Semester 3")){
-                                    message("Semester_3");
+                                    message("Semester_3");message("Semester3");
                                     
                                 } else if (snapshot1.child("sem").getValue().equals("Semester 4")) {
-                                    message("Semester_4");
+                                    message("Semester_4");message("Semester4");
                                     
                                 } else if (snapshot1.child("sem").getValue().equals("Semester 5")) {
-                                    message("Semester_5");
-                                } else if (snapshot1.child("sem").getValue().equals("Semester 6")) {
+                                    message("Semester_5");message("Semester5");
+                                } else if (snapshot1.child("sem").getValue().equals("Semester6")) {
                                     message("Semester_6");
+                                    message("Semester6");
 
                                 }
 
@@ -272,6 +276,7 @@ public class MainActivity extends AppCompatActivity {
                         String token = task.getResult();
                         FirebaseMessaging.getInstance().subscribeToTopic(Semester);
                         FirebaseMessaging.getInstance().subscribeToTopic("all");
+
                         // Log and toast
 
                         Log.d("Token", token+"  "+Semester);

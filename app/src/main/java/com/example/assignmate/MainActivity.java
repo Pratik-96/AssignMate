@@ -18,6 +18,8 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.assignmate.Models.User;
+import com.example.assignmate.authentication.choose_sem;
 import com.example.assignmate.databinding.ActivityMainBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -34,6 +36,8 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
+import java.util.HashMap;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,6 +46,14 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     public static final String SUBJECT_NAME ="";
     String user ;
+
+    String email;
+    boolean isUpdating;
+
+    String sem;
+
+    String name;
+
 
     FirebaseDatabase database;
 
@@ -200,8 +212,15 @@ public class MainActivity extends AppCompatActivity {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             user = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+            name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName().toString();
+            email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+
         } else if (account != null) {
             user = account.getId().toString();
+            name = account.getDisplayName().toString();
+            email = account.getEmail().toString();
+
+
         }
 
         DatabaseReference semesterRef = FirebaseDatabase.getInstance().getReference();
@@ -213,6 +232,18 @@ public class MainActivity extends AppCompatActivity {
 
 
                             if (snapshot1.child("uid").getValue().equals(user)) {
+
+
+                                sem = snapshot1.child("sem").getValue().toString();
+
+
+
+                                if (!snapshot1.child("email").exists())
+                                {
+                                    update_user(user,name,sem,user);
+
+                                }
+
 
                                 if (snapshot1.child("sem").getValue().equals("Semester 1"))
                                 {
@@ -261,7 +292,67 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    
+
+    private void update_user(String userId, String name, String sem, String user1) {
+        DatabaseReference fetchref = FirebaseDatabase.getInstance().getReference().child("Users");
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+
+
+
+        HashMap  update = new HashMap();
+        update.put("name",name);
+        update.put("sem",sem);
+        update.put("uid",userId);
+        update.put("email",email);
+
+
+
+
+
+
+        fetchref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                    if (userId.equals(dataSnapshot.child("uid").getValue().toString()) && !isUpdating) {
+
+
+                        // User Already Exists
+                        Log.d("update", "onDataChange: "+dataSnapshot.getKey());
+                        fetchref.child(dataSnapshot.getKey()).updateChildren(update).addOnCompleteListener(new OnCompleteListener() {
+                            @Override
+                            public void onComplete(@NonNull Task task) {
+                                if (task.isSuccessful())
+                                {
+//                                    Toast.makeText(MainActivity.this, "Email Updated Successfully!!", Toast.LENGTH_SHORT).show();
+
+                                }
+                                else
+                                {
+                                    Toast.makeText(MainActivity.this, task.getException().getLocalizedMessage().toString(), Toast.LENGTH_SHORT).show();
+                                }
+                                isUpdating=true;
+                            }
+                        });
+
+                        break;
+                    }
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
     public void message(String Semester)
     {
         FirebaseMessaging.getInstance().getToken()

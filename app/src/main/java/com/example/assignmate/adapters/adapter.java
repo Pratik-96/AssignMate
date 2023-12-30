@@ -172,7 +172,7 @@ private int lastPosition=-1;
             timestamp = itemView.findViewById(R.id.timestamp);
             item=itemView.findViewById(R.id.item);
 
-            empty = itemView.findViewById(R.id.empty);
+
             imageView= itemView.findViewById(R.id.doc_icon);
 
 

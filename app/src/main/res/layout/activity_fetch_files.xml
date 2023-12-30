@@ -16,6 +16,7 @@
         android:background="@color/white"
         android:orientation="vertical"
         android:visibility="gone"
+        android:layout_gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,22 +52,26 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:src="@drawable/nodata" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
 
-        <TextView
-            android:id="@+id/empty"
-            android:layout_width="wrap_content"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/sarabun"
-            android:text="No data Found!!"
-            android:textColor="@color/secondary"
-            android:textSize="30sp"
-            android:visibility="visible" />
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:lottie_autoPlay="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/nodata" />
+        </LinearLayout>
 
 
     </LinearLayout>

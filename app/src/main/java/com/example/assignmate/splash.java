@@ -26,14 +26,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.io.IOException;
 import java.util.Objects;
 
-import pl.droidsonroids.gif.GifDrawable;
-import pl.droidsonroids.gif.GifImageView;
-
 public class splash extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     FirebaseUser user;
-    GifDrawable gifFromResource;
+
     private ActivitySplashBinding binding;
     public void chk_Maintenance()
     {
@@ -105,6 +102,8 @@ public class splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        binding.animationView.playAnimation();
 
 
         user = FirebaseAuth.getInstance().getCurrentUser();

@@ -9,13 +9,24 @@ public class User {
 
     private String sem;
 
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     User(){}
 
 
-    public User(String uid, String name, String sem) {
+    public User(String uid, String name, String sem,String email) {
         this.uid = uid;
         this.name = name;
         this.sem = sem;
+        this.email = email;
     }
 
     public String getUid() {

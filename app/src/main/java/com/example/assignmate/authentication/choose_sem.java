@@ -40,6 +40,8 @@ public class choose_sem extends AppCompatActivity {
     boolean isUpdating = false;
     String name;
     String id = null;
+
+    String email;
     GoogleSignInAccount account;
 
     @Override
@@ -149,16 +151,18 @@ public class choose_sem extends AppCompatActivity {
 
                     name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
                     id = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+                    email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
                 }
                 else if (account!=null)
                 {
                     name = account.getDisplayName().toString();
                     id= account.getId().toString();
+                    email = account.getEmail().toString();
                 }
 
                 Log.d("TAG", "onClick: "+name);
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").push();
-                User u = new User(id, name, selectedSem[0]);
+                User u = new User(id, name, selectedSem[0],email);
                 reference.setValue(u).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -189,17 +193,20 @@ public class choose_sem extends AppCompatActivity {
                 if (FirebaseAuth.getInstance().getCurrentUser()!=null) {
                      name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
                     id = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+                    email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
                 }
                 else if (account!=null)
                 {
                     name = account.getDisplayName().toString();
                     id = account.getId().toString();
+                    email = account.getEmail().toString();
                 }
 
                 HashMap  user = new HashMap();
                 user.put("name",name);
                 user.put("sem",selectedSem[0]);
                 user.put("uid",id);
+                user.put("email",email);
 
                 fetchref.addValueEventListener(new ValueEventListener() {
                     @Override

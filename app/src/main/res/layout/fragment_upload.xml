@@ -10,14 +10,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/no_access"
+        android:gravity="center"
         android:background="@color/gray"
         >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_gravity="top"
-            android:layout_height="500dp"
-            android:src="@drawable/admin_access_only"
-            />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/noaccess" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

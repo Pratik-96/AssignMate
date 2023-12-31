@@ -166,7 +166,7 @@ private int lastPosition=-1;
         LinearLayout item;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            progressBar=itemView.findViewById(R.id.progressBarID);
+
             name=itemView.findViewById(R.id.put_filename);
             descrption=itemView.findViewById(R.id.put_description);
             timestamp = itemView.findViewById(R.id.timestamp);

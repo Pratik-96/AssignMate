@@ -13,20 +13,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.assignmate.Models.User;
-import com.example.assignmate.authentication.choose_sem;
+import com.example.assignmate.Models.Streak_model;
 import com.example.assignmate.databinding.ActivityMainBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +35,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 
 
@@ -162,7 +162,12 @@ public class MainActivity extends AppCompatActivity {
                 if (FirebaseAuth.getInstance().getCurrentUser() != null || account != null) {
                     if (selectedItem == R.id.home_nav) {
                         replaceFragment(new HomeFragment());
-                    } else if (selectedItem == R.id.upload_nav) {
+                    }
+                    else if (selectedItem == R.id.board_nav)
+                    {
+                        replaceFragment(new LeaderBoard());
+                    }
+                    else if (selectedItem == R.id.upload_nav) {
 //                    startActivity(new Intent(getApplicationContext(), uploadFile.class));
                         replaceFragment(new UploadFragment());
 
@@ -212,14 +217,18 @@ public class MainActivity extends AppCompatActivity {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             user = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
-            name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName().toString();
+            name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
             email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+
+            updateStreak();
 
         } else if (account != null) {
             user = account.getId().toString();
-            name = account.getDisplayName().toString();
+            name = account.getDisplayName();
             email = account.getEmail().toString();
 
+
+            updateStreak();
 
         }
 
@@ -249,22 +258,28 @@ public class MainActivity extends AppCompatActivity {
                                 {
                                     message("Semester_1");
                                     message("Semester1");
+                                    message("all");
 
 
                                 } else if (snapshot1.child("sem").getValue().equals("Semester 2")) {
                                     message("Semester_2");
                                     message("Semester2");
+                                    message("all");
                                 } else if (snapshot1.child("sem").getValue().equals("Semester 3")){
                                     message("Semester_3");message("Semester3");
+                                    message("all");
                                     
                                 } else if (snapshot1.child("sem").getValue().equals("Semester 4")) {
                                     message("Semester_4");message("Semester4");
+                                    message("all");
                                     
                                 } else if (snapshot1.child("sem").getValue().equals("Semester 5")) {
                                     message("Semester_5");message("Semester5");
+                                    message("all");
                                 } else if (snapshot1.child("sem").getValue().equals("Semester6")) {
                                     message("Semester_6");
                                     message("Semester6");
+                                    message("all");
 
                                 }
 
@@ -292,6 +307,185 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    LocalDate currentDate = null;
+
+    boolean userFound = false;
+
+    private void updateStreak() {
+
+
+
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            user = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+            name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName().toString();
+            email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+
+        } else if (account != null) {
+            user = account.getId().toString();
+            name = account.getDisplayName().toString();
+            email = account.getEmail().toString();
+        }
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+             currentDate = LocalDate.now();
+        }
+
+        DatabaseReference streakRef = FirebaseDatabase.getInstance().getReference();
+        streakRef.child("Streak Data").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot userSnapshot: snapshot.getChildren())
+                {
+                     if (email.equals(userSnapshot.child("uemail").getValue().toString()))
+                    {
+                        //execute when user already exists in streaks database.
+                        updateStreakData(user,name,email,userSnapshot.child("lastLoginDate").getValue().toString(),Integer.parseInt(userSnapshot.child("currentStreak").getValue().toString()),Integer.parseInt(userSnapshot.child("longestStreak").getValue().toString()));
+                        userFound=true;
+                        break;
+
+                    }
+                     else
+                     {
+                         userFound = false;
+                     }
+
+
+                }
+                if (!userFound) //TODO: it is getting false even the user exists.
+                {
+                    // Execute when the user does not exits in streaks database.
+                    Streak_model streakModel = new Streak_model(name,email,1,1,currentDate.toString(),-1);
+                    streakRef.child("Streak Data").push().setValue(streakModel);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+    }
+
+
+    private void updateStreakData(String user, String name, String email, String lastLoginDate, int currentStreak, int longestStreak) {
+
+        LocalDate date=null,today=null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+           date  = LocalDate.parse(lastLoginDate);
+           today = LocalDate.now();
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (date.plusDays(1).isEqual(today))
+            {
+                currentStreak = currentStreak+1;
+                lastLoginDate = String.valueOf(LocalDate.now());
+                if (currentStreak>longestStreak)
+                {
+                    longestStreak = currentStreak;
+                }
+
+                HashMap map = new HashMap();
+                map.put("currentStreak",currentStreak);
+                map.put("lastLoginDate",lastLoginDate);
+                map.put("longestStreak",longestStreak);
+                map.put("longestStreakNeg",-longestStreak);
+                map.put("uemail",email);
+                map.put("uname",name);
+                isUpdating = false;
+
+                DatabaseReference Streakref = FirebaseDatabase.getInstance().getReference();
+                Streakref.child("Streak Data").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot userSnapshot:snapshot.getChildren())
+                        {
+                            if (email.equals(userSnapshot.child("uemail").getValue().toString()) && !isUpdating)
+                            {
+                                Streakref.child("Streak Data").child(userSnapshot.getKey()).updateChildren(map).addOnCompleteListener(new OnCompleteListener() {
+                                    @Override
+                                    public void onComplete(@NonNull Task task) {
+                                        if (task.isSuccessful())
+                                        {
+                                            Log.d("streak", "streak updated");
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(MainActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                        isUpdating=true;
+
+                                    }
+                                });
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+            }
+            else
+            {
+
+                currentStreak = 1;
+                lastLoginDate = String.valueOf(LocalDate.now());
+                HashMap map = new HashMap();
+                map.put("currentStreak",currentStreak);
+                map.put("lastLoginDate",lastLoginDate);
+                map.put("longestStreak",longestStreak);
+                map.put("uemail",email);
+                map.put("uname",name);
+                isUpdating = false;
+
+                DatabaseReference Streakref = FirebaseDatabase.getInstance().getReference();
+                Streakref.child("Streak Data").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot userSnapshot:snapshot.getChildren())
+                        {
+                            if (email.equals(userSnapshot.child("uemail").getValue().toString()) && !isUpdating)
+                            {
+                                Streakref.child("Streak Data").child(userSnapshot.getKey()).updateChildren(map).addOnCompleteListener(new OnCompleteListener() {
+                                    @Override
+                                    public void onComplete(@NonNull Task task) {
+                                        if (task.isSuccessful())
+                                        {
+                                            Log.d("streak", "streak reseted");
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(MainActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                        isUpdating=true;
+                                    }
+                                });
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+            }
+
+
+        }
+
+
+    }
 
     private void update_user(String userId, String name, String sem, String user1) {
         DatabaseReference fetchref = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -310,7 +504,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        fetchref.addValueEventListener(new ValueEventListener() {
+        fetchref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 

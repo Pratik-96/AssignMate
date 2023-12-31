@@ -69,7 +69,7 @@ public class choose_sem extends AppCompatActivity {
             id= account.getId().toString();
         }
         DatabaseReference fetchref = FirebaseDatabase.getInstance().getReference().child("Users");
-        fetchref.addValueEventListener(new ValueEventListener() {
+        fetchref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
@@ -208,7 +208,7 @@ public class choose_sem extends AppCompatActivity {
                 user.put("uid",id);
                 user.put("email",email);
 
-                fetchref.addValueEventListener(new ValueEventListener() {
+                fetchref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 

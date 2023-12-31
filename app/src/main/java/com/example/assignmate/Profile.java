@@ -11,6 +11,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.assignmate.Models.Streak_model;
 import com.example.assignmate.authentication.Login;
 import com.example.assignmate.authentication.aboutAssignMate;
 import com.example.assignmate.authentication.choose_sem;
@@ -31,8 +33,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -80,7 +84,7 @@ public class Profile extends Fragment {
         }
 
     }
-
+    String mail=null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -101,6 +105,10 @@ public class Profile extends Fragment {
         LinearLayout changeProfileInfo = view.findViewById(R.id.updateProfile);
         LinearLayout updateSemester = view.findViewById(R.id.updateSemester);
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
+        TextView streak = view.findViewById(R.id.streak);
+
+
+
 
 
         updateSemester.setOnClickListener(new View.OnClickListener() {
@@ -198,9 +206,49 @@ public class Profile extends Fragment {
         else if (FirebaseAuth.getInstance().getCurrentUser()!=null)
         {
             email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-            name.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+            if (FirebaseAuth.getInstance().getCurrentUser().getDisplayName()!=null)
+            {
+                name.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+            }
+            else
+            {
+                name.setText("User");
+            }
             name.setVisibility(View.VISIBLE);
         }
+
+
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            mail = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+
+        } else if (account != null) {
+
+            mail = account.getEmail().toString();
+        }
+        DatabaseReference streakRef = FirebaseDatabase.getInstance().getReference();
+        streakRef.child("Streak Data").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot userSnapshot: snapshot.getChildren())
+                {
+                    if (mail.equals(userSnapshot.child("uemail").getValue().toString()))
+                    {
+                        Log.d("prof_streak",userSnapshot.child("longestStreak").getValue().toString());
+                        streak.setText("Learning Streak : "+userSnapshot.child("currentStreak").getValue());
+
+                    }
+
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
         about.setOnClickListener(new View.OnClickListener() {

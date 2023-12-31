@@ -142,6 +142,11 @@ public class HomeFragment extends Fragment {
 
                 } else {
                     name = mAuth.getCurrentUser().getDisplayName();
+
+                    if (name == null)
+                    {
+                        name = "User";
+                    }
                 }
             } else {
                 name = "User";

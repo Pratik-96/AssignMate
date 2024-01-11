@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.assignmate.Models.Streak_model;
@@ -42,6 +43,7 @@ public class rankAdapter extends FirebaseRecyclerAdapter<Streak_model, rankAdapt
 
         holder.userRank.setText(String.valueOf(position+1));
         holder.streak.setText(String.valueOf(model.getLongestStreak()));
+
         if (model.getUname()==null)
         {
             holder.UserName.setText("User");
@@ -62,6 +64,7 @@ public class rankAdapter extends FirebaseRecyclerAdapter<Streak_model, rankAdapt
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView userRank,UserName,streak;
+        ConstraintLayout cl;
         int rank =1;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,6 +72,7 @@ public class rankAdapter extends FirebaseRecyclerAdapter<Streak_model, rankAdapt
              userRank = itemView.findViewById(R.id.userRank);
              UserName = itemView.findViewById(R.id.leadUserName);
              streak = itemView.findViewById(R.id.userLearningStreak);
+             cl = itemView.findViewById(R.id.constraintly);
         }
     }
 }

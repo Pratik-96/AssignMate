@@ -158,7 +158,7 @@ public class fetch_files extends AppCompatActivity {
 
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child(subject).child(type);
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 binding.progressBarID.setVisibility(View.GONE);
@@ -296,7 +296,7 @@ public class fetch_files extends AppCompatActivity {
 
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child(selectedSem).child(subject).child(type);
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 binding.progressBarID.setVisibility(View.GONE);

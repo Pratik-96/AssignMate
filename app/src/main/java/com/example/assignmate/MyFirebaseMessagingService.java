@@ -30,16 +30,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "Channel_id");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder.setSmallIcon(R.drawable.google_play_books);
-
-        } else
-        {
-            builder.setSmallIcon(R.drawable.google_play_books);
-        }
+        builder.setSmallIcon(R.drawable.google_play_books);
 
 
-         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivities(this,1, new Intent[]{intent},PendingIntent.FLAG_IMMUTABLE);
         builder.setContentTitle(remoteMessage.getNotification().getTitle());
         builder.setContentText(remoteMessage.getNotification().getBody());
@@ -49,13 +43,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         builder.setContentIntent(pendingIntent);
 
        NotificationManager notificationManager = (NotificationManager)getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-        {
-            String channelId = "Channel_id";
-            NotificationChannel channel = new NotificationChannel(channelId,"Channel human readable title",NotificationManager.IMPORTANCE_HIGH);
-            notificationManager.createNotificationChannel(channel);
-            builder.setChannelId(channelId);
-        }
+        String channelId = "Channel_id";
+        NotificationChannel channel = new NotificationChannel(channelId,"Channel human readable title",NotificationManager.IMPORTANCE_HIGH);
+        notificationManager.createNotificationChannel(channel);
+        builder.setChannelId(channelId);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             if (!notificationManager.isNotificationPolicyAccessGranted()) {
                 Intent intent2 = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);

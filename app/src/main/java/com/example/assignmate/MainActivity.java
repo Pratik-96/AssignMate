@@ -17,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.assignmate.Models.Streak_model;
@@ -25,6 +26,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,7 +38,9 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -152,7 +156,11 @@ public class MainActivity extends AppCompatActivity {
         checkNotificationPermission();
         mAuth=FirebaseAuth.getInstance();
         binding.navBar.setItemSelected(R.id.home_nav,true);
-        binding.navBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+        if (!Objects.equals(mAuth.getUid(), "RYmuvMvQn3WpjHpgIjDMgrazSpq1")) {
+
+            binding.navBar.removeViewAt(3);
+
+        }        binding.navBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int i) {
                 int selectedItem = binding.navBar.getSelectedItemId();
@@ -166,8 +174,10 @@ public class MainActivity extends AppCompatActivity {
                     else if (selectedItem == R.id.board_nav)
                     {
                         replaceFragment(new LeaderBoard());
-                    }
-                    else if (selectedItem == R.id.upload_nav) {
+                    } else if (selectedItem == R.id.todo) {
+
+                        replaceFragment(new todo());
+                    } else if (selectedItem == R.id.upload_nav) {
 //                    startActivity(new Intent(getApplicationContext(), uploadFile.class));
                         replaceFragment(new UploadFragment());
 
@@ -327,9 +337,7 @@ public class MainActivity extends AppCompatActivity {
             email = account.getEmail().toString();
         }
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-             currentDate = LocalDate.now();
-        }
+        currentDate = LocalDate.now();
 
         DatabaseReference streakRef = FirebaseDatabase.getInstance().getReference();
         streakRef.child("Streak Data").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -433,7 +441,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             }
-            else
+            else if (!date.isEqual(today))
             {
 
                 currentStreak = 1;
@@ -572,7 +580,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(MainActivity.this)
+        new MaterialAlertDialogBuilder(MainActivity.this)
                  .setMessage("Are you sure you want to exit ?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {

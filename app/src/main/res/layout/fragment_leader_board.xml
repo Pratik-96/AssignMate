@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,43 +8,57 @@
 
     tools:context=".LeaderBoard">
 
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-   <RelativeLayout
+
+   <androidx.constraintlayout.widget.ConstraintLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
+
+       android:layout_alignParentTop="true"
+       android:layout_alignBottom="@id/Relatively"
       android:id="@+id/Relatively"
        >
+
+
+
 
        <TextView
            android:id="@+id/rank"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:layout_marginStart="20dp"
-           android:layout_marginTop="10dp"
            android:layout_alignParentStart="true"
            android:layout_alignParentTop="true"
-           android:layout_marginBottom="10dp"
            android:fontFamily="@font/sarabun"
+           android:layout_marginStart="20dp"
            android:text="Rank"
            android:textColor="@color/white"
-           android:textSize="20sp" />
+           android:textSize="20sp"
+           android:textStyle="bold"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent" />
 
        <TextView
            android:id="@+id/userName"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_alignParentTop="true"
-           android:layout_marginTop="11dp"
            android:layout_toStartOf="@+id/learningStreak"
            android:layout_toEndOf="@+id/rank"
            android:fontFamily="@font/sarabun"
            android:gravity="center"
            android:text="Name"
            android:textColor="@color/white"
-           android:textSize="20sp" />
+           android:textSize="20sp"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent" />
 
        <TextView
            android:id="@+id/learningStreak"
@@ -51,27 +66,36 @@
            android:layout_height="wrap_content"
            android:layout_alignParentTop="true"
            android:layout_alignParentEnd="true"
-           android:layout_marginTop="10dp"
-           android:layout_marginEnd="20dp"
-           android:layout_marginBottom="20dp"
            android:fontFamily="@font/sarabun"
            android:text="Streak"
            android:textColor="@color/white"
-           android:textSize="20sp" />
+           android:textSize="20sp"
+           android:layout_marginEnd="20dp"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintTop_toTopOf="parent" />
 
 
 
-   </RelativeLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/leaderBoardRecyclerView"
-
-        android:layout_alignParentBottom="true"
-        android:layout_below="@id/Relatively">
 
 
-    </androidx.recyclerview.widget.RecyclerView>
+   </androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/Relatively"
+            android:background="@color/gray"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/leaderBoardRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_below="@id/Relatively"
+            android:layout_alignParentBottom="true">
+
+
+        </androidx.recyclerview.widget.RecyclerView>
 
     </RelativeLayout>
 
